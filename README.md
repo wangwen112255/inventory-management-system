@@ -45,3 +45,9 @@
 4. 欢迎进行二次开发，并且不需要保留任何版权信息
 5. 如果对系统有任何疑问，欢迎加入ＱＱ交流群：688920281 进行交流
 
+#### 系统截图
+
+![系统登录](https://images.gitee.com/uploads/images/2019/0528/122631_a08f6fd5_593571.png "login.png")
+![生产加工](https://images.gitee.com/uploads/images/2019/0528/122656_8a1a46ec_593571.png "product_build.png")
+![出库](https://images.gitee.com/uploads/images/2019/0528/122704_156f6554_593571.png "sales.png")
+![仓储配置](https://images.gitee.com/uploads/images/2019/0528/122711_e9f82619_593571.png "warehouse.png")
