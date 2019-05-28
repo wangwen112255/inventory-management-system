@@ -1,0 +1,1 @@
+{extend name="base:base" /} {block name="body"} ffffff{/block}
