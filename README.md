@@ -4,34 +4,44 @@
 基于TP5开发的进销存系统 
 
 #### 软件架构
-软件架构说明
+基于以下技术开发
+
+1. BUI
+2. Bootstrap3
+3. jquery
+4. Auth权限控制
+5. AutoComplete
+6. cxselect联动菜单
+7. php-Excel库
+8. C-Lodop网页打印组件
+9. thinkphp5.0.24
+10. datetimepicker
+
+
+实现了如下功能：
+
+1. 生产管理
+2. 入库、出库
+4. 库存查询、调拨、报废
+5. 财务管理
+6. 系统用户权限访问控制
+7. 仓库、供应商、会员管理
 
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 下载代码到本地目录
+2. 如果放在域名下运行，请将网站目录指向到public目录
+3. 新建mysql数据库，并导入demo_ims.sql文件
+4. 修改application目录下的database.php文件，修改为你当前的数据库参数
+5. 安装完成
+
 
 #### 使用说明
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 系统超级管理员账号只有一个，拥有所有菜单权限
+2. 超级管理员账号superadmin，密码123456
+3. 系统架构清晰，数据库设计合理
+4. 欢迎进行二次开发，并且不需要保留任何版权信息
+5. 如果对系统有任何疑问，欢迎加入ＱＱ交流群：688920281 进行交流
 
-#### 参与贡献
-
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
-
-
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
