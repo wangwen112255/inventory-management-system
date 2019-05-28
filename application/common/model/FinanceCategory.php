@@ -6,7 +6,11 @@ use think\Model;
 use app\common\model\Base;
 
 class FinanceCategory extends Base {
-    
+
+    public function getTypeAttr($value) {
+        $types = [0 => '支出', 1 => '收入'];
+        return isset($types[$value]) ? $types[$value] : '';
+    }
 
     public function json() {
         $json = array();
@@ -20,8 +24,6 @@ class FinanceCategory extends Base {
         }
         return json_encode($json);
     }
-
-    
 
     public function model_where() {
 

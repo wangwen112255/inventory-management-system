@@ -12,10 +12,10 @@
     <div class="col-sm-6">
     <fieldset>
         <legend>系统信息</legend>
-<!--        <p class="bg-info">
-            你当前看到的是木马牛进销存系统的演示版本，欢迎联系我们进行私人定制<br>
+        <p class="bg-info">
+            你当前看到的是<strong>木马牛进销存系统</strong>的演示版本，如有任何疑问请加群咨询<br>
             <strong>ＱＱ交流群：</strong>688920281 <br>
-        </p>-->
+        </p>
         <table class="table table-striped">
             <tbody>
                 <tr>

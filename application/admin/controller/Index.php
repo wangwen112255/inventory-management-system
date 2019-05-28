@@ -31,11 +31,12 @@ class Index extends Admin {
     public function password() {
 
         if (request()->isPost()) {
+            
+            (UID == 1) && $this->error('超级管理员暂不支持修改');
 
             $password = input('post.password');
 
             if (trim($password) == '') {
-
                 $this->error('密码不能为空');
             } else {
 

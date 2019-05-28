@@ -241,6 +241,8 @@ class System extends Admin {
      */
     function user_edit($id) {
         empty($id) && $this->error('参数不能为空');
+        if($id == 1)
+            $this->error('超级管理员暂不支持修改');
         if (request()->isPost()) {
             $post = request()->post();
             $data['username'] = request()->post('username') ?: '';
@@ -271,6 +273,8 @@ class System extends Admin {
      */
     public function user_delete($id) {
         empty($id) && $this->error('参数不能为空');
+        if($id == 1)
+            $this->error('超级管理员都想删，不合适吧？');
         $message = $this->m_system_user->user_delete($id);
         if ($message) {
             $this->error($message);

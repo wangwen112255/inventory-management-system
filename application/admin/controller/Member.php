@@ -10,7 +10,7 @@ use app\admin\controller\Admin;
 class Member extends Admin {
 
     /**
-     * @title 会员组销价管理
+     * @title 销价管理
      */
     public function group_price() {
         if (request()->isPost()) {
@@ -77,11 +77,11 @@ class Member extends Admin {
     }
 
     /**
-     * @title 删除管理
+     * @title 会员删除
      */
     public function delete($id) {
 
-        empty($id) && $this->error('参数不能为空');
+        empty($id) && $this->error('参数不能为空');       
 
 
         if (db('member')->where('id', $id)->delete()) {
@@ -94,7 +94,7 @@ class Member extends Admin {
     }
 
     /**
-     * @title 查看会员
+     * @title 会员查看
      */
     public function look($id) {
 
@@ -118,11 +118,12 @@ class Member extends Admin {
     }
 
     /**
-     * @title 修改会员
+     * @title 会员修改
      */
     public function edit($id) {
 
-        empty($id) && $this->error('参数不能为空');
+        empty($id) && $this->error('参数不能为空');       
+        
 
         if (request()->isPost()) {
             $post = request()->post();
@@ -154,7 +155,7 @@ class Member extends Admin {
     }
 
     /**
-     * @title 新增会员
+     * @title 会员新增
      */
     public function add() {
         if (request()->isPost()) {
@@ -193,9 +194,6 @@ class Member extends Admin {
      */
     public function group() {
         $lists = $this->m_member_group->model_where()->lists_tree(NULL, 'a.sort,a.id desc');
-        foreach ($lists as $key => $value) {
-            $lists[$key]['member_count'] = db('member')->where('g_id', $value['id'])->count();
-        }
         $this->assign('lists', $lists);
         builder('list')
                 ->addItem('id', '#')

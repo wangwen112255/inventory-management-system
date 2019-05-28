@@ -10,7 +10,7 @@ class MemberGroup extends Base {
 
         $this->join('member m', 'a.id = m.g_id', 'LEFT');
 
-        $this->field('a.*,COUNT(DISTINCT m.id) as member');
+        $this->field('a.*,COUNT(DISTINCT m.id) as member_count');
 
         $this->group('a.id');
         $this->alias('a');

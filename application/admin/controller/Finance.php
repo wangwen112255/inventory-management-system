@@ -160,13 +160,7 @@ class Finance extends Admin {
 
         $lists = $this->m_finance_category->lists_tree();
 
-
-        foreach ($lists as $key => $value) {
-            $lists[$key]['type'] = $value['type'] ? '收入' : '支出';
-        }
-
         $this->assign('lists', $lists);
-
 
         builder('list')
                 ->addItem('id', '#')
