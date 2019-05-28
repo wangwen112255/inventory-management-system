@@ -5,7 +5,7 @@
            class="print btn btn-default"
            title="打印订单{$one.id}"
            num="{$one.order_number}"
-           val="<?php echo url('prints/orders', ['id' => $one['id']]) ?>"        >
+           val="<?php echo url('prints/orders_view', ['id' => $one['id']]) ?>"        >
             <i class="fa fa-print"></i> 打印</a>
     </div>
 <hr>
