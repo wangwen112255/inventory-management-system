@@ -17,7 +17,6 @@
 9. thinkphp5.0.24
 10. datetimepicker
 
-
 实现了如下功能：
 
 1. 生产管理
