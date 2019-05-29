@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2017-2-28, 10:58:30
+    Author     : seqier
+*/
+body { color: #3F3F3F; font: 14px/25px "Open Sans", "STXihei", sans-serif; letter-spacing: 1px; }
+.nav{ margin-bottom: 20px;}
+.table-actions{ overflow: hidden; }
+.panel{margin-bottom: 0;}
+.bg-warning{ padding: 15px;margin-top: 20px; }
+.body{
+    padding-top: 20px;
+}
+.table-common{    
+    border-bottom: 1px solid #efefef;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.table-common .left{
+    float: left;
+    margin-bottom: 10px;
+}
+.table-common .right{
+    float: right;
+    margin-bottom: 10px;
+}
+.search-box{
+    margin-bottom: 10px;
+    line-height: 3em;
+}
+/*回到顶部*/
+.up { width: 54px; height: 54px; 
+      background: url(img/topback.gif) no-repeat 0 0; filter: alpha(Opacity=60); 
+      -moz-opacity: 0.6; opacity: 0.6; 
+      border-radius: 30px;}
+.up:hover { filter: alpha(Opacity=100); -moz-opacity: 1; opacity: 1; }
