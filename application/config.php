@@ -54,7 +54,7 @@ return [
     // | 模块设置
     // +----------------------------------------------------------------------
     // 默认模块名
-    'default_module' => 'index',
+    'default_module' => 'admin',
     // 禁止访问模块
     'deny_module_list' => ['common'],
     // 默认控制器名
@@ -189,7 +189,7 @@ return [
         // SESSION 前缀
         'prefix' => 'think',
         // 驱动方式 支持redis memcache memcached \driver\session\Mysql
-        'type' => 'driver\session\Mysql',
+        'type' => '\driver\session\Mysql',
         // 是否自动开启 SESSION
         'auto_start' => true,
     ],
