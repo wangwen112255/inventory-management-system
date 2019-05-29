@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2019-05-28 10:52:38
+-- Generation Time: 2019-05-29 11:07:46
 -- 服务器版本： 5.5.56-log
 -- PHP Version: 7.1.7
 
@@ -41,8 +41,8 @@ CREATE TABLE `tb_auth_group` (
 --
 
 INSERT INTO `tb_auth_group` (`id`, `title`, `status`, `rules`, `remark`) VALUES
-(17, '北京', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113', ''),
-(21, '郑州', 1, '1,46,47,48,49,50,51,52,53,54,55,56,57,68,69,70,71,72,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113', '');
+(17, '北京', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113', ''),
+(21, '上海', 1, '1,46,47,48,49,50,51,52,53,54,55,56,57,68,69,70,71,72,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113', '');
 
 -- --------------------------------------------------------
 
@@ -60,14 +60,15 @@ CREATE TABLE `tb_auth_group_access` (
 --
 
 INSERT INTO `tb_auth_group_access` (`uid`, `group_id`) VALUES
-(1, 0),
 (11, 18),
 (12, 17),
 (16, 17),
 (17, 17),
 (18, 17),
 (19, 21),
-(27, 17);
+(27, 17),
+(29, 17),
+(30, 17);
 
 -- --------------------------------------------------------
 
@@ -217,6 +218,15 @@ CREATE TABLE `tb_express` (
   `sort` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `tb_express`
+--
+
+INSERT INTO `tb_express` (`id`, `name`, `sort`) VALUES
+(1, '顺丰', NULL),
+(2, '中通', NULL),
+(3, '圆通', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -237,6 +247,13 @@ CREATE TABLE `tb_finance_accounts` (
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账务';
 
+--
+-- 转存表中的数据 `tb_finance_accounts`
+--
+
+INSERT INTO `tb_finance_accounts` (`id`, `u_id`, `bank_id`, `c_id`, `status`, `type`, `money`, `datetime`, `attn_id`, `remark`, `create_time`) VALUES
+(1, 1, 1, 0, 1, 0, 111.00, 1557237780, 30, '1111', 1559052188);
+
 -- --------------------------------------------------------
 
 --
@@ -251,6 +268,13 @@ CREATE TABLE `tb_finance_bank` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `sort` int(11) DEFAULT NULL COMMENT '排序'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='财务银行';
+
+--
+-- 转存表中的数据 `tb_finance_bank`
+--
+
+INSERT INTO `tb_finance_bank` (`id`, `name`, `money`, `default`, `remark`, `sort`) VALUES
+(1, '1111', 1000.00, 0, '11111', NULL);
 
 -- --------------------------------------------------------
 
@@ -292,6 +316,14 @@ CREATE TABLE `tb_member` (
   `update_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员';
 
+--
+-- 转存表中的数据 `tb_member`
+--
+
+INSERT INTO `tb_member` (`id`, `u_id`, `g_id`, `card`, `nickname`, `sex`, `tel`, `qq`, `email`, `address`, `id_card`, `birthday`, `remark`, `create_time`, `points`, `update`, `update_time`) VALUES
+(1, 1, 1, '', '广州XX', 1, '', '', '', '', '', '0000-00-00', '', 1559019097, 0, NULL, NULL),
+(2, 1, 1, '', '上海某代理', 1, '', '', '', '地址地址地址地址地址地址地址', '', '0000-00-00', '', 1559019108, 0, 1, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -318,6 +350,14 @@ CREATE TABLE `tb_member_group` (
   `sort` int(11) DEFAULT NULL,
   `discounts` double(3,2) DEFAULT '0.00' COMMENT '折扣'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产器分类';
+
+--
+-- 转存表中的数据 `tb_member_group`
+--
+
+INSERT INTO `tb_member_group` (`id`, `name`, `pid`, `sort`, `discounts`) VALUES
+(1, '一级代理', 0, NULL, 0.00),
+(2, '二级代理', 0, NULL, 0.00);
 
 -- --------------------------------------------------------
 
@@ -348,6 +388,18 @@ CREATE TABLE `tb_member_price` (
   `g_id` int(11) DEFAULT NULL,
   `price` double(20,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tb_member_price`
+--
+
+INSERT INTO `tb_member_price` (`id`, `p_id`, `g_id`, `price`) VALUES
+(1, 1, 1, 1.00),
+(2, 1, 2, 22.00),
+(3, 2, 1, 1.00),
+(4, 2, 2, 22.00),
+(5, 3, 1, 2.00),
+(6, 3, 2, 2.00);
 
 -- --------------------------------------------------------
 
@@ -411,6 +463,85 @@ CREATE TABLE `tb_operate_2` (
   `data` text,
   `log` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='操作日志';
+
+--
+-- 转存表中的数据 `tb_operate_2`
+--
+
+INSERT INTO `tb_operate_2` (`id`, `u_id`, `title`, `status`, `create_time`, `ip`, `client`, `country`, `area`, `url`, `data`, `log`) VALUES
+(50, 1, '成功登录系统', 1, 1559030183, '171.88.1.34', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(49, 1, '成功登录系统', 1, 1559029021, '1.204.205.59', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(47, 1, '成功登录系统', 1, 1559026552, '182.117.176.27', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(48, 1, '成功登录系统', 1, 1559028761, '125.62.5.96', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(46, 1, '成功登录系统', 1, 1559026292, '27.187.170.93', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(45, 1, '入库成功', 1, 1559026289, '115.56.39.127', 'pc', '', '', '/admin/inventory/storage_submit', 'a:9:{s:4:\"code\";s:0:\"\";s:10:\"product_id\";s:0:\"\";s:11:\"product_ids\";a:1:{i:1;s:1:\"1\";}s:9:\"warehouse\";a:1:{i:1;s:1:\"2\";}s:16:\"product_quantity\";a:1:{i:1;s:2:\"20\";}s:11:\"group_price\";a:1:{i:1;s:3:\"100\";}s:8:\"supplier\";s:1:\"1\";s:4:\"type\";s:1:\"1\";s:6:\"remark\";s:0:\"\";}', ''),
+(44, 1, '产品关联提交', 1, 1559026223, '115.56.39.127', 'pc', '', '', '/admin/production/product_relation_edit_submit?id=2', 'a:2:{s:4:\"code\";s:0:\"\";s:11:\"product_ids\";a:1:{i:0;s:0:\"\";}}', ''),
+(42, 1, '成功登录系统', 1, 1559025791, '171.8.254.201', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(43, 1, '成功登录系统', 1, 1559026123, '115.56.39.127', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(41, 1, '打印出货单=>20190528311257263831', 1, 1559025691, '223.72.67.182', 'pc', '', '', '/admin/prints/orders_view?id=1&session_id=t58fd8lbt540l3gjue17im21ff&r=0.19589730460150578', 'a:0:{}', ''),
+(39, 1, '成功登录系统', 1, 1559024773, '112.86.69.48', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(40, 1, '成功登录系统', 1, 1559025516, '223.72.67.182', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(38, 1, '打印账务单', 1, 1559024352, '113.200.156.117', 'pc', '', '', '/admin/prints/finance_list?session_id=2651m7ti8f2c93007vqon8tlkg&r=0.2695308762426796&timea=2019-04-28&timeb=2019-05-28&b_id=&attn_id=&remark=', 'a:0:{}', ''),
+(36, 1, '成功登录系统', 1, 1559023582, '183.3.155.73', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(37, 1, '成功登录系统', 1, 1559024267, '113.200.156.117', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(33, 1, '成功登录系统', 1, 1559023511, '175.169.111.129', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(34, 1, '成功登录系统', 1, 1559023562, '113.104.244.35', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(35, 1, '成功登录系统', 1, 1559023575, '175.169.111.129', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(32, 1, '成功登录系统', 1, 1559021939, '61.148.245.73', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(51, 1, '成功登录系统', 1, 1559031293, '58.246.20.210', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(52, 1, '成功登录系统', 1, 1559031529, '14.114.37.90', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(53, 1, '成功登录系统', 1, 1559031736, '119.90.88.106', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(54, 1, '成功登录系统', 1, 1559032055, '211.97.10.43', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(55, 1, '成功登录系统', 1, 1559033016, '220.173.124.78', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(56, 1, '成功登录系统', 1, 1559034469, '113.109.110.67', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(57, 1, '成功登录系统', 1, 1559034575, '222.211.206.46', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(58, 1, '入库撤消', 1, 1559034807, '222.211.206.46', 'pc', '', '', '/admin/inventory/storage_undo?id=4', 'a:0:{}', ''),
+(59, 1, '成功登录系统', 1, 1559035309, '110.184.163.99', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(60, 1, '成功登录系统', 1, 1559040723, '175.188.64.228', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(61, 1, '成功登录系统', 1, 1559048766, '180.106.15.242', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(62, 1, '成功登录系统', 1, 1559048960, '183.17.67.146', 'mobile', '', '', '/admin/everyone/login', 'a:2:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";}', ''),
+(63, 1, '成功登录系统', 1, 1559049000, '180.106.15.242', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(64, 1, '用户密码错误', 0, 1559049113, '113.65.210.18', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:5:\"admin\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(65, 1, '成功登录系统', 1, 1559049133, '113.65.210.18', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(66, 1, '成功登录系统', 1, 1559049424, '124.114.249.125', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(67, 1, '成功登录系统', 1, 1559050091, '180.126.42.76', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(68, 1, '成功登录系统', 1, 1559050094, '112.86.69.48', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(69, 1, '成功登录系统', 1, 1559050260, '112.86.69.48', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(70, 1, '成功登录系统', 1, 1559051010, '61.140.206.221', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(71, 1, '产品关联提交', 1, 1559051027, '61.140.206.221', 'pc', '', '', '/admin/production/product_relation_edit_submit?id=3', 'a:2:{s:4:\"code\";s:0:\"\";s:11:\"product_ids\";a:1:{i:0;s:0:\"\";}}', ''),
+(72, 1, '成功登录系统', 1, 1559051354, '59.109.152.230', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(73, 1, '成功登录系统', 1, 1559052042, '223.72.57.23', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(74, 1, '新增银行', 1, 1559052175, '223.72.57.23', 'pc', '', '', '/admin/finance/bank_add', 'a:3:{s:4:\"name\";s:4:\"1111\";s:5:\"money\";s:4:\"1111\";s:6:\"remark\";s:5:\"11111\";}', ''),
+(75, 1, '新增账务', 1, 1559052188, '223.72.57.23', 'pc', '', '', '/admin/finance/add', 'a:7:{s:4:\"type\";s:12:\"选择类型\";s:4:\"c_id\";s:12:\"选择分类\";s:7:\"bank_id\";s:1:\"1\";s:5:\"money\";s:3:\"111\";s:8:\"datetime\";s:16:\"2019-05-07 22:03\";s:7:\"attn_id\";s:2:\"30\";s:6:\"remark\";s:4:\"1111\";}', ''),
+(76, 1, '成功登录系统', 1, 1559053687, '110.52.105.173', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(77, 1, '成功登录系统', 1, 1559054144, '119.60.64.116', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(78, 1, '库存调拨', 1, 1559054313, '119.60.64.116', 'pc', '', '', '/admin/inventory/transfer_add?id=1', 'a:3:{s:9:\"warehouse\";s:1:\"1\";s:6:\"number\";s:1:\"2\";s:6:\"remark\";s:0:\"\";}', ''),
+(79, 1, '新增供应商', 1, 1559054423, '119.60.64.116', 'pc', '', '', '/admin/configure/supplier_add', 'a:9:{s:7:\"company\";s:2:\"ce\";s:4:\"name\";s:0:\"\";s:3:\"tel\";s:0:\"\";s:3:\"fax\";s:0:\"\";s:6:\"mobile\";s:0:\"\";s:4:\"site\";s:0:\"\";s:5:\"email\";s:0:\"\";s:7:\"address\";s:0:\"\";s:6:\"remark\";s:0:\"\";}', ''),
+(80, 1, '修改供应商', 1, 1559054461, '119.60.64.116', 'pc', '', '', '/admin/configure/supplier_edit', 'a:10:{s:2:\"id\";s:1:\"4\";s:7:\"company\";s:6:\"测试\";s:4:\"name\";s:12:\"企业返现\";s:3:\"tel\";s:7:\"1111111\";s:3:\"fax\";s:0:\"\";s:6:\"mobile\";s:0:\"\";s:4:\"site\";s:0:\"\";s:5:\"email\";s:0:\"\";s:7:\"address\";s:0:\"\";s:6:\"remark\";s:0:\"\";}', ''),
+(81, 1, '成功登录系统', 1, 1559056288, '180.106.15.242', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(82, 1, '成功登录系统', 1, 1559056391, '122.192.12.103', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(83, 1, '成功登录系统', 1, 1559056423, '223.104.27.232', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(84, 1, '成功登录系统', 1, 1559060555, '119.86.37.174', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(85, 1, '成功登录系统', 1, 1559062272, '218.87.25.149', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(86, 1, '成功登录系统', 1, 1559084994, '183.52.198.196', 'mobile', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(87, 1, '成功登录系统', 1, 1559091418, '121.231.46.186', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(88, 1, '成功登录系统', 1, 1559092386, '59.61.92.150', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(89, 1, '成功登录系统', 1, 1559092401, '180.106.15.242', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(90, 1, '成功登录系统', 1, 1559093783, '1.202.124.123', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(91, 1, '成功登录系统', 1, 1559093800, '1.202.124.123', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(92, 1, '成功登录系统', 1, 1559095757, '111.160.91.250', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(93, 1, '成功登录系统', 1, 1559095777, '111.160.91.250', 'pc', '', '', '/admin/everyone/login', 'a:2:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";}', ''),
+(94, 1, '成功登录系统', 1, 1559096761, '118.250.172.63', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(95, 1, '成功登录系统', 1, 1559096903, '125.118.132.23', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(96, 1, '入库成功', 1, 1559097009, '125.118.132.23', 'pc', '', '', '/admin/inventory/storage_submit', 'a:9:{s:4:\"code\";s:0:\"\";s:10:\"product_id\";s:0:\"\";s:11:\"product_ids\";a:1:{i:1;s:1:\"1\";}s:9:\"warehouse\";a:1:{i:1;s:1:\"2\";}s:16:\"product_quantity\";a:1:{i:1;s:1:\"2\";}s:11:\"group_price\";a:1:{i:1;s:1:\"1\";}s:8:\"supplier\";s:1:\"3\";s:4:\"type\";s:1:\"1\";s:6:\"remark\";s:3:\"123\";}', ''),
+(97, 1, '销售产品', 1, 1559097054, '125.118.132.23', 'pc', '', '', '/admin/inventory/sales_submit', 'a:12:{s:9:\"member_id\";s:0:\"\";s:10:\"product_id\";s:0:\"\";s:11:\"product_ids\";a:1:{i:1;s:1:\"1\";}s:17:\"product_warehouse\";a:1:{i:1;s:1:\"2\";}s:16:\"product_quantity\";a:1:{i:1;s:1:\"1\";}s:11:\"group_price\";a:1:{i:1;s:1:\"1\";}s:9:\"ship_time\";s:16:\"2019-05-29 10:30\";s:10:\"express_id\";s:1:\"1\";s:11:\"express_num\";s:0:\"\";s:12:\"express_addr\";s:5:\"21132\";s:10:\"sales_type\";s:1:\"1\";s:6:\"remark\";s:3:\"123\";}', ''),
+(98, 1, '入库成功', 1, 1559097091, '125.118.132.23', 'pc', '', '', '/admin/inventory/storage_submit', 'a:9:{s:4:\"code\";s:0:\"\";s:10:\"product_id\";s:0:\"\";s:11:\"product_ids\";a:1:{i:1;s:1:\"1\";}s:9:\"warehouse\";a:1:{i:1;s:1:\"2\";}s:16:\"product_quantity\";a:1:{i:1;s:1:\"1\";}s:11:\"group_price\";a:1:{i:1;s:1:\"1\";}s:8:\"supplier\";s:0:\"\";s:4:\"type\";s:1:\"1\";s:6:\"remark\";s:0:\"\";}', ''),
+(99, 1, '销售产品', 1, 1559097112, '125.118.132.23', 'pc', '', '', '/admin/inventory/sales_submit', 'a:12:{s:9:\"member_id\";s:0:\"\";s:10:\"product_id\";s:0:\"\";s:11:\"product_ids\";a:1:{i:1;s:1:\"1\";}s:17:\"product_warehouse\";a:1:{i:1;s:1:\"2\";}s:16:\"product_quantity\";a:1:{i:1;s:1:\"4\";}s:11:\"group_price\";a:1:{i:1;s:1:\"1\";}s:9:\"ship_time\";s:16:\"2019-05-29 10:31\";s:10:\"express_id\";s:0:\"\";s:11:\"express_num\";s:0:\"\";s:12:\"express_addr\";s:0:\"\";s:10:\"sales_type\";s:1:\"1\";s:6:\"remark\";s:0:\"\";}', ''),
+(100, 1, '成功登录系统', 1, 1559097354, '183.239.207.144', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(101, 1, '成功登录系统', 1, 1559097687, '118.187.58.216', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(102, 1, '成功登录系统', 1, 1559098166, '223.72.67.182', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(103, 1, '成功登录系统', 1, 1559099051, '113.70.58.77', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', ''),
+(104, 1, '成功登录系统', 1, 1559099149, '222.214.45.197', 'pc', '', '', '/admin/everyone/login', 'a:3:{s:8:\"username\";s:10:\"superadmin\";s:8:\"password\";s:6:\"123456\";s:15:\"rember_password\";s:2:\"on\";}', '');
 
 -- --------------------------------------------------------
 
@@ -661,6 +792,15 @@ CREATE TABLE `tb_product` (
   `remark` text COMMENT '备注'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品';
 
+--
+-- 转存表中的数据 `tb_product`
+--
+
+INSERT INTO `tb_product` (`id`, `u_id`, `c_id`, `code`, `name`, `sales`, `purchase`, `points`, `format`, `lowest`, `type`, `unit`, `create_time`, `update_time`, `update_uid`, `remark`) VALUES
+(1, 1, 1, '00001', '苹果', 1.00, 1.00, 0, '', 0, 1, '1', 1559019025, 1559019025, 1, ''),
+(2, 1, 1, '0003', '香蕉', 1.00, 1.00, 0, '', 0, 1, '1', 1559019070, 1559019070, 1, ''),
+(3, 1, 3, '0008', 'MG面膜', 5.00, 1.00, 0, '', 0, 1, '4', 1559019309, 1559019309, 1, '');
+
 -- --------------------------------------------------------
 
 --
@@ -707,6 +847,15 @@ CREATE TABLE `tb_product_category` (
   `sort` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产器分类';
 
+--
+-- 转存表中的数据 `tb_product_category`
+--
+
+INSERT INTO `tb_product_category` (`id`, `name`, `pid`, `sort`) VALUES
+(1, '水果', 2, NULL),
+(2, '干货', 0, NULL),
+(3, '美妆', 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -719,6 +868,15 @@ CREATE TABLE `tb_product_inventory` (
   `w_id` varchar(255) DEFAULT NULL COMMENT '仓库',
   `quantity` bigint(255) DEFAULT NULL COMMENT '数量'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='库存表';
+
+--
+-- 转存表中的数据 `tb_product_inventory`
+--
+
+INSERT INTO `tb_product_inventory` (`id`, `p_id`, `w_id`, `quantity`) VALUES
+(1, '1', '2', 2996),
+(2, '3', '2', 0),
+(3, '1', '1', 2);
 
 -- --------------------------------------------------------
 
@@ -758,6 +916,15 @@ CREATE TABLE `tb_product_sales_order` (
   `type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单管理';
 
+--
+-- 转存表中的数据 `tb_product_sales_order`
+--
+
+INSERT INTO `tb_product_sales_order` (`id`, `order_number`, `status`, `u_id`, `m_id`, `create_time`, `remark`, `ship_time`, `print`, `amount`, `points`, `cost`, `express_id`, `express_num`, `express_addr`, `type`) VALUES
+(1, '20190528311257263831', 1, 1, 2, 1559019446, '', 1559019420, 1, 400.00, NULL, 200.00, 0, '', '地址地址地址地址地址地址地址', 1),
+(2, '20190529311030545051', 1, 1, 0, 1559097054, '123', 1559097000, 0, 1.00, NULL, 1.00, 1, '', '21132', 1),
+(3, '20190529311031521201', 1, 1, 0, 1559097112, '', 1559097060, 0, 4.00, NULL, 4.00, 0, '', '', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -779,6 +946,15 @@ CREATE TABLE `tb_product_sales_order_data` (
   `returns` bigint(20) DEFAULT '0' COMMENT '退货数量',
   `group_price` double(20,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单数据';
+
+--
+-- 转存表中的数据 `tb_product_sales_order_data`
+--
+
+INSERT INTO `tb_product_sales_order_data` (`id`, `o_id`, `status`, `p_id`, `quantity`, `discounts`, `amount`, `cost`, `points`, `w_id`, `product_data`, `returns`, `group_price`) VALUES
+(1, 1, 1, 3, 200, NULL, 400.00, 200.00, 0, 2, 'a:18:{s:2:\"id\";i:3;s:4:\"u_id\";i:1;s:4:\"c_id\";i:3;s:4:\"code\";s:4:\"0008\";s:4:\"name\";s:8:\"MG面膜\";s:5:\"sales\";d:5;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"4\";s:11:\"create_time\";i:1559019309;s:11:\"update_time\";i:1559019309;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"美妆\";s:12:\"product_type\";s:6:\"正常\";}', 0, 2.00),
+(2, 2, 1, 1, 1, NULL, 1.00, 1.00, 0, 2, 'a:18:{s:2:\"id\";i:1;s:4:\"u_id\";i:1;s:4:\"c_id\";i:1;s:4:\"code\";s:5:\"00001\";s:4:\"name\";s:6:\"苹果\";s:5:\"sales\";d:1;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"1\";s:11:\"create_time\";i:1559019025;s:11:\"update_time\";i:1559019025;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"水果\";s:12:\"product_type\";s:6:\"正常\";}', 0, 1.00),
+(3, 3, 1, 1, 4, NULL, 4.00, 4.00, 0, 2, 'a:18:{s:2:\"id\";i:1;s:4:\"u_id\";i:1;s:4:\"c_id\";i:1;s:4:\"code\";s:5:\"00001\";s:4:\"name\";s:6:\"苹果\";s:5:\"sales\";d:1;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"1\";s:11:\"create_time\";i:1559019025;s:11:\"update_time\";i:1559019025;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"水果\";s:12:\"product_type\";s:6:\"正常\";}', 0, 1.00);
 
 -- --------------------------------------------------------
 
@@ -830,6 +1006,17 @@ CREATE TABLE `tb_product_storage_order` (
   `type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `tb_product_storage_order`
+--
+
+INSERT INTO `tb_product_storage_order` (`id`, `order_number`, `u_id`, `create_time`, `s_id`, `quantity`, `amount`, `remark`, `type`) VALUES
+(1, '20190528311252414901', 1, 1559019161, 0, 1000, 1000.00, '', 1),
+(2, '20190528311253599831', 1, 1559019239, 3, 2000, 4000.00, '', 1),
+(3, '20190528311255464171', 1, 1559019346, 1, 200, 200.00, '', 1),
+(5, '20190529311030099241', 1, 1559097009, 3, 2, 2.00, '123', 1),
+(6, '20190529311031316481', 1, 1559097091, 0, 1, 1.00, '', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -850,6 +1037,17 @@ CREATE TABLE `tb_product_storage_order_data` (
   `product_data` text NOT NULL,
   `amount` double(20,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品仓库';
+
+--
+-- 转存表中的数据 `tb_product_storage_order_data`
+--
+
+INSERT INTO `tb_product_storage_order_data` (`id`, `o_id`, `w_id`, `s_id`, `p_id`, `quantity`, `create_time`, `u_id`, `remark`, `returns`, `product_data`, `amount`) VALUES
+(1, 1, 2, 0, 1, 1000, 1559019161, 1, NULL, 0, 'a:18:{s:2:\"id\";i:1;s:4:\"u_id\";i:1;s:4:\"c_id\";i:1;s:4:\"code\";s:5:\"00001\";s:4:\"name\";s:6:\"苹果\";s:5:\"sales\";d:1;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"1\";s:11:\"create_time\";i:1559019025;s:11:\"update_time\";i:1559019025;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"水果\";s:12:\"product_type\";s:6:\"正常\";}', 1000.00),
+(2, 2, 2, 3, 1, 2000, 1559019239, 1, NULL, 0, 'a:18:{s:2:\"id\";i:1;s:4:\"u_id\";i:1;s:4:\"c_id\";i:1;s:4:\"code\";s:5:\"00001\";s:4:\"name\";s:6:\"苹果\";s:5:\"sales\";d:1;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"1\";s:11:\"create_time\";i:1559019025;s:11:\"update_time\";i:1559019025;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"水果\";s:12:\"product_type\";s:6:\"正常\";}', 4000.00),
+(3, 3, 2, 1, 3, 200, 1559019346, 1, NULL, 0, 'a:18:{s:2:\"id\";i:3;s:4:\"u_id\";i:1;s:4:\"c_id\";i:3;s:4:\"code\";s:4:\"0008\";s:4:\"name\";s:8:\"MG面膜\";s:5:\"sales\";d:5;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"4\";s:11:\"create_time\";i:1559019309;s:11:\"update_time\";i:1559019309;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"美妆\";s:12:\"product_type\";s:6:\"正常\";}', 200.00),
+(5, 5, 2, 3, 1, 2, 1559097009, 1, NULL, 0, 'a:18:{s:2:\"id\";i:1;s:4:\"u_id\";i:1;s:4:\"c_id\";i:1;s:4:\"code\";s:5:\"00001\";s:4:\"name\";s:6:\"苹果\";s:5:\"sales\";d:1;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"1\";s:11:\"create_time\";i:1559019025;s:11:\"update_time\";i:1559019025;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"水果\";s:12:\"product_type\";s:6:\"正常\";}', 2.00),
+(6, 6, 2, 0, 1, 1, 1559097091, 1, NULL, 0, 'a:18:{s:2:\"id\";i:1;s:4:\"u_id\";i:1;s:4:\"c_id\";i:1;s:4:\"code\";s:5:\"00001\";s:4:\"name\";s:6:\"苹果\";s:5:\"sales\";d:1;s:8:\"purchase\";d:1;s:6:\"points\";i:0;s:6:\"format\";s:0:\"\";s:6:\"lowest\";i:0;s:4:\"type\";i:1;s:4:\"unit\";s:1:\"1\";s:11:\"create_time\";i:1559019025;s:11:\"update_time\";i:1559019025;s:10:\"update_uid\";i:1;s:6:\"remark\";s:0:\"\";s:8:\"category\";s:6:\"水果\";s:12:\"product_type\";s:6:\"正常\";}', 1.00);
 
 -- --------------------------------------------------------
 
@@ -875,6 +1073,16 @@ CREATE TABLE `tb_product_supplier` (
   `replace_uid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商';
 
+--
+-- 转存表中的数据 `tb_product_supplier`
+--
+
+INSERT INTO `tb_product_supplier` (`id`, `u_id`, `company`, `name`, `tel`, `fax`, `mobile`, `site`, `email`, `pc`, `address`, `remark`, `create_time`, `update_time`, `replace_uid`) VALUES
+(1, 1, '包装盒厂家', '', '', '', '', '', '', NULL, '', '', 1559019189, 1559019189, 1),
+(2, 1, '防伪标厂家', '', '', '', '', '', '', NULL, '', '', 1559019196, 1559019196, 1),
+(3, 1, '苹果园', '', '', '', '', '', '', NULL, '', '', 1559019205, 1559019205, 1),
+(4, 1, '测试', '企业返现', '1111111', '', '', '', '', NULL, '', '', 1559054423, 1559054461, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -886,6 +1094,17 @@ CREATE TABLE `tb_product_unit` (
   `name` varchar(255) DEFAULT NULL COMMENT '单位名称',
   `sort` int(11) DEFAULT '0' COMMENT '排序'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tb_product_unit`
+--
+
+INSERT INTO `tb_product_unit` (`id`, `name`, `sort`) VALUES
+(1, '个', 0),
+(2, '瓶', 0),
+(3, '箱', 0),
+(4, '片', 0),
+(5, '盒', 0);
 
 -- --------------------------------------------------------
 
@@ -901,6 +1120,15 @@ CREATE TABLE `tb_product_warehouse` (
   `remark` text,
   `sort` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='仓库';
+
+--
+-- 转存表中的数据 `tb_product_warehouse`
+--
+
+INSERT INTO `tb_product_warehouse` (`id`, `name`, `default`, `address`, `remark`, `sort`) VALUES
+(1, '默认仓库', 1, '', '', NULL),
+(2, '上海仓库', 1, '', '', NULL),
+(3, '退货仓库', 0, '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -919,6 +1147,13 @@ CREATE TABLE `tb_product_warehouse_transfer` (
   `remark` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='调拨';
 
+--
+-- 转存表中的数据 `tb_product_warehouse_transfer`
+--
+
+INSERT INTO `tb_product_warehouse_transfer` (`id`, `u_id`, `jin_id`, `out_id`, `p_id`, `number`, `create_time`, `remark`) VALUES
+(1, 1, 1, 2, 1, 2, 1559054313, '');
+
 -- --------------------------------------------------------
 
 --
@@ -931,6 +1166,18 @@ CREATE TABLE `tb_product_warehouse_user` (
   `w_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='仓库负责人';
 
+--
+-- 转存表中的数据 `tb_product_warehouse_user`
+--
+
+INSERT INTO `tb_product_warehouse_user` (`id`, `u_id`, `w_id`) VALUES
+(3, 1, 1),
+(4, 29, 1),
+(5, 1, 2),
+(6, 29, 2),
+(7, 1, 3),
+(8, 29, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -942,6 +1189,20 @@ CREATE TABLE `tb_session` (
   `session_expire` int(11) NOT NULL,
   `session_data` varchar(2000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 转存表中的数据 `tb_session`
+--
+
+INSERT INTO `tb_session` (`session_id`, `session_expire`, `session_data`) VALUES
+('think_3ptlteqhud1r8l43pkbdpijaho', 1559102809, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}'),
+('think_4o59e6eccblho3gvg523g4c0l7', 1559100734, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}'),
+('think_83jjiuqs2emkdlo5dd69c255ov', 1559100779, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}'),
+('think_c4lf1lvtjklkdsahpe0dc4fmo9', 1559101383, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}'),
+('think_h4hsbglc97g9sfs66k3f966b0q', 1559101796, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}'),
+('think_o1vo46go9hmf31kmjsok736o6b', 1559102677, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}'),
+('think_qa418g2aogspj1osflobq4b15k', 1559101034, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}'),
+('think_thn06ghcqp7eoad9ao7b97jblq', 1559099439, 'think|a:1:{s:9:\"user_auth\";a:3:{s:2:\"id\";i:1;s:8:\"username\";s:10:\"superadmin\";s:8:\"nickname\";s:9:\"管理员\";}}');
 
 -- --------------------------------------------------------
 
@@ -970,7 +1231,7 @@ INSERT INTO `tb_system_menu` (`id`, `pid`, `name`, `sort`, `status`, `path`, `ic
 (1, 0, '系统首页', 1, 1, '0-1', 'fa-home', 'admin/index/main', '', 0),
 (2, 1, '控制台', 0, 1, '0-1-2', '', '', '', 0),
 (3, 2, '首页', 1, 1, '0-1-2-3', '', 'admin/index/main', '', 0),
-(4, 0, '系统管理', 99, 1, '0-4', 'fa-gear', '', '', 0),
+(4, 0, '系统管理', 99, 1, '0-4', 'fa-gear', 'admin/system/config', '', 0),
 (5, 4, '系统设置', 1, 1, '0-4-5', '', '', '', 0),
 (6, 5, '菜单管理', 1, 1, '0-4-5-6', '', 'admin/system/menu', '', 0),
 (7, 4, '员工管理', 2, 1, '0-4-7', '', '', '', 0),
@@ -1044,7 +1305,9 @@ CREATE TABLE `tb_system_user` (
 --
 
 INSERT INTO `tb_system_user` (`id`, `username`, `nickname`, `password`, `email`, `sex`, `status`, `create_time`, `update_time`, `birthday`, `mobile`) VALUES
-(1, 'superadmin', '管理员', '698d51a19d8a121ce581499d7b701668', '1@1.com', 2, 1, 1489718475, 1492835129, '', '');
+(1, 'superadmin', '管理员', 'e10adc3949ba59abbe56e057f20f883e', '1@1.com', 2, 1, 1489718475, 1492835129, '', ''),
+(29, 'fas', 'fdsa', 'e10adc3949ba59abbe56e057f20f883e', '', 0, 1, 1559014989, 0, NULL, ''),
+(30, '544555', '是否收费电视', 'e10adc3949ba59abbe56e057f20f883e', '', 0, 1, 1559026684, 0, NULL, '');
 
 --
 -- Indexes for dumped tables
@@ -1344,19 +1607,19 @@ ALTER TABLE `tb_auth_rule`
 -- 使用表AUTO_INCREMENT `tb_express`
 --
 ALTER TABLE `tb_express`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `tb_finance_accounts`
 --
 ALTER TABLE `tb_finance_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用表AUTO_INCREMENT `tb_finance_bank`
 --
 ALTER TABLE `tb_finance_bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用表AUTO_INCREMENT `tb_finance_category`
@@ -1368,7 +1631,7 @@ ALTER TABLE `tb_finance_category`
 -- 使用表AUTO_INCREMENT `tb_member`
 --
 ALTER TABLE `tb_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `tb_member_card`
@@ -1380,7 +1643,7 @@ ALTER TABLE `tb_member_card`
 -- 使用表AUTO_INCREMENT `tb_member_group`
 --
 ALTER TABLE `tb_member_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `tb_member_points`
@@ -1392,7 +1655,7 @@ ALTER TABLE `tb_member_points`
 -- 使用表AUTO_INCREMENT `tb_member_price`
 --
 ALTER TABLE `tb_member_price`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用表AUTO_INCREMENT `tb_operate`
@@ -1410,7 +1673,7 @@ ALTER TABLE `tb_operate_1`
 -- 使用表AUTO_INCREMENT `tb_operate_2`
 --
 ALTER TABLE `tb_operate_2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- 使用表AUTO_INCREMENT `tb_operate_3`
@@ -1464,7 +1727,7 @@ ALTER TABLE `tb_operate_10`
 -- 使用表AUTO_INCREMENT `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_build_order`
@@ -1482,13 +1745,13 @@ ALTER TABLE `tb_product_build_order_data`
 -- 使用表AUTO_INCREMENT `tb_product_category`
 --
 ALTER TABLE `tb_product_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_inventory`
 --
 ALTER TABLE `tb_product_inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_relation`
@@ -1500,13 +1763,13 @@ ALTER TABLE `tb_product_relation`
 -- 使用表AUTO_INCREMENT `tb_product_sales_order`
 --
 ALTER TABLE `tb_product_sales_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_sales_order_data`
 --
 ALTER TABLE `tb_product_sales_order_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_sales_return`
@@ -1524,43 +1787,43 @@ ALTER TABLE `tb_product_scrapped`
 -- 使用表AUTO_INCREMENT `tb_product_storage_order`
 --
 ALTER TABLE `tb_product_storage_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_storage_order_data`
 --
 ALTER TABLE `tb_product_storage_order_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_supplier`
 --
 ALTER TABLE `tb_product_supplier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_unit`
 --
 ALTER TABLE `tb_product_unit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_warehouse`
 --
 ALTER TABLE `tb_product_warehouse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_warehouse_transfer`
 --
 ALTER TABLE `tb_product_warehouse_transfer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用表AUTO_INCREMENT `tb_product_warehouse_user`
 --
 ALTER TABLE `tb_product_warehouse_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- 使用表AUTO_INCREMENT `tb_system_menu`
@@ -1572,7 +1835,7 @@ ALTER TABLE `tb_system_menu`
 -- 使用表AUTO_INCREMENT `tb_system_user`
 --
 ALTER TABLE `tb_system_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
