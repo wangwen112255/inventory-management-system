@@ -27,7 +27,7 @@ class Admin extends Base {
                 define('UID', $user_auth['id']);
             }
         } else {
-            $this->error('cookie or session missing', url('admin/everyone/login'));
+            $this->redirect('admin/everyone/login');
         }
 
 
@@ -39,7 +39,7 @@ class Admin extends Base {
         if (!IS_SUPER_ADMIN) {
             //检测访问权限
             if (strpos($this->url, 'listorders') === false && !$this->_rule_check($this->url)) {
-                $this->error('未授权访问!');
+                $this->error('未授权访问');
             }
         }
     }
