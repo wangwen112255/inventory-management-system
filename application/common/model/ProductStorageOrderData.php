@@ -3,9 +3,6 @@
 namespace app\common\model;
 
 use app\common\model\Base;
-use const UID;
-use function config_value;
-use function request;
 
 class ProductStorageOrderData extends Base {
 

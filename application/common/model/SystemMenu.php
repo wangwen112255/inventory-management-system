@@ -4,10 +4,6 @@ namespace app\common\model;
 
 use app\common\model\Base;
 use org\util\Auth;
-use const IS_SUPER_ADMIN;
-use const UID;
-use function gen_tree;
-use function url;
 
 class SystemMenu extends Base {
 

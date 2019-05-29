@@ -3,8 +3,6 @@
 namespace app\common\model;
 
 use app\common\model\Base;
-use const UID;
-use function request;
 
 class Operate extends Base {
 

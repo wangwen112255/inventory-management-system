@@ -3,9 +3,6 @@
 namespace app\common\model;
 
 use app\common\model\Base;
-use const UID;
-use function db;
-use function request;
 
 class Member extends Base {
 

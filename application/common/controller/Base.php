@@ -5,10 +5,6 @@ namespace app\common\controller;
 use think\Config;
 use think\Controller;
 use think\Loader;
-use const ACTION_NAME;
-use const CONTROLLER_NAME;
-use const MODULE_NAME;
-use function hump_to_underline;
 
 /**
  * @title 基类
