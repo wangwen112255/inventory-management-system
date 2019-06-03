@@ -124,7 +124,7 @@
                                             ?>
                                             <tr>
                                                 <td>{:sprintf("%06d",$var2.id)}</td>
-                                                <td>{$var2.name}</td>
+                                                <td>{$var2.warehouse}</td>
                                                 <td>{$var2.quantity}</td>
                                                 <td>{$var2.amount}</td>
                                                 <td>{$var2.inventory_quantity}</td>
