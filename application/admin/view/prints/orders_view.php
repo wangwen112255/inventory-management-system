@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>
-            <table width="90%" border="0" cellpadding="0" cellspacing="5" align="center">
+        <div><br><br>
+            <table width="90%" border="0" cellpadding="0" cellspacing="5" align="center" >
                 <tr>
                     <td height="21" align="center"><h2> {:config('base.company')}</h2>
                         <h3>产品销售出库单</h3></td>
@@ -41,6 +41,9 @@
                             <?php
                             foreach ($orders as $key => $var) {
                                 $var['product_data'] = unserialize($var['product_data']);
+                                
+                                $units = db('product_unit')->column('id,name');
+                                
                                 ?>
                                 <?php
                                 $quantity += $var['quantity'];
@@ -52,7 +55,11 @@
                                     <td align="center">{$var.product_data.name}</td>
                                     <td align="center">{$var.product_data.format}</td>
                                     <td align="center">{$var.quantity}</td>
-                                    <td align="center">{$var.product_data.unit}</td>
+                                    <td align="center">
+                                            <?php 
+                                            echo isset($units[$var['product_data']['unit']]) ? $units[$var['product_data']['unit']]: '';
+                                            ?>
+                                         </td>
     <?php
     if (strpos($info['nickname'], '宏顺物流') != FALSE) {
         echo ' <td align="center"> ' . number_format($var['amount'], 2) . ' </td>';

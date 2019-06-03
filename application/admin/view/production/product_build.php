@@ -19,17 +19,17 @@
                         <table class="table table-hover table-striped" style="margin-bottom:0px">
                             <tbody>
                                 <tr>
-                                    <th style="width:120px;line-height:30px;text-align:right">识别码</th>
-                                    <td style="width:120px;line-height:30px;">
+                                    <th style="width:100px;line-height:30px;text-align:right">识别码</th>
+                                    <td style="width:100px;line-height:30px;">
                                         <?php echo $val['code']; ?>
                                     </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">产品</th>
-                                    <td style="width:120px;line-height:30px;">
+                                    <th style="width:100px;line-height:30px;text-align:right">产品</th>
+                                    <td style="width:300px;line-height:30px;">
                                         <input type="hidden" name="product_ids[{$key}]" value="<?php echo $val['id']; ?>" />
                                         <?php echo $val['name']; ?>
                                     </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">倍数</th>
-                                    <td style="width:120px;line-height:30px;">
+                                    <th style="width:100px;line-height:30px;text-align:right">倍数</th>
+                                    <td style="width:100px;line-height:30px;">
                                         <?php echo $val['multiple']; ?>
                                     </td>
                                     <th style="width:100px;line-height:30px;text-align:right">出货仓库<font color="#ff0000">*</font></th>
