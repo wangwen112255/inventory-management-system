@@ -172,7 +172,7 @@
                 {volist name="lists" id="var"}
                 <tr>
                     <td>{:sprintf("%06d",$var.id)}</td>
-                    <td>{$var.name}</td>
+                    <td>{$var.warehouse}</td>
                     <td>{$var.quantity}</td>
                     <td>{$var.inventory_quantity}</td>
                     <td>{$var.unit_name}</td>
