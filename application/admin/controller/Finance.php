@@ -165,7 +165,7 @@ class Finance extends Admin {
         builder('list')
                 ->addItem('id', '#')
                 ->addItem('name', '名称')
-                ->addItem('type', '类型')
+                ->addItem('type_name', '类型')
                 ->addSortItem('sort', '排序', 'finance_category')
                 ->addAction('编辑', 'category_edit', '<i class="fa fa-edit"></i>')
                 ->addAction('删除', 'category_delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
@@ -205,7 +205,7 @@ class Finance extends Admin {
             $type = input('get.type', 0);
 
             builder('form')
-                    ->addItem('pid', 'select', '目录', $this->m_finance_category->lists_select_tree(), '')
+                    ->addItem('pid', 'select', '目录', $this->m_finance_category->lists_select_tree('type=' . $type), '')
                     ->addItem('name', 'input', '分类名称<font color="red">*</font>')
                     ->addItem('type', 'hidden', '类别', $type)
                     ->build();

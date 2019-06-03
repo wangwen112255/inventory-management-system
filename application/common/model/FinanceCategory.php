@@ -7,18 +7,25 @@ use app\common\model\Base;
 
 class FinanceCategory extends Base {
 
-    public function getTypeAttr($value) {
+    public function getTypeNameAttr($value, $data) {
         $types = [0 => '支出', 1 => '收入'];
-        return isset($types[$value]) ? $types[$value] : '';
+        return isset($types[$data['type']]) ? $types[$data['type']] : '';
     }
 
     public function json() {
-        $json = array();
-        $array = array(array('v' => '0', 'n' => '支出'), array('v' => '1', 'n' => '收入'));
+        $json = [];
+        $array = [
+            ['v' => '0', 'n' => '支出'],
+            ['v' => '1', 'n' => '收入']
+        ];
+
         foreach ($array as $value) {
             foreach ($this->lists_tree() as $var) {
                 if ($var['type'] == $value['v'])
-                    $value['s'][] = array('v' => $var['id'], 'n' => $var['name']);
+                    $value['s'][] = [
+                        'v' => $var['id'],
+                        'n' => $var['name']
+                    ];
             }
             $json[] = $value;
         }
