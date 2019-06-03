@@ -89,6 +89,7 @@
                 <td style="text-align:center">
                     <a data-toggle="modal" data-target="#modal" href="{:url('transfer_add',['id'=>$var.inventory_id])}" data-title="产品调出"  title="调出"><i class="fa fa-share"></i> 调出</a>
                     <a data-toggle="modal" data-target="#modal" href="{:url('scrapped_add',['id'=>$var.inventory_id])}" data-title="产品报废" title="报废"><i class="fa fa-trash"></i> 报废</a>
+                    <a href="{:url('admin/configure/product_look',['id'=>$var.p_id, 'w_id'=>$var.w_id])}" data-title="产品查看" title="查看"><i class="fa fa-search"></i> 查看</a>
                 </td>
             </tr>
             {/volist}

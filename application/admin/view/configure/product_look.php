@@ -85,7 +85,6 @@
 {if !empty($count3)}
 <div id="legend" class="text-center">
     <h2>调拨记录</h2>   
-<!--    <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="fa fa-angle-left"></i> 返回</a> -->
 </div>
 <hr />
 <p class="bg-warning">   查询到了<strong>{$count3}</strong>个调拨记录</p>
@@ -123,7 +122,7 @@
             currentPage:1,
             onPageChange: function(num, type) {
             // alert(num);
-            $.post("{:url('product_look',['id'=>$var.id, 'wh_id'=>$Think.get.wh_id])}", {looktype:1, count:{$count1}, page:num}, function(data) {
+            $.post("{:url('product_look',['id'=>$var.id, 'w_id'=>$Think.get.w_id])}", {looktype:1, count:{$count1}, page:num}, function(data) {
             $('#tablelist1').html(data);
             });
             }
@@ -135,7 +134,7 @@
             pageSize:{:config('base.page_size')},
             currentPage:1,
             onPageChange:function(num, type) {
-            $.post("{:url('product_look',['id'=>$var.id, 'wh_id'=>$Think.get.wh_id])}", {looktype:2, count:{$count2}, page:num}, function(data) {
+            $.post("{:url('product_look',['id'=>$var.id, 'w_id'=>$Think.get.w_id])}", {looktype:2, count:{$count2}, page:num}, function(data) {
             $('#tablelist2').html(data);
             });
             }
@@ -147,7 +146,7 @@
             pageSize:{:config('base.page_size')},
             currentPage: 1,
             onPageChange:function(num, type) {
-            $.post("{:url('product_look',['id'=>$var.id, 'wh_id'=>$Think.get.wh_id])}", {looktype:3, count:{$count3}, page:num}, function(data) {
+            $.post("{:url('product_look',['id'=>$var.id, 'w_id'=>$Think.get.w_id])}", {looktype:3, count:{$count3}, page:num}, function(data) {
             $('#tablelist3').html(data);
             });
             }
@@ -159,7 +158,7 @@
             pageSize:{:config('base.page_size')},
             currentPage: 1,
             onPageChange:function(num, type) {
-            $.post("{:url('product_look',['id'=>$var.id, 'wh_id'=>$Think.get.wh_id])}", {looktype:4, count:{$count4}, page:num}, function(data) {
+            $.post("{:url('product_look',['id'=>$var.id, 'w_id'=>$Think.get.w_id])}", {looktype:4, count:{$count4}, page:num}, function(data) {
             $('#tablelist4').html(data);
             });
             }

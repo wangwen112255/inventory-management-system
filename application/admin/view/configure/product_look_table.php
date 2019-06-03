@@ -2,34 +2,36 @@
 {case value="1"}
 <table class="table table-hover table-striped">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>仓库</th>
-            <th>库存</th>
-            <th>报警</th>
-        </tr>
-    </thead>
-    <tbody>
-        {volist name="inventory" id="var"}
-        <tr>
-            <td>{:sprintf("%06d",$var.inventory_id)}</td>
-            <td>{$var.warehouse}</td>
-            <td>
-                {elt name="var.quantity" value="$var.lowest"}
-                <span class="badge badge-important">{$var.quantity}</span>
-                {else/}
-                {$var.quantity}
-                {/elt}
-            </td>
-            <td>{$var.lowest}</td>
-        </tr>
-        {/volist}
-    </tbody>
+    <col width="120px" />
+    <tr>
+        <th>ID</th>
+        <th>仓库</th>
+        <th>库存</th>
+        <th>报警</th>
+    </tr>
+</thead>
+<tbody>
+    {volist name="inventory" id="var"}
+    <tr>
+        <td>{:sprintf("%06d",$var.inventory_id)}</td>
+        <td>{$var.warehouse}</td>
+        <td>
+            {elt name="var.quantity" value="$var.lowest"}
+            <span class="badge badge-important">{$var.quantity}</span>
+            {else/}
+            {$var.quantity}
+            {/elt}
+        </td>
+        <td>{$var.lowest}</td>
+    </tr>
+    {/volist}
+</tbody>
 </table>
 {/case}
 {case value="2"}
 <table class="table table-hover table-striped">
     <thead>
+        <col width="120px" />
         <tr>
             <th>ID</th>
             <th>仓库</th>
@@ -58,6 +60,7 @@
 {case value="3"}
 <table class="table table-hover table-striped">
     <thead>
+        <col width="120px" />
         <tr>
             <th>ID</th>
             <th>拨出仓库</th>
@@ -84,6 +87,7 @@
 {case value="4"}
 <table class="table table-hover table-striped">
     <thead>
+        <col width="120px" />
         <tr>
             <th>ID</th>
             <th>仓库</th>
@@ -106,7 +110,7 @@
                 <td>{$var.nickname}</td>
                 <td>{$var.create_time}</td>
             </tr>
-<?php } ?>
+        <?php } ?>
     </tbody>
 </table>
 {/case}

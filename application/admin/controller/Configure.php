@@ -12,31 +12,45 @@ class Configure extends Admin {
     /**
      * @title 产品查看
      */
-    public function product_look($id, $wh_id = 0) {
+    public function product_look($id, $w_id = 0) {
 
-        empty($id) && $this->error('ID参数不能为空');
+        empty($id) && $this->error('ID参数不能为空');  
 
         if (request()->post('looktype')) {
 
             $count = input('post.count');
-            $where['p.id'] = $id;
-            if ($wh_id) {
-                $where['pw.id'] = $wh_id;
-            }
+
             if (request()->post('looktype') === '1') {
-                $this->assign('inventory', $this->m_product_inventory->model_where()->group('a.w_id')->where($where)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+
+                $where1['a.p_id'] = $id;
+                if ($w_id) {
+                    $where1['a.w_id'] = $w_id;
+                }
+                $this->assign('inventory', $this->m_product_inventory->model_where()->where($where1)->group('a.w_id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '2') {
 
-                $this->assign('warehouse', $this->m_product_storage_order_data->model_where()->group('a.id')->where($where)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $where2['a.p_id'] = $id;
+                if ($w_id) {
+                    $where2['a.w_id'] = $w_id;
+                }
+                $this->assign('warehouse', $this->m_product_storage_order_data->model_where()->where($where2)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '3') {
-                $this->assign('warehouse_allocate', $this->m_product_warehouse_transfer->model_where()->where('a.p_id', $id)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+
+                $where3['a.p_id'] = $id;
+                if ($w_id) {
+                    $where3['a.out_id'] = $w_id;
+                }
+                $this->assign('warehouse_allocate', $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '4') {
-                $where4['p.id'] = $id;
-                if ($wh_id) {
-                    $where4['pw.id'] = $wh_id;
+
+
+                $where4['a.p_id'] = $id;
+                if ($w_id) {
+                    $where4['a.w_id'] = $w_id;
                 }
                 $this->assign('lists', $lists = $this->m_product_sales_order_data->model_where()->where($where4)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             }
+            
             $this->assign('looktype', request()->post('looktype'));
             return view('product_look_table');
         } else {
@@ -46,35 +60,39 @@ class Configure extends Admin {
 
 
             // 库存记录 1
-            $where['p.id'] = $id;
-            if ($wh_id) {
-                $where['pw.id'] = $wh_id;
+            $where1['a.p_id'] = $id;
+            if ($w_id) {
+                $where1['a.w_id'] = $w_id;
             }
-            $count1 = $this->m_product_inventory->model_where()->group('a.id')->where($where)->count();
+            $count1 = $this->m_product_inventory->model_where()->where($where1)->group('a.id')->count();
             $this->assign('count1', $count1);
-            $quantity_sum1 = $this->m_product_inventory->model_where()->where($where)->sum('a.quantity');
+            $quantity_sum1 = $this->m_product_inventory->model_where()->where($where1)->sum('a.quantity');
             $this->assign('quantity_sum1', $quantity_sum1);
 
             // 出库记录 2
-            $count2 = $this->m_product_storage_order_data->model_where()->where($where)->count();
+            $where2['a.p_id'] = $id;
+            if ($w_id) {
+                $where2['a.w_id'] = $w_id;
+            }
+            $count2 = $this->m_product_storage_order_data->model_where()->where($where2)->count();
             $this->assign('count2', $count2);
-            $quantity_sum2 = $this->m_product_storage_order_data->model_where()->where($where)->sum('a.quantity');
+            $quantity_sum2 = $this->m_product_storage_order_data->model_where()->where($where2)->sum('a.quantity');
             $this->assign('quantity_sum2', $quantity_sum2);
 
             // 调拨记录
             $where3['a.p_id'] = $id;
-            if ($wh_id) {
-                $where3['a.out_id'] = $wh_id;
+            if ($w_id) {
+                $where3['a.out_id'] = $w_id;
             }
-            $count3 = $this->m_product_warehouse_transfer->model_where()->where('a.p_id', $id)->group('a.id')->count();
+            $count3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->count();
             $this->assign('count3', $count3);
-            $quantity_sum3 = $this->m_product_warehouse_transfer->alias('a')->where($where3)->sum('number');
+            $quantity_sum3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->sum('a.number');
             $this->assign('quantity_sum3', $quantity_sum3);
 
             //出库记录          
-            $where4['p.id'] = $id;
-            if ($wh_id) {
-                $where4['pw.id'] = $wh_id;
+            $where4['a.p_id'] = $id;
+            if ($w_id) {
+                $where4['a.w_id'] = $w_id;
             }
             $count4 = $this->m_product_sales_order_data->model_where()->where($where4)->count('distinct a.id');
             $this->assign('count4', $count4);
@@ -597,18 +615,18 @@ class Configure extends Admin {
      * @title 供应商新增
      */
     public function supplier_add() {
-        
+
         if (request()->isPost()) {
             $post = request()->post();
-            
+
             if (!$this->v_product_supplier->check($post))
                 $this->error($this->v_product_supplier->getError());
-            
+
             $post['u_id'] = UID;
             $post['replace_uid'] = UID;
             $post['create_time'] = time();
             $post['update_time'] = time();
-            
+
             if (db('product_supplier')->insertGetId($post)) {
                 $this->m_operate->success('新增供应商');
                 $this->success('', 'supplier');
@@ -641,13 +659,13 @@ class Configure extends Admin {
 
         if (request()->isPost()) {
             $post = request()->post();
-            
+
             if (!$this->v_product_supplier->check($post))
                 $this->error($this->v_product_supplier->getError());
-            
+
             $post['replace_uid'] = UID;
             $post['update_time'] = time();
-            
+
             if (db('product_supplier')->where('id', $id)->update($post) !== FALSE) {
                 $this->m_operate->success('修改供应商');
                 $this->success('', 'supplier');
