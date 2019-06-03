@@ -66,7 +66,7 @@ class Inventory extends Admin {
                 if (empty($product_quantity[$id]) || !preg_match("/^[1-9][0-9]*$/", $product_quantity[$id]))
                     $this->error('数量有误');
 
-                if (empty($group_price[$id]) || !is_numeric($group_price[$id]))
+                if (!is_numeric($group_price[$id]))
                     $this->error('金额有误');
 
                 if (!empty($id) && is_numeric($id) && ($one = db('product')->where('id', $id)->find())) {
