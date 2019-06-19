@@ -779,6 +779,7 @@ CREATE TABLE `tb_product` (
   `c_id` int(11) DEFAULT NULL COMMENT '产品分类',
   `code` varchar(255) DEFAULT NULL COMMENT '产品货号',
   `name` varchar(255) DEFAULT NULL COMMENT '产品名称',
+  `image` varchar(255) NOT NULL COMMENT '产品主图',
   `sales` double(11,2) DEFAULT NULL COMMENT '销售价',
   `purchase` double(11,2) DEFAULT NULL COMMENT '进货价',
   `points` bigint(20) DEFAULT '0' COMMENT '积分',
