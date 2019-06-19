@@ -20,7 +20,7 @@
         <link href="__PUBLIC__/libs/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">     
         <link rel="stylesheet" href="__STATIC__/admin/css/style.css" />
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="__PUBLIC__/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__PUBLIC__/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="container-fluid body">
