@@ -8,11 +8,12 @@
             <input size="16" type="text" class="datetime_search form-control" name="timeb" value="{$Think.get.timeb}" placeholder="创建结束日期">
             <input size="16" type="text" placeholder="单号/识别码/产品名称" name="keyword" value="{$Think.get.keyword}" class="form-control">
 
-
-            {if $chart==='0'}
+ 
+            <?php if(empty($chart)){ ?>
             <input type="text" class="form-control" style="width: 140px;" name="express_num" value="{$Think.get.express_num}" placeholder="快递单号">
-            {/if}
-            <input type="text" style="width: 120px;" placeholder="会员电话" name="card" value="{$Think.get.tel}" class="form-control">
+            <?php } ?>
+            <input type="text" style="width: 120px;" placeholder="会员" name="nickname" value="{$Think.get.nickname}" class="form-control">
+            <input type="text" style="width: 120px;" placeholder="会员电话" name="tel" value="{$Think.get.tel}" class="form-control">
 
             <select name="c_id" class="form-control">
                 <option value="">所有分类</option>
@@ -94,7 +95,7 @@
                     <td onclick="product_data('{$var.id}')" class="product_dataplus" id="product_dataplus{$var.id}"><i class="fa fa-angle-double-right"></i></td>
                     <td onclick="product_data('{$var.id}')">{$var.order_number}</td>
                     <td onclick="product_data('{$var.id}')">{$var.status_text}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.express_name|default='无'}</td>
+                    <td onclick="product_data('{$var.id}')">{$var.express_name|default='无'}{$var.express_num}</td>
                     <td onclick="product_data('{$var.id}')">{$var.amount}</td>
                     <td onclick="product_data('{$var.id}')">{$var.create_time}</td>
                     <td onclick="product_data('{$var.id}')">{$var.nickname?:'<span class="label label-important">没有客户</span>'}</td>

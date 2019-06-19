@@ -18,18 +18,17 @@ class Member extends Admin {
             $price_arr = $post['g_price'];
             foreach ($price_arr as $key => $val) {
                 $where = [];
-                $data = [];
+                $datas = [];
                 foreach ($val as $key2 => $val2) {
-                    $where = ['p_id' => $key,
-                        'g_id' => $key2];
-                    $data = ['p_id' => $key,
-                        'g_id' => $key2,
-                        'price' => floatval($val2)];
+                    
+                    $where = ['p_id' => $key, 'g_id' => $key2];
+                    $datas = ['p_id' => $key, 'g_id' => $key2, 'price' => floatval($val2)];
+
                     //如果存在 - 更新
-                    if ($this->m_member_price->where($where)->count()) {
-                        $this->m_member_price->save(['price' => floatval($val2)], $where);
-                    } else {
-                        $this->m_member_price->insert($data);
+                    if (db('member_price')->where($where)->count()) {                        
+                        db('member_price')->where($where)->setField('price', floatval($val2));                        
+                    } else {                        
+                        db('member_price')->where($where)->insert($datas);                                
                     }
                 }
             }
@@ -81,7 +80,7 @@ class Member extends Admin {
      */
     public function delete($id) {
 
-        empty($id) && $this->error('参数不能为空');       
+        empty($id) && $this->error('参数不能为空');
 
 
         if (db('member')->where('id', $id)->delete()) {
@@ -122,8 +121,8 @@ class Member extends Admin {
      */
     public function edit($id) {
 
-        empty($id) && $this->error('参数不能为空');       
-        
+        empty($id) && $this->error('参数不能为空');
+
 
         if (request()->isPost()) {
             $post = request()->post();

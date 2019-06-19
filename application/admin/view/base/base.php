@@ -42,7 +42,7 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="__PUBLIC__/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="__PUBLIC__/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="__PUBLIC__/libs/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </body>

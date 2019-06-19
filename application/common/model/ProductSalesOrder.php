@@ -159,6 +159,8 @@ class ProductSalesOrder extends Base {
 
         if (request()->get('express_num'))
             $this->where('a.express_num', 'like', '%' . request()->get('express_num') . '%');
+        if (request()->get('nickname'))
+            $this->where('m.nickname', 'like', '%' . request()->get('nickname') . '%');
         if (request()->get('tel'))
             $this->where('m.tel', 'like', '%' . request()->get('tel') . '%');
         if (request()->get('c_id'))
