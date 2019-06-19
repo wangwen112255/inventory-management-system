@@ -123,6 +123,7 @@ class Configure extends Admin {
         builder('list')
                 ->addItem('category', '分类')
                 ->addItem('code', '识别码')
+                ->addItem('image', '图片', 'image')
                 ->addItem('name', '名称')
                 ->addItem('sales', '销售价')
                 ->addItem('purchase', '进货价')
@@ -165,6 +166,7 @@ class Configure extends Admin {
         } else {
             builder('form')
                     ->addItem('c_id', 'select', '产品分类', $this->m_product_category->lists_select_tree())
+                    ->addItem('image', 'image', '产品图片','','data-src="holder.js/140x140?text=选择图片" ')
                     ->addItem('name', 'input', '产品名称<font color="red">*</font>')
                     ->addItem('code', 'input', '产品货号<font color="red">*</font>')
                     ->addItem('format', 'input', '产品规格')
@@ -208,6 +210,7 @@ class Configure extends Admin {
 
             builder('form')
                     ->addItem('c_id', 'select', '产品分类<font color="red">*</font>', $this->m_product_category->lists_select_tree())
+                    ->addItem('image', 'image', '产品图片','','data-src="holder.js/140x140?text=选择图片" ')
                     ->addItem('name', 'input', '产品名称<font color="red">*</font>')
                     ->addItem('code', 'input', '产品货号<font color="red">*</font>')
                     ->addItem('format', 'input', '产品规格')

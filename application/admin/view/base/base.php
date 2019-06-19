@@ -17,8 +17,10 @@
         <script src="__PUBLIC__/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="__PUBLIC__/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <link href="__PUBLIC__/libs/font-awesome/4.2.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">     
+        <link href="__PUBLIC__/libs/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">     
         <link rel="stylesheet" href="__STATIC__/admin/css/style.css" />
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="__PUBLIC__/libs/jquery/2.0.0/jquery.min.js"></script>
     </head>
     <body>
         <div class="container-fluid body">
@@ -41,12 +43,13 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="__PUBLIC__/libs/jquery/3.2.1/jquery.min.js"></script>
+        
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="__PUBLIC__/libs/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </body>
 </html>
+<script type="text/javascript" src="__PUBLIC__/libs/layer/3.0/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/libs/holder/2.9.4/holder.min.js"></script> 
 <!--自定义的一些JS函数--> 
 <script src="__STATIC__/admin/js/common.js"></script>
 <script src="__STATIC__/admin/js/init.js"></script>

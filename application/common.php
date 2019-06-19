@@ -14,6 +14,72 @@ use app\common\builder\Builder;
 
 
 /**
+ * @title 生成图片的缩略图
+ * @param type $filename
+ * @param type $width
+ * @param type $height
+ * @return boolean
+ */
+function img_resize($filename, $width, $height, $default = '') {
+    //define('$res_path','E:/xampp552/htdocs/vv_mythink1.0/Res/');
+    //define('RES_HTTP','http://127.0.0.1:8080/vv_mythink1.0/Res/');
+    $res_path = APP_DIR . '/uploads/';
+    $res_http = APP_URL . '/uploads/';
+    //import('Common.Org.Image');
+    if (!is_file($res_path . $filename)) {
+        // echo 'eeee'. $res_path . $filename;exit;
+        if (strpos($filename, 'http') !== false) {
+            return $filename;
+        } else {
+            return $filename;            
+        }
+        //return false;
+    }
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    $old_image = $filename;
+    $new_image = 'cache/' . iconv_substr($filename, 0, iconv_strrpos($filename, '.')) . '-' . $width . 'x' . $height . '.' . $extension;
+    //print_r(filemtime($res_path . $old_image));
+    // print_r('<br />');
+    // print_r(filemtime($res_path . $new_image));f
+    if (is_file($res_path . $new_image)) {
+        return $res_http . $new_image;
+    } else {
+        $path = '';
+        $directories = explode('/', dirname(str_replace('../', '', $new_image)));
+        foreach ($directories as $directory) {
+            $path = $path . '/' . $directory;
+            if (!is_dir($res_path . $path)) {
+                @mkdir($res_path . $path, 0777);
+            }
+        }
+        if (!is_file($res_path . $old_image)) {
+            return '';
+        }
+        list($width_orig, $height_orig) = @getimagesize($res_path . $old_image);
+        if ($height == 0) {
+            $height = $width * $height_orig / $width_orig;
+        }
+        if ($width == 0) {
+            $width = $height * $width_orig / $height_orig;
+        }
+        if ($width_orig == $width && $height_orig == $height) {
+            copy($res_path . $old_image, $res_path . $new_image);
+        } else {
+            $image = new org\util\Image($res_path . $old_image);
+            $image->resize($width, $height, $default);
+            $image->save($res_path . $new_image, 75);
+        }
+        return $res_http . $new_image;
+    }
+}
+
+function res_http($res_path) {
+    if (is_file(APP_DIR . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR  . $res_path)) {
+        return APP_URL . '/uploads/' . $res_path;
+    }
+}
+
+/**
  * @title HASH值计算
  * @param type $u
  * @param type $s
