@@ -51,18 +51,15 @@ class Member extends Base {
 
     public function json() {
 
-        if (request()->get('query')) {
-            $this->where('py.py|card|nickname', 'like', '%' . request()->get('query') . '%');
+        if (request()->get('keyword')) {
+            $this->where('py.py|card|nickname', 'like', '%' . request()->get('keyword') . '%');
         }
 
         $this->join('pinyin py', 'CONV(HEX(LEFT(CONVERT(nickname USING GBK),1)),16,10) BETWEEN py.begin AND py.end', 'LEFT');
 
-        $array = $this->field('a.*,c.name')->alias('a')->join('member_group c', 'a.g_id=c.id', 'LEFT')->limit(10)->select();
-        $json['query'] = request()->get('query');
-        foreach ($array as $value) {
-            $json['suggestions'][] = array('value' => $value['nickname'], 'id' => $value['id'], 'name' => $value['name']);
-        }
-        return json_encode($json);
+        $lists = $this->alias('a')->field('a.id,a.nickname as label')->join('member_group c', 'a.g_id=c.id', 'LEFT')->limit(10)->select();
+
+        return json_encode($lists);
     }
 
     public function model_where() {

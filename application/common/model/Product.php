@@ -13,8 +13,8 @@ class Product extends Base {
 
     public function json($type = []) {
 
-        if (request()->get('query')) {
-            $this->where('py.py|code|name', 'like', '%' . request()->get('query') . '%');
+        if (request()->get('keyword')) {
+            $this->where('py.py|code|name', 'like', '%' . request()->get('keyword') . '%');
         }
 
         if (!empty($type))
@@ -22,12 +22,14 @@ class Product extends Base {
 
         $this->join('pinyin py', 'CONV(HEX(LEFT(CONVERT(name USING GBK),1)),16,10) BETWEEN py.begin AND py.end', 'LEFT');
 
-        $array = $this->limit(10)->select();
-        $json['query'] = request()->get('query');
-        foreach ($array as $value) {
-            $json['suggestions'][] = array('value' => $value['name'], 'code' => $value['code'], 'id' => $value['id']);
+        $lists = $this->field('id,name as label,image')->limit(10)->select();
+        foreach ($lists as $key => $value) {
+            if ($value['image'])
+                $lists[$key]['image'] = APP_HOST . img_resize($value['image'], 50, 50);
+            else
+                $lists[$key]['image'] = APP_HOST . img_resize('');            
         }
-        return json_encode($json);
+        return json_encode($lists);
     }
 
     public function model_where() {
