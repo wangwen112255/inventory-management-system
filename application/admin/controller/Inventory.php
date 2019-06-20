@@ -131,7 +131,7 @@ class Inventory extends Admin {
             $_GET['timea'] = date('Y-m-d', strtotime("-30 day"));
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
-        
+
         $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
         $this->assign('category', $this->m_product_category->lists_select_tree());
 
@@ -216,9 +216,9 @@ class Inventory extends Admin {
 
                     //如果存在这个值的话，把会员所相关联的分级价格(group_price)找出来 
                     if (is_numeric($member_id) && !empty($member_id)) {
-                        if ($price = db('member_price')->where('p_id', $id)->where('g_id', $member['g_id'])->value('price')) {
-                            $var['group_price'] = $price;
-                        }
+                        $group_price = db('member_price')->where('p_id', $id)->where('g_id', $member['g_id'])->find();
+                        if ($group_price)
+                            $var['group_price'] = $group_price['price'];
                     }
 
                     $products[$id] = $var;
@@ -312,7 +312,7 @@ class Inventory extends Admin {
             $_GET['timea'] = date('Y-m-d', strtotime("-30 day"));
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
-        
+
         $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
         $this->assign('category', $this->m_product_category->lists_select_tree());
 
@@ -506,7 +506,7 @@ class Inventory extends Admin {
 
         $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
         $this->assign('category', $this->m_product_category->lists_select_tree());
- 
+
 
         $this->assign('count', $count = $this->m_product_inventory->model_where()->count('distinct a.id'));
         $this->assign('lists', $lists = $this->m_product_inventory->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
@@ -571,11 +571,11 @@ class Inventory extends Admin {
         if (!isset($_GET['timea']))
             $_GET['timea'] = date('Y-m-d', strtotime("-30 day"));
         if (!isset($_GET['timeb']))
-            $_GET['timeb'] = date('Y-m-d');       
-        
+            $_GET['timeb'] = date('Y-m-d');
+
         $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
         $this->assign('category', $this->m_product_category->lists_select_tree());
-        
+
 
         $count = $this->m_product_warehouse_transfer->model_where()->count('distinct a.id');
         $lists = $this->m_product_warehouse_transfer->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
@@ -636,7 +636,7 @@ class Inventory extends Admin {
             $_GET['timea'] = date('Y-m-d', strtotime("-30 day"));
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
-        
+
         $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
         $this->assign('category', $this->m_product_category->lists_select_tree());
 
