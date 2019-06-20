@@ -12,7 +12,6 @@
 // 应用公共文件
 use app\common\builder\Builder;
 
-
 /**
  * @title 生成图片的缩略图
  * @param type $filename
@@ -20,7 +19,7 @@ use app\common\builder\Builder;
  * @param type $height
  * @return boolean
  */
-function img_resize($filename, $width, $height, $default = '') {
+function img_resize($filename, $width = 10, $height = 10, $default = '') {
     //define('$res_path','E:/xampp552/htdocs/vv_mythink1.0/Res/');
     //define('RES_HTTP','http://127.0.0.1:8080/vv_mythink1.0/Res/');
     $res_path = APP_DIR . '/uploads/';
@@ -31,7 +30,7 @@ function img_resize($filename, $width, $height, $default = '') {
         if (strpos($filename, 'http') !== false) {
             return $filename;
         } else {
-            return $filename;            
+            return APP_URL . '/static/admin/images/noimage.jpg';
         }
         //return false;
     }
@@ -74,7 +73,7 @@ function img_resize($filename, $width, $height, $default = '') {
 }
 
 function res_http($res_path) {
-    if (is_file(APP_DIR . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR  . $res_path)) {
+    if (is_file(APP_DIR . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $res_path)) {
         return APP_URL . '/uploads/' . $res_path;
     }
 }
