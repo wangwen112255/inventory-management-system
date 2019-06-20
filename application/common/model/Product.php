@@ -27,7 +27,7 @@ class Product extends Base {
             if ($value['image'])
                 $lists[$key]['image'] = APP_HOST . img_resize($value['image'], 50, 50);
             else
-                $lists[$key]['image'] = APP_HOST . img_resize('');            
+                $lists[$key]['image'] = APP_HOST . img_resize('/static/admin/images/noimage.jpg');            
         }
         return json_encode($lists);
     }
