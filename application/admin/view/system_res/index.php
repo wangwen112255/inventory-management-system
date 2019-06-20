@@ -13,7 +13,7 @@
     .lightbox img{
         margin: 0 auto;
     }   
-  
+
     .lightbox .img_title{
         position: relative;
         height: 30px;
@@ -62,17 +62,16 @@
     <?php
     if ($folder == 'image') {
         ?>
-    
-        <?php 
-        if(empty($data['images'])){       
-        ?>
-    <div class="row text-warning" style="margin: 50px; text-align: center; ">
-        <i class="fa fa-frown-o fa-2x"></i> <span style=" font-size: 24px;">没有任何文件</span> 
-    </div>
-    
-    
+
+        <?php
+        if (empty($data['images'])) {
+            ?>
+            <div class="row text-warning" style="margin: 50px; text-align: center; ">
+                <i class="fa fa-frown-o fa-2x"></i> <span style=" font-size: 24px;">没有任何文件</span> 
+            </div>  
+
         <?php } ?>
-    
+
         <?php
         foreach (array_chunk($data['images'], 6) as $image_lists) {
             ?>

@@ -4,7 +4,7 @@
         <tr>
             <th style="width:200px;line-height:30px;text-align:right">产品</th>
             <td>
-                <input type="text" name="code" placeholder="产品识别码或搜索" class="form-control" id="autocomplete">
+                <input type="text" name="code" placeholder="产品识别码或搜索" class="form-control" id="autoproduct">
                 <input type="hidden" name="product_id" id="product_id" value="" />
             </td>
         </tr>
@@ -118,17 +118,34 @@
 </form>
 {/block}
 {block name="foot_js"} 
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.css"></link>
+<script type="text/javascript" src="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.min.js"></script>
+<script>   
+    $('#autoproduct').AutoComplete({
+        'data': "<?php echo url('json/product') ?>",
+        'ajaxDataType': 'json',
+        'listStyle': 'iconList',
+        'maxItems': 10,
+        'itemHeight': 55,
+        'width': 300,
+        'async': true,
+        'matchHandler': function (keyword, data) {
+            return true
+        },
+        'afterSelectedHandler': function (data) {            
+            $('#product_id').val(data.id);
+            $('form').attr('action', "{:url('storage')}");
+            $('form').submit();
+        },
+        'onerror': function (msg) {
+            alert(msg);
+        }
+    });
+</script>
+
 <script type="text/javascript">
-    $(function () {
-        $('#autocomplete').autocomplete({
-            serviceUrl: "{:url('json/product')}",
-            onSelect: function (suggestion) {
-                $('#product_id').val(suggestion.id);
-                $('form').attr('action', "{:url('storage')}");
-                $('form').submit();
-            }
-        });
-        //
+    $(function () {      
         $('.just').click(function () {
             var key = $(this).attr('val');
             $('#quantity' + key).val(Number($('#quantity' + key).val()) + 1);

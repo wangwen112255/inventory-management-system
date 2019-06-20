@@ -5,7 +5,7 @@
         <tr>
             <th style="width:120px;line-height:30px;text-align:right">加工产品</th>
             <td>
-                <input type="text" name="code" placeholder="产品识别码或搜索" class="form-control" id="autocomplete">
+                <input type="text" name="code" placeholder="产品识别码或搜索" class="form-control" id="autoproduct">
                 <input type="hidden" name="product_id" id="product_id" value="{$Think.post.product_id}" />
                 <span class="check-tips"><strong>{$Think.post.code}</strong></span>
             </td>
@@ -85,6 +85,32 @@
 </form>
 {/block}
 {block name="foot_js"} 
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.css"></link>
+<script type="text/javascript" src="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.min.js"></script>
+<script>   
+    $('#autoproduct').AutoComplete({
+        'data':  "{:url('json/product', ['type'=>[1,2]])}",
+        'ajaxDataType': 'json',
+        'listStyle': 'iconList',
+        'maxItems': 10,
+        'itemHeight': 55,
+        'width': 300,
+        'async': true,
+        'matchHandler': function (keyword, data) {
+            return true
+        },
+        'afterSelectedHandler': function (data) {            
+            $('#product_id').val(data.id);
+            $('form').attr('action', "{:url('product_build')}");
+            $('form').submit();
+        },
+        'onerror': function (msg) {
+            alert(msg);
+        }
+    });
+</script>
+
 <!--加载时间框--> 
 <script>
     $(function () {
@@ -92,16 +118,5 @@
                 {lang: 'zh', format: 'Y-m-d H:i', timepicker: true, step: 5, closeOnDateSelect: true});
     });</script> 
 <!--加载时间框END-->
-<script type="text/javascript">
-    $(function () {
-        $('#autocomplete').autocomplete({
-            serviceUrl: "{:url('json/product', ['type'=>[1,2]])}",
-            onSelect: function (suggestion) {
-                $('#product_id').val(suggestion.id);
-                $('form').attr('action', "{:url('product_build')}");
-                $('form').submit();
-            }
-        });
-    });
-</script>
+
 {/block}

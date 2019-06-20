@@ -12,6 +12,7 @@
     <thead>
         <tr>
             <th>识别码</th>
+            <th>产品图片</th>
             <th>产品名称</th>
             <th>包材数量</th>
             <th>操作</th>
@@ -22,6 +23,7 @@
         ?>
         <tr>
             <td><?php echo $value['code'] ?></td>
+            <td><img src="<?php echo img_resize($value['image'], 80, 80) ?>" class="img-thumbnail" /></td>
             <td><?php echo $value['name'] ?></td>
             <td><?php echo $value['bc_count'] > 0 ? $value['bc_count'] : '' ?></td>
             <td>

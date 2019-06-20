@@ -26,7 +26,7 @@
         <tr>
             <th style="line-height:30px;text-align:right">选择产品</th>
             <td style="line-height:30px;">
-                <input type="text"  placeholder="产品识别码或名称搜索" class="form-control" id="autocomplete">
+                <input type="text"  placeholder="产品识别码或名称搜索" class="form-control" id="autoproduct">
                 <input type="hidden" name="product_id" id="product_id" value="" />
             </td>
         </tr>
@@ -189,22 +189,53 @@
                 {lang: 'zh', format: 'Y-m-d H:i', timepicker: true, step: 5, closeOnDateSelect: true});
     });</script> 
 <!--加载时间框END-->
+
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.css"></link>
+<script type="text/javascript" src="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.min.js"></script>
+<script>
+    $('#automember').AutoComplete({
+        'data': "<?php echo url('json/member') ?>",
+        'ajaxDataType': 'json',
+        'listStyle': 'normal',
+        'maxItems': 10,
+        'width': 'auto',
+        'async': true,
+        'matchHandler': function (keyword, data) {
+            return true
+        },
+        'afterSelectedHandler': function (data) {            
+            $('#member_id').val(data.id);
+            $('form').submit();
+        },
+        'onerror': function (msg) {
+            alert(msg);
+        }
+    });
+    
+    $('#autoproduct').AutoComplete({
+        'data': "<?php echo url('json/product') ?>",
+        'ajaxDataType': 'json',
+        'listStyle': 'iconList',
+        'maxItems': 10,
+        'itemHeight': 55,
+        'width': 300,
+        'async': true,
+        'matchHandler': function (keyword, data) {
+            return true
+        },
+        'afterSelectedHandler': function (data) {            
+            $('#product_id').val(data.id);
+            $('form').submit();
+        },
+        'onerror': function (msg) {
+            alert(msg);
+        }
+    });
+</script>
+
 <script type="text/javascript">
     $(function () {
-        $('#autocomplete').autocomplete({
-            serviceUrl: "{:url('json/product')}",
-            onSelect: function (suggestion) {
-                $('#product_id').val(suggestion.id);
-                $('form').submit();
-            }
-        });
-        $('#automember').autocomplete({
-            serviceUrl: "{:url('json/member')}",
-            onSelect: function (suggestion) {
-                $('#member_id').val(suggestion.id);
-                $('form').submit();
-            }
-        });
         $('.money').each(function () {
             var key = $(this).attr('key');
             var quantity = $('#quantity' + key).val();
