@@ -30,7 +30,7 @@ function img_resize($filename, $width = 10, $height = 10, $default = '') {
         if (strpos($filename, 'http') !== false) {
             return $filename;
         } else {
-            return APP_URL . '/static/admin/images/noimage.jpg';
+            return $filename;
         }
         //return false;
     }
