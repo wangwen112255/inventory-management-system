@@ -66,9 +66,7 @@
 <!--加载时间框END-->
 <!--表单自动保存-->
 <script src="__PUBLIC__/libs/sisyphus/sisyphus.min.js"></script>
-<!--自动下拉提示-->
-<link rel="stylesheet" href="__PUBLIC__/libs/autocomplete/autocomplete.css" />
-<script src="__PUBLIC__/libs/autocomplete/jquery.autocomplete.min.js"></script>
+
 <!--联动下拉http://www.jq22.com/jquery-info3238-->
 <script src="__PUBLIC__/libs/jquery.cxselect/jquery.cxselect.min.js"></script>
 <!-- 提示组件-->

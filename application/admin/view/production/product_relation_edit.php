@@ -16,7 +16,7 @@
         <form class="form-inline" action="{:url('product_relation_edit',['id'=>$Think.get.id])}" method="post" >
 
             <div style="margin-bottom: 20px;">
-                <input type="text" name="code" placeholder="包材搜索" class="form-control" id="autocomplete">
+                <input type="text" name="code" placeholder="包材搜索" class="form-control" id="autoproduct">
                 <input type="hidden" name="product_ids[]" id="product_id" value="" />
             </div>
             <table class="table table-hover table-bordered">
@@ -60,15 +60,32 @@
 
 {/block}
 {block name="foot_js"}
-<script type="text/javascript">
-    $(function () {
-        $('#autocomplete').autocomplete({
-            serviceUrl: "{:url('json/product', ['type'=>[3]])}",
-            onSelect: function (suggestion) {
-                $('#product_id').val(suggestion.id);
-                $('form').submit();
-            }
-        });
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.css"></link>
+<script type="text/javascript" src="__PUBLIC__/libs/jquery.autocomplete/jquery.autocomplete.min.js"></script>
+
+<script type="text/javascript">      
+ 
+    $('#autoproduct').AutoComplete({
+        'data': "{:url('json/product', ['type'=>[3]])}",
+        'ajaxDataType': 'json',
+        'listStyle': 'iconList',
+        'maxItems': 10,
+        'itemHeight': 55,
+        'width': 300,
+        'async': true,
+        'matchHandler': function (keyword, data) {
+            return true
+        },
+        'afterSelectedHandler': function (data) {            
+            $('#product_id').val(data.id);
+            $('form').submit();
+        },
+        'onerror': function (msg) {
+            alert(msg);
+        }
     });
+ 
+    
+    
 </script>
 {/block}
