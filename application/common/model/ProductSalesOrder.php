@@ -163,6 +163,11 @@ class ProductSalesOrder extends Base {
             $this->where('m.nickname', 'like', '%' . request()->get('nickname') . '%');
         if (request()->get('tel'))
             $this->where('m.tel', 'like', '%' . request()->get('tel') . '%');
+        
+        
+        
+        if (request()->get('warehouse'))
+            $this->where('d.w_id', request()->get('warehouse'));
         if (request()->get('c_id'))
             $this->where('p.c_id', request()->get('c_id'));
         if (request()->get('type'))

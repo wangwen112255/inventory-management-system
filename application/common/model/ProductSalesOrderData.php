@@ -90,6 +90,9 @@ class ProductSalesOrderData extends Base {
         if (request()->get('tel'))
             $this->where('m.tel', 'like', '%' . request()->get('tel') . '%');
         
+        if (request()->get('warehouse'))
+            $this->where('a.w_id', request()->get('warehouse'));
+        
         if (request()->get('c_id'))
             $this->where('p.c_id', request()->get('c_id'));  
 

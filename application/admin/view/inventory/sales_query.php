@@ -15,6 +15,11 @@
             <input type="text" style="width: 120px;" placeholder="会员" name="nickname" value="{$Think.get.nickname}" class="form-control">
             <input type="text" style="width: 120px;" placeholder="会员电话" name="tel" value="{$Think.get.tel}" class="form-control">
 
+            <select name="warehouse" class="form-control">
+                <option value="">所有仓库</option>
+                <?php echo html_select($warehouse, input('get.warehouse')); ?>       
+            </select>
+            
             <select name="c_id" class="form-control">
                 <option value="">所有分类</option>
                 <?php echo html_select($category, input('get.c_id')); ?>       
