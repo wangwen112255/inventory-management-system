@@ -91,7 +91,7 @@ class ProductInventory extends Base {
         $this->field('a.id as inventory_id,a.p_id,a.w_id,a.quantity,'
                 . 'pc.name as category,'
                 . 'pw.id,pw.name as warehouse,pw.default,'
-                . 'p.name,p.lowest,p.code,p.type,'
+                . 'p.name,p.lowest,p.code,p.type,p.image,'
                 . 'b.nickname,'
                 . 'c.nickname as replace_nickname,'
                 . 'pu.name as unit_name');

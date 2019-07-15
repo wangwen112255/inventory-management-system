@@ -58,6 +58,7 @@
                 <th>库存</th>
                 <th>识别码</th>
                 <th>产品名称</th>
+                <th>图片</th>
                 <th>产品分类</th>
                 <th>产品类型</th>
                 <th style="text-align:center">删除</th>
@@ -79,6 +80,7 @@
                 </td>
                 <td>{$var.code}</td>
                 <td>{$var.name}</td>
+                <td><img src="<?php echo img_resize($var['image'], 100, 100) ?>" /></td>
                 <td>{$var.category}</td>
                 <td>{$var.type}</td>
                 <td style="text-align:center">
