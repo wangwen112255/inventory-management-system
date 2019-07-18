@@ -63,6 +63,8 @@ class ProductInventory extends Base {
     public function model_where() {
 
         $this->where('pwu.u_id', UID);
+        
+        $this->where('a.quantity', '>', 0);
 
         if (request()->get('keyword'))
             $this->where('p.code|p.name', 'like', '%' . request()->get('keyword') . '%');
