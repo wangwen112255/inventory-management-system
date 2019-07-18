@@ -6,8 +6,6 @@ use app\common\model\Base;
 use Exception;
 use think\Db;
 
-;
-
 class ProductSalesOrder extends Base {
 
     public function getShipTimeAttr($value) {
