@@ -50,7 +50,7 @@
         <thead>
             <tr>
                 <th colspan="3" style="text-align:center" class="warning">仓库信息</th>
-                <th colspan="6" style="text-align:center" class="success">产品信息</th>
+                <th colspan="7" style="text-align:center" class="success">产品信息</th>
             </tr>
             <tr>
                 <th>ID</th>
