@@ -244,7 +244,7 @@
 <script>
     $('.export').click(function () {
         //收集form表单数据
-        var data = $('#forminventorysupplier').serialize();
+        var data = $('form').serialize();
         //console.log(data.toString());
         var url = '<?php echo url('sales_query'); ?>?' + data.toString() + '&export=1';
         //console.log(url);
