@@ -38,7 +38,7 @@ class Configure extends Admin {
 
                 $where3['a.p_id'] = $id;
                 if ($w_id) {
-                    $where3['a.out_id'] = $w_id;
+                    $where3['a.out_id|a.jin_id'] = $w_id;
                 }
                 $this->assign('warehouse_allocate', $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '4') {
@@ -82,7 +82,7 @@ class Configure extends Admin {
             // 调拨记录
             $where3['a.p_id'] = $id;
             if ($w_id) {
-                $where3['a.out_id'] = $w_id;
+                $where3['a.out_id|a.jin_id'] = $w_id;
             }
             $count3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->count();
             $this->assign('count3', $count3);
