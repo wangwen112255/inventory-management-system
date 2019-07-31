@@ -26,6 +26,7 @@
                 <?php echo html_select(config('_dict_product_type'), input('get.type')) ?>                
             </select>
             <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
+            <button class="btn btn-success export" title="导出"><i class="fa fa-file-excel-o"></i> 导出</button>
         </div>
         <div class="search-box">
             <ul class="nav nav-pills">
@@ -103,4 +104,16 @@
         <i class="fa fa-exclamation-circle"></i> 暂时没有相关数据
     </p>
 <?php } ?>
+{/block}
+
+{block name="foot_js"}
+<script>
+    $('.export').click(function () {
+        //收集form表单数据
+        var data = $('form').serialize();
+        var url = '<?php echo url('stock_query'); ?>?' + data.toString() + '&export=1';
+        location.href = url;
+        return false;
+    });
+</script>
 {/block}

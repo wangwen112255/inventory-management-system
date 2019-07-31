@@ -505,8 +505,15 @@ class Inventory extends Admin {
     public function stock_query() {
 
         $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
-        $this->assign('category', $this->m_product_category->lists_select_tree());
-
+        $this->assign('category', $this->m_product_category->lists_select_tree());        
+        
+        //如果export这个参数=1，则直接进行数据导出
+        $export = input('get.export', 0);
+        if ($export) {
+            $lists = $this->m_product_inventory->model_where()->group('a.id')->select();
+            $this->m_excel->product_stock_query_export($lists);
+            exit();
+        }
 
         $this->assign('count', $count = $this->m_product_inventory->model_where()->count('distinct a.id'));
         $this->assign('lists', $lists = $this->m_product_inventory->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));

@@ -13,6 +13,83 @@ use function array_out;
 class Excel extends Base {
 
     /**
+     * @title 导出库存列表
+     * @date 19/07/31
+     */
+    public function product_stock_query_export($lists) {
+
+        $lists = array_out($lists);
+         
+        $PHPExcel = new PHPExcel();
+        // Set properties
+        $PHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+        // 获得当前活动sheet的操作对象
+        $PHPSheet = $PHPExcel->getActiveSheet();
+        // 给当前活动sheet设置名称
+        $PHPSheet->setTitle('库存导出');
+        // 第一行用来写标题
+        $PHPSheet->setCellValue('A1', '#')
+                ->setCellValue('B1', '仓库')
+                ->setCellValue('C1', '商品')
+                ->setCellValue('D1', '商品识别码')
+                ->setCellValue('E1', '库存')
+                ->setCellValue('F1', '产品分类')
+                ->setCellValue('G1', '产品类型');
+        $PHPExcel->getActiveSheet()->getStyle('A1:G1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+        $PHPExcel->getActiveSheet()->getStyle('A1:G1')->getFill()->getStartColor()->setARGB('FFFFFF00');
+
+        $i = 2; //从第二行开始填充数据
+        foreach ($lists as $key => $value) {
+
+            $j = $i;
+
+            $PHPSheet->setCellValue('A' . $i, sprintf('%06d', $value['inventory_id']));
+            $PHPSheet->setCellValue('B' . $i, $value['warehouse']);
+            $PHPSheet->setCellValue('C' . $i, $value['name']);
+            $PHPSheet->setCellValue('D' . $i, $value['code']);
+            $PHPSheet->setCellValue('E' . $i, $value['quantity']);
+            $PHPSheet->setCellValue('F' . $i, $value['category']);
+            $PHPSheet->setCellValue('G' . $i, $value['type']);
+
+            $PHPExcel->getActiveSheet()->getStyle('A' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('B' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('C' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('D' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('E' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('F' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('G' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+            $i++;
+        }
+
+        $PHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+        $PHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+        $PHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(60);
+        $PHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        $PHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $PHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+        $PHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
+        // $PHPSheet->mergeCells('A1:B1');
+        // dd($PHPExcel);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //告诉浏览器输出07Excel文件
+        //header('Content-Type:application/vnd.ms-excel');//告诉浏览器将要输出Excel03版本文件
+        header('Content-Disposition: attachment;filename="Finance-' . date("YmdHis") . '.xlsx"'); //告诉浏览器输出浏览器名称
+        header('Cache-Control: max-age=0'); //禁止缓存
+        $PHPWriter = PHPExcel_IOFactory::createWriter($PHPExcel, 'Excel2007'); //按照指定格式生成Excel文件，'Excel2007'表示生成2007版本的xlsx，'Excel5'表示生成2003版本Excel文件
+        ob_clean();
+        ob_start();
+        $PHPWriter->save("php://output");
+        ob_end_flush();
+        exit();
+    }
+
+    /**
      * @title 导出出库列表
      * @param type $lists
      */
