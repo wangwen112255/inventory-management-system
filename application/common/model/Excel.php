@@ -39,10 +39,11 @@ class Excel extends Base {
                 ->setCellValue('C1', '商品')
                 ->setCellValue('D1', '商品识别码')
                 ->setCellValue('E1', '库存')
-                ->setCellValue('F1', '产品分类')
-                ->setCellValue('G1', '产品类型');
-        $PHPExcel->getActiveSheet()->getStyle('A1:G1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
-        $PHPExcel->getActiveSheet()->getStyle('A1:G1')->getFill()->getStartColor()->setARGB('FFFFFF00');
+                ->setCellValue('F1', '单位')
+                ->setCellValue('G1', '产品分类')
+                ->setCellValue('H1', '产品类型');
+        $PHPExcel->getActiveSheet()->getStyle('A1:H1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+        $PHPExcel->getActiveSheet()->getStyle('A1:H1')->getFill()->getStartColor()->setARGB('FFFFFF00');
 
         $i = 2; //从第二行开始填充数据
         foreach ($lists as $key => $value) {
@@ -54,8 +55,9 @@ class Excel extends Base {
             $PHPSheet->setCellValue('C' . $i, $value['name']);
             $PHPSheet->setCellValue('D' . $i, $value['code']);
             $PHPSheet->setCellValue('E' . $i, $value['quantity']);
-            $PHPSheet->setCellValue('F' . $i, $value['category']);
-            $PHPSheet->setCellValue('G' . $i, $value['type']);
+            $PHPSheet->setCellValue('F' . $i, $value['unit_name']);
+            $PHPSheet->setCellValue('G' . $i, $value['category']);
+            $PHPSheet->setCellValue('H' . $i, $value['type']);
 
             $PHPExcel->getActiveSheet()->getStyle('A' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
             $PHPExcel->getActiveSheet()->getStyle('B' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
@@ -64,6 +66,7 @@ class Excel extends Base {
             $PHPExcel->getActiveSheet()->getStyle('E' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
             $PHPExcel->getActiveSheet()->getStyle('F' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
             $PHPExcel->getActiveSheet()->getStyle('G' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('H' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
             $i++;
         }
@@ -73,8 +76,9 @@ class Excel extends Base {
         $PHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(60);
         $PHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
         $PHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
-        $PHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+        $PHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
         $PHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
+        $PHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(30);
         // $PHPSheet->mergeCells('A1:B1');
         // dd($PHPExcel);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //告诉浏览器输出07Excel文件
