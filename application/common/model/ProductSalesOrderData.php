@@ -86,6 +86,8 @@ class ProductSalesOrderData extends Base {
         if (request()->get('keyword'))
             $this->where('pso.order_number|p.code|p.name', 'like', '%' . request()->get('keyword') . '%');
         
+        if (request()->get('nickname'))
+            $this->where('m.nickname', 'like', '%' . request()->get('nickname') . '%');
 
         if (request()->get('tel'))
             $this->where('m.tel', 'like', '%' . request()->get('tel') . '%');
