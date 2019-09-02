@@ -6,11 +6,10 @@ use app\common\model\Base;
 use think\Db;
 
 class ProductSalesOrderData extends Base {
-    
+
     public function getShipTimeAttr($value) {
         return date('Y-m-d H:i', $value);
     }
-    
 
     public function getStatusTextAttr($value, $data) {
         $status = [-1 => '<span class="label label-warning">有退货</span>', 1 => '<span class="label label-success">已完成</span>', -2 => '<span class="label label-important">已退货</span>'];
@@ -78,50 +77,50 @@ class ProductSalesOrderData extends Base {
         if (request()->get('timeb'))
             $this->where('pso.create_time', '<=', strtotime(request()->get('timeb') . ' 23:59:59'));
 
-        
+
         $this->where('pwu.u_id', UID);
-        
-        
-        
+
+
+
         if (request()->get('keyword'))
-            $this->where('pso.order_number|p.code|p.name', 'like', '%' . request()->get('keyword') . '%');
-        
+            $this->where('pso.order_number|p.code|p.name', '=', request()->get('keyword'));
+
         if (request()->get('nickname'))
             $this->where('m.nickname', 'like', '%' . request()->get('nickname') . '%');
 
         if (request()->get('tel'))
             $this->where('m.tel', 'like', '%' . request()->get('tel') . '%');
-        
+
         if (request()->get('warehouse'))
             $this->where('a.w_id', request()->get('warehouse'));
-        
+
         if (request()->get('c_id'))
-            $this->where('p.c_id', request()->get('c_id'));  
+            $this->where('p.c_id', request()->get('c_id'));
 
         if (request()->get('type'))
             $this->where('p.type', request()->get('type'));
-        
+
         if (request()->get('status'))
-            $this->where('a.status', request()->get('status'));       
-     
-        
-        
+            $this->where('a.status', request()->get('status'));
+
+
+
         $this->join('product_sales_order pso', 'a.o_id=pso.id', 'LEFT');
         $this->join('member m', 'm.id=pso.m_id', 'LEFT');
         $this->join('system_user s', 'pso.u_id=s.id', 'LEFT');
         $this->join('product p', 'a.p_id=p.id', 'LEFT');
         $this->join('product_warehouse_user pwu', 'a.w_id=pwu.w_id', 'LEFT');
         $this->join('product_warehouse pw', 'pw.id=a.w_id', 'LEFT');
-        
-        
+
+
         $this->field('a.*,'
                 . 'pso.create_time,pso.ship_time,'
                 . 'pw.name as warehouse,'
                 . 'm.nickname,'
                 . 's.nickname as staff_nickname');
-        
+
         $this->order('pso.id desc');
-        $this->alias('a');                
+        $this->alias('a');
         return $this;
     }
 
