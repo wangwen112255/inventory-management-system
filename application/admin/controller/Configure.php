@@ -26,21 +26,21 @@ class Configure extends Admin {
                 if ($w_id) {
                     $where1['a.w_id'] = $w_id;
                 }
-                $this->assign('inventory', $this->m_product_inventory->model_where()->where($where1)->group('a.w_id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('inventory', $this->m_product_inventory->model_where()->where($where1)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '2') {
 
                 $where2['a.p_id'] = $id;
                 if ($w_id) {
                     $where2['a.w_id'] = $w_id;
                 }
-                $this->assign('warehouse', $this->m_product_storage_order_data->model_where()->where($where2)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('warehouse', $this->m_product_storage_order_data->model_where()->where($where2)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '3') {
 
                 $where3['a.p_id'] = $id;
                 if ($w_id) {
                     $where3['a.out_id|a.jin_id'] = $w_id;
                 }
-                $this->assign('warehouse_allocate', $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('warehouse_allocate', $this->m_product_warehouse_transfer->model_where()->where($where3)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '4') {
 
 
@@ -48,7 +48,7 @@ class Configure extends Admin {
                 if ($w_id) {
                     $where4['a.w_id'] = $w_id;
                 }
-                $this->assign('lists', $lists = $this->m_product_sales_order_data->model_where()->where($where4)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('lists', $lists = $this->m_product_sales_order_data->model_where()->where($where4)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             }
             
             $this->assign('looktype', request()->post('looktype'));
@@ -64,12 +64,12 @@ class Configure extends Admin {
             if ($w_id) {
                 $where1['a.w_id'] = $w_id;
             }
-            $count1 = $this->m_product_inventory->model_where()->where($where1)->group('a.id')->count();
+            $count1 = $this->m_product_inventory->model_where()->where($where1)->count();
             $this->assign('count1', $count1);
             $quantity_sum1 = $this->m_product_inventory->model_where()->where($where1)->sum('a.quantity');
             $this->assign('quantity_sum1', $quantity_sum1);
 
-            // 出库记录 2
+            // 入库记录 2
             $where2['a.p_id'] = $id;
             if ($w_id) {
                 $where2['a.w_id'] = $w_id;
@@ -84,7 +84,7 @@ class Configure extends Admin {
             if ($w_id) {
                 $where3['a.out_id|a.jin_id'] = $w_id;
             }
-            $count3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->count();
+            $count3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->count();
             $this->assign('count3', $count3);
             $quantity_sum3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->sum('a.number');
             $this->assign('quantity_sum3', $quantity_sum3);
@@ -94,8 +94,9 @@ class Configure extends Admin {
             if ($w_id) {
                 $where4['a.w_id'] = $w_id;
             }
-            $count4 = $this->m_product_sales_order_data->model_where()->where($where4)->count('distinct a.id');
+            $count4 = $this->m_product_sales_order_data->model_where()->where($where4)->count();
             $this->assign('count4', $count4);
+            
             $quantity_sum4 = $this->m_product_sales_order_data->model_where()->where($where4)->sum('a.quantity');
             $this->assign('quantity_sum4', $quantity_sum4);
             $quantity_sum42 = $this->m_product_sales_order_data->model_where()->where($where4)->sum('a.returns');

@@ -73,7 +73,7 @@
     <h2>入库记录</h2>  
 </div>
 <hr>
-<p class="bg-warning">   查询到了<strong>{$count1}</strong>个入库记录，入库合计：<?php echo $quantity_sum2; ?> </p>
+<p class="bg-warning">   查询到了<strong>{$count2}</strong>个入库记录，入库合计：<?php echo $quantity_sum2; ?> </p>
 <div id="tablelist2">
 </div>
 <div class=" text-center">
