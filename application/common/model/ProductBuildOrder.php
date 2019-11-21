@@ -121,7 +121,7 @@ class ProductBuildOrder extends Base {
         if (request()->get('keyword'))
             $this->where('p.name|p.code', 'like', '%' . request()->get('keyword') . '%');        
         
-        $this->where('a.u_id', UID);
+        // $this->where('a.u_id', UID);
         
         $this->join('product p', 'p.id=a.p_id');
         
