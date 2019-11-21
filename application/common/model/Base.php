@@ -9,7 +9,7 @@ use think\Cookie;
 
 class Base extends Model {
 
-    private $formats;
+    private $formats = [];
     private $category;
 
     public function get_formats($pid = 0, $len = 0) {
@@ -41,7 +41,7 @@ class Base extends Model {
      * @param type $firstRow
      * @return type
      */
-    public function lists_tree($map = NULL, $sort = 'sort asc,id asc', $pid = 0) {
+    public function lists_tree($map = NULL, $sort = 'sort asc,id asc', $pid = 0) {        
         $this->category = $this->where($map)->order($sort)->select();
         $this->formats(0, $pid);
         $category = $this->formats;
