@@ -145,7 +145,7 @@ class Inventory extends Admin {
             $lists = $this->m_product_storage_order->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
             foreach ($lists as $key => $val) {
-                $lists2 = $this->m_product_storage_order_data->model_where()->group('a.id')->where('a.o_id', $val['id'])->select();
+                $lists2 = $this->m_product_storage_order_data->model_where()->where('a.o_id', $val['id'])->select();
                 if ($lists2) {
                     $lists[$key]['child'] = $lists2;
                 }
@@ -160,8 +160,8 @@ class Inventory extends Admin {
             $this->assign('count_sum', $count_sum);
 
 
-            $count = $this->m_product_storage_order_data->model_where()->count('distinct a.id');
-            $lists = $this->m_product_storage_order_data->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+            $count = $this->m_product_storage_order_data->model_where()->count();
+            $lists = $this->m_product_storage_order_data->model_where()->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
             $this->assign('count', $count);
             $this->assign('lists', $lists);
@@ -347,8 +347,8 @@ class Inventory extends Admin {
 
             $this->assign('count_sum', $count_sum = $this->m_product_sales_order_data->model_where()->sum('a.quantity'));
 
-            $this->assign('count', $count = $this->m_product_sales_order_data->model_where()->count('distinct a.id'));
-            $this->assign('lists', $lists = $this->m_product_sales_order_data->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+            $this->assign('count', $count = $this->m_product_sales_order_data->model_where()->count());
+            $this->assign('lists', $lists = $this->m_product_sales_order_data->model_where()->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             $this->assign('pages', $lists->render());
         }
 
