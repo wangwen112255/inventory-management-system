@@ -162,7 +162,8 @@ class ProductSalesOrder extends Base {
         if (request()->get('tel'))
             $this->where('m.tel', 'like', '%' . request()->get('tel') . '%');
         
-        
+        if(request()->get('sales_type'))
+            $this->where('a.type', request()->get('sales_type'));
         
         if (request()->get('warehouse'))
             $this->where('d.w_id', request()->get('warehouse'));

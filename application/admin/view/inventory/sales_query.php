@@ -15,6 +15,10 @@
             <input type="text" style="width: 120px;" placeholder="会员" name="nickname" value="{$Think.get.nickname}" class="form-control">
             <input type="text" style="width: 120px;" placeholder="会员电话" name="tel" value="{$Think.get.tel}" class="form-control">
 
+            <select name="sales_type" class="form-control">
+                <option value="">出库类型</option>
+                <?php echo html_select(config('_dict_sales'), input('get.sales_type')); ?>
+            </select>
             <select name="warehouse" class="form-control">
                 <option value="">所有仓库</option>
                 <?php echo html_select($warehouse, input('get.warehouse')); ?>       

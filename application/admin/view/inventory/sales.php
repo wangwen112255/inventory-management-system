@@ -161,7 +161,7 @@
             </td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">销售类型</th>
+            <th style="line-height:30px;text-align:right">出库类型</th>
             <td>
                 <select name="sales_type" class="form-control">
                     <?php echo html_select(config('_dict_sales'), input('get.storage_type')); ?>

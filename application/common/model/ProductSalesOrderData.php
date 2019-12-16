@@ -102,6 +102,10 @@ class ProductSalesOrderData extends Base {
 
         if (request()->get('status'))
             $this->where('a.status', request()->get('status'));
+        
+        
+        if(request()->get('sales_type'))
+            $this->where('pso.type', request()->get('sales_type'));
 
 
 
