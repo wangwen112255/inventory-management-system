@@ -7,7 +7,7 @@ and open the template in the editor.
     Created on : 2017-2-28, 10:58:30
     Author     : seqier
 */
-body { color: #3F3F3F; font: 14px/25px "Open Sans", "STXihei", sans-serif; letter-spacing: 1px; }
+body { color: #3F3F3F;letter-spacing: 1px; }
 .nav{ margin-bottom: 20px;}
 .table-actions{ overflow: hidden; }
 .panel{margin-bottom: 0;}
@@ -16,10 +16,41 @@ body { color: #3F3F3F; font: 14px/25px "Open Sans", "STXihei", sans-serif; lette
     padding-top: 20px;
 }
 .table-common{    
-    border-bottom: 1px solid #efefef;
+
     overflow: hidden;
+    
+}
+
+
+
+.fix-top {
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #dedede;
+    color: #666;
+}
+.fix-bottom {
+    z-index: 8009;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #dedede;
+    padding: 10px;
+    color: #666;
+}
+/*
+.fix-top{
+    border-bottom: 1px solid #efefef;
     margin-bottom: 15px;
 }
+.fix-bottom{
+    border-top: 1px solid #efefef;
+    margin-top: 15px;
+    padding-top: 15px;
+}*/
+
 .table-common .left{
     float: left;
     margin-bottom: 10px;
@@ -28,6 +59,9 @@ body { color: #3F3F3F; font: 14px/25px "Open Sans", "STXihei", sans-serif; lette
     float: right;
     margin-bottom: 10px;
 }
+
+
+
 .search-box{
     margin-bottom: 10px;
     line-height: 3em;

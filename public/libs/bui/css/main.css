@@ -24,7 +24,7 @@
 .ks-hidden { display: none; }
 html { *overflow: hidden;}
 body { overflow: hidden; background-color: white; }
-body { color: #3F3F3F; font: 14px/25px "Open Sans", "STXihei", sans-serif; letter-spacing: 1px; }
+body { color: #3F3F3F;letter-spacing: 1px; }
 iframe { border: none; padding: none; }
 .header { height: 70px; width: 100%; overflow: hidden; background: url('../img/topbg.gif') repeat scroll 0 0; }
 .dl-title { color: #c1d5ec; font-family: "Microsoft YaHei";  padding-top: 3px;
