@@ -8,9 +8,9 @@
             <input size="16" type="text" class="datetime_search form-control" name="timeb" value="{$Think.get.timeb}" placeholder="创建结束日期">
             <input size="16" type="text" placeholder="单号/识别码/产品名称" name="keyword" value="{$Think.get.keyword}" class="form-control">
 
- 
-            <?php if(empty($chart)){ ?>
-            <input type="text" class="form-control" style="width: 140px;" name="express_num" value="{$Think.get.express_num}" placeholder="快递单号">
+
+            <?php if (empty($chart)) { ?>
+                <input type="text" class="form-control" style="width: 140px;" name="express_num" value="{$Think.get.express_num}" placeholder="快递单号">
             <?php } ?>
             <input type="text" style="width: 120px;" placeholder="会员" name="nickname" value="{$Think.get.nickname}" class="form-control">
             <input type="text" style="width: 120px;" placeholder="会员电话" name="tel" value="{$Think.get.tel}" class="form-control">
@@ -23,7 +23,7 @@
                 <option value="">所有仓库</option>
                 <?php echo html_select($warehouse, input('get.warehouse')); ?>       
             </select>
-            
+
             <select name="c_id" class="form-control">
                 <option value="">所有分类</option>
                 <?php echo html_select($category, input('get.c_id')); ?>       
@@ -94,98 +94,93 @@
             <tbody>
                 <?php foreach ($lists as $key => $var) {
                     ?>
-                <script type="text/javascript">
-                    function product_data(id) {
-                        $('.product_data').hide();
-                        $('.product_dataplus').html('<i class=\'fa fa-angle-double-right\'></i>'); $('#product_data' + id).fadeIn(); $('#product_dataplus' + id).html('<i class=\'fa fa-angle-double-down\'></i>');
-                    }
-                </script>
-                <tr{$var.status==='-1'?' class="warning"':($var.status==='-2'?' class="error"':'')}>
-                    <td onclick="product_data('{$var.id}')" class="product_dataplus" id="product_dataplus{$var.id}"><i class="fa fa-angle-double-right"></i></td>
-                    <td onclick="product_data('{$var.id}')">{$var.order_number}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.status_text}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.express_name|default='无'}{$var.express_num}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.amount}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.create_time}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.nickname?:'<span class="label label-important">没有客户</span>'}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.ship_time}</td>
-                    <td onclick="product_data('{$var.id}')">{$var.type}</td>
-                    <td onclick="product_data('{$var.id}')">  
-                        {eq name="var.print" value="0"}
-                        <span class="label label-warning">未打印</span>
-                        {else/}
-                        <span class="label label-success">已打印</span>
-                        {/eq}
-                    </td>
-                    <td onclick="product_data('{$var.id}')">{$var.count_data}</td>
-                    <td style="text-align:center">
-                        <a href="javascript:;" 
-                           class="print"
-                           title="打印订单{$var.id}"
-                           num="{$var.order_number}"
-                           val="<?php echo url('prints/orders_view', ['id' => $var['id']]) ?>" >
-                            <i class="fa fa-print"></i> 打印</a>
-                    </td>
-                    <td style="text-align:center"><a href="{:url('sales_look',['id'=>$var.id])}" title="查看记录"><i class="fa fa-search"></i> 查看</a></td>
-                    <td style="text-align:center">               
-                        <a href="{:url('sales_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>            
-                    </td>
-                </tr>
-                <tr id="product_data{$var.id}" class="product_data" style="display:none">
-                    <td colspan="14">
-                        <table class="table table-bordered" style="margin-bottom:0px">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>状态</th>
-                                    <th>数量</th>
-                                    <th>退货</th>
-                                    <th>购买金额</th>
-                                    <th>实销价</th>
-                                    <th>出库仓库</th>
-                                    <th class="success">识别码</th>
-                                    <th class="success">产品名称</th>
-                                    <th class="success">产品单价</th>
-                                    <th class="success">产品分类</th>
-                                    <th class="success">产品类型</th>
-                                    <th>退货</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                if (!empty($var['child'])) {
-                                    foreach ($var['child'] as $key2 => $var2) {
-                                        $var2['product_data'] = unserialize($var2['product_data']);
-                                        ?>
-                                        <tr>
-                                            <td>{:sprintf("%06d",$var2.id)}</td>
-                                            <td>{$var2.status_text}</td>
-                                            <td>{$var2.quantity}</td>
-                                            <td>{$var2.returns}</td>
-                                            <td>{$var2.amount}</td>
-                                            <td>{$var2.group_price}</td>
-                                            <td>{$var2.warehouse}</td>
-                                            <td class="success">{$var2.product_data.code}</td>
-                                            <td class="success">{$var2.product_data.name}</td>
-                                            <td class="success">{$var2.product_data.sales}</td>
-                                            <td class="success">{$var2.product_data.category}</td>
-                                            <td class="success">{$var2.product_data.product_type}</td>
-                                            <td>
-                                                {if $var2.status>-2}
-                                                <a data-toggle="modal" data-target="#modal" href="{:url('sales_returns_add',['id'=>$var2.id])}" data-title="产品退货" title="退货"><i class="fa fa-reply"></i> 退货</a>
-                                                {/if}
-                                            </td>
-                                        </tr>
-                                        <?php
+
+                    <tr{$var.status==='-1'?' class="warning"':($var.status==='-2'?' class="error"':'')} onclick="product_data('{$var.id}')">
+                        <td class="product_dataplus" id="product_dataplus{$var.id}"><i class="fa fa-angle-double-right"></i></td>
+                        <td>{$var.order_number}</td>
+                        <td>{$var.status_text}</td>
+                        <td>{$var.express_name|default='无'}{$var.express_num}</td>
+                        <td>{$var.amount}</td>
+                        <td>{$var.create_time}</td>
+                        <td>{$var.nickname?:'<span class="label label-important">没有客户</span>'}</td>
+                        <td>{$var.ship_time}</td>
+                        <td>{$var.type}</td>
+                        <td>  
+                            {eq name="var.print" value="0"}
+                            <span class="label label-warning">未打印</span>
+                            {else/}
+                            <span class="label label-success">已打印</span>
+                            {/eq}
+                        </td>
+                        <td>{$var.count_data}</td>
+                        <td style="text-align:center">
+                            <a href="javascript:;" 
+                               class="print"
+                               title="打印订单{$var.id}"
+                               num="{$var.order_number}"
+                               val="<?php echo url('prints/orders_view', ['id' => $var['id']]) ?>" >
+                                <i class="fa fa-print"></i> 打印</a>
+                        </td>
+                        <td style="text-align:center"><a href="{:url('sales_look',['id'=>$var.id])}" title="查看记录"><i class="fa fa-search"></i> 查看</a></td>
+                        <td style="text-align:center">               
+                            <a href="{:url('sales_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>            
+                        </td>
+                    </tr>
+                    <tr id="product_data{$var.id}" class="product_data" style="display:none">
+                        <td colspan="14">
+                            <table class="table table-bordered" style="margin-bottom:0px">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>状态</th>
+                                        <th>数量</th>
+                                        <th>退货</th>
+                                        <th>购买金额</th>
+                                        <th>实销价</th>
+                                        <th>出库仓库</th>
+                                        <th class="success">识别码</th>
+                                        <th class="success">产品名称</th>
+                                        <th class="success">产品单价</th>
+                                        <th class="success">产品分类</th>
+                                        <th class="success">产品类型</th>
+                                        <th>退货</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if (!empty($var['child'])) {
+                                        foreach ($var['child'] as $key2 => $var2) {
+                                            $var2['product_data'] = unserialize($var2['product_data']);
+                                            ?>
+                                            <tr>
+                                                <td>{:sprintf("%06d",$var2.id)}</td>
+                                                <td>{$var2.status_text}</td>
+                                                <td>{$var2.quantity}</td>
+                                                <td>{$var2.returns}</td>
+                                                <td>{$var2.amount}</td>
+                                                <td>{$var2.group_price}</td>
+                                                <td>{$var2.warehouse}</td>
+                                                <td class="success">{$var2.product_data.code}</td>
+                                                <td class="success">{$var2.product_data.name}</td>
+                                                <td class="success">{$var2.product_data.sales}</td>
+                                                <td class="success">{$var2.product_data.category}</td>
+                                                <td class="success">{$var2.product_data.product_type}</td>
+                                                <td>
+                                                    {if $var2.status>-2}
+                                                    <a data-toggle="modal" data-target="#modal" href="{:url('sales_returns_add',['id'=>$var2.id])}" data-title="产品退货" title="退货"><i class="fa fa-reply"></i> 退货</a>
+                                                    {/if}
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
                                     }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
+                                    ?>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
         </table>
 
     <?php } else { ?>
@@ -245,6 +240,15 @@
 {$pages}
 {/block}
 {block name="foot_js"}
+<script type="text/javascript">
+    // 展开列表
+    function product_data(id) {
+        $('.product_data').hide();
+        $('.product_dataplus').html('<i class=\'fa fa-angle-double-right\'></i>');
+        $('#product_data' + id).fadeIn();
+        $('#product_dataplus' + id).html('<i class=\'fa fa-angle-double-down\'></i>');
+    }
+</script>
 <script>
     $('.export').click(function () {
         //收集form表单数据
@@ -253,11 +257,6 @@
         var url = '<?php echo url('sales_query'); ?>?' + data.toString() + '&export=1';
         //console.log(url);
         location.href = url;
-//        $.get(url).success(function (data) {
-//
-//
-//
-//        });
         return false;
     });
 </script>

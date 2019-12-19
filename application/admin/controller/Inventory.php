@@ -138,6 +138,13 @@ class Inventory extends Admin {
         $chart = request()->get('chart');
         $this->assign('chart', $chart);
 
+        //如果export这个参数=1，则直接进行数据导出
+        $export = input('get.export', 0);
+        if ($export) {
+            $lists = $this->m_product_storage_order->model_where()->group('a.id')->select();
+            $this->m_excel->product_storage_query_export($lists);
+            exit();
+        }
 
         if (empty($chart)) {
 

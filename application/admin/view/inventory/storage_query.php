@@ -42,6 +42,8 @@
                     val="<?php echo url('prints/storage_list'); ?>" 
                     >
                 <i class="fa fa-print"></i> 打印</button>
+            {else/}
+            <button class="btn btn-success export" title="导出"><i class="fa fa-file-excel-o"></i> 导出</button>
             {/if}
         </div>
 
@@ -76,16 +78,16 @@
                 <?php
                 foreach ($lists as $key => $var) {
                     ?>
-                    <tr>
-                        <td onclick="product_data('{$var.id}')" class="product_dataplus" id="product_dataplus{$var.id}" style="cursor: pointer"><i class="fa fa-angle-double-right"></i></td>
-                        <td onclick="product_data('{$var.id}')">{$var.order_number}</td>
-                        <td onclick="product_data('{$var.id}')">{$var.quantity}</td>
-                        <td onclick="product_data('{$var.id}')">{$var.amount}</td>
-                        <td onclick="product_data('{$var.id}')">{$var.create_time}</td>
-                        <td onclick="product_data('{$var.id}')">{$var.nickname}</td>
-                        <td onclick="product_data('{$var.id}')">{$var.company}</td>
-                        <td onclick="product_data('{$var.id}')">{$var.type}</td>
-                        <td onclick="product_data('{$var.id}')" title="{$var.remark}">{$var.remark}</td>
+                    <tr onclick="product_data('{$var.id}')">
+                        <td class="product_dataplus" id="product_dataplus{$var.id}" style="cursor: pointer"><i class="fa fa-angle-double-right"></i></td>
+                        <td>{$var.order_number}</td>
+                        <td>{$var.quantity}</td>
+                        <td>{$var.amount}</td>
+                        <td>{$var.create_time}</td>
+                        <td>{$var.nickname}</td>
+                        <td>{$var.company}</td>
+                        <td>{$var.type}</td>
+                        <td title="{$var.remark}">{$var.remark}</td>
                         <td style="text-align:center">
                             <a href="javascript:;" 
                                class="print"
@@ -197,11 +199,23 @@
 {/block}
 {block name="foot_js"} 
 <script type="text/javascript">
+    // 展开列表
     function product_data(id) {
         $('.product_data').hide();
         $('.product_dataplus').html('<i class=\'fa fa-angle-double-right\'></i>');
         $('#product_data' + id).fadeIn();
         $('#product_dataplus' + id).html('<i class=\'fa fa-angle-double-down\'></i>');
-    }
+    }    
+</script>
+<script>
+    $('.export').click(function () {
+        //收集form表单数据
+        var data = $('form').serialize();
+        //console.log(data.toString());
+        var url = '<?php echo url('storage_query'); ?>?' + data.toString() + '&export=1';
+        //console.log(url);
+        location.href = url;
+        return false;
+    });
 </script>
 {/block}

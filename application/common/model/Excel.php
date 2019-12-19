@@ -83,7 +83,7 @@ class Excel extends Base {
         // dd($PHPExcel);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //告诉浏览器输出07Excel文件
         //header('Content-Type:application/vnd.ms-excel');//告诉浏览器将要输出Excel03版本文件
-        header('Content-Disposition: attachment;filename="Finance-' . date("YmdHis") . '.xlsx"'); //告诉浏览器输出浏览器名称
+        header('Content-Disposition: attachment;filename="StockQuery-' . date("YmdHis") . '.xlsx"'); //告诉浏览器输出浏览器名称
         header('Cache-Control: max-age=0'); //禁止缓存
         $PHPWriter = PHPExcel_IOFactory::createWriter($PHPExcel, 'Excel2007'); //按照指定格式生成Excel文件，'Excel2007'表示生成2007版本的xlsx，'Excel5'表示生成2003版本Excel文件
         ob_clean();
@@ -91,6 +91,122 @@ class Excel extends Base {
         $PHPWriter->save("php://output");
         ob_end_flush();
         exit();
+    }
+    
+    
+    
+    /**
+     * @title 导出入库列表 
+     * @param type $lists
+     */
+    public function product_storage_query_export($lists){
+        
+        $PHPExcel = new PHPExcel(); //实例化PHPExcel类，类似于在桌面上新建一个Excel表格
+        // Set properties
+        $PHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+        $PHPSheet = $PHPExcel->getActiveSheet(); //获得当前活动sheet的操作对象
+        $PHPSheet->setTitle('入库导出'); //给当前活动sheet设置名称
+        
+        // 第一行用来写标题
+        $PHPSheet->setCellValue('A1', '编号')
+                ->setCellValue('B1', '入库时间')
+                ->setCellValue('C1', '入库人')
+                ->setCellValue('D1', '供应商')
+                ->setCellValue('E1', '入库类型')
+                ->setCellValue('F1', '仓库')//
+                ->setCellValue('G1', '产品')//
+                ->setCellValue('H1', '金额')//
+                ->setCellValue('I1', '数量')//
+                ->setCellValue('J1', '单位')//
+                ->setCellValue('K1', '产品类型')//
+                ->setCellValue('L1', '备注');
+        
+        $PHPExcel->getActiveSheet()->getStyle('A1:L1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+        $PHPExcel->getActiveSheet()->getStyle('A1:L1')->getFill()->getStartColor()->setARGB('FFFFFF00');
+        
+        $i = 2; //从第二行开始填充数据
+        foreach ($lists as $key => $value) {
+            $j = $i;
+            //->setCellValue('J' . $i, $value['express_num'])
+            $PHPSheet->setCellValue('A' . $i, $value['order_number']);
+            $PHPSheet->setCellValue('B' . $i, $value['create_time']);
+            $PHPSheet->setCellValue('C' . $i, $value['nickname']);
+            $PHPSheet->setCellValue('D' . $i, $value['company']);
+            $PHPSheet->setCellValue('E' . $i, $value['type']);
+            $PHPSheet->setCellValue('L' . $i, $value['remark']);
+            
+          //  $PHPSheet->setCellValueExplicit('J' . $i, $value['express_num'], PHPExcel_Cell_DataType::TYPE_STRING); //防止单元格进行科学计数
+          //  $PHPSheet->setCellValue('K' . $i, $value['nickname']);   
+                     
+            $lists_sub = model('product_storage_order_data')->model_where()->where('a.o_id', $value['id'])->select();
+            
+            foreach ($lists_sub as $value2) {                  
+                
+                $product_data = unserialize($value2['product_data']);
+                
+                $PHPSheet->setCellValue('F' . $i, $value2['warehouse']);
+                $PHPSheet->setCellValue('G' . $i, $product_data['name']);
+                $PHPSheet->setCellValue('H' . $i, $value2['amount']);
+                $PHPSheet->setCellValue('I' . $i, $value2['quantity']);
+                $PHPSheet->setCellValue('J' . $i, $value2['unit_name']);
+                $PHPSheet->setCellValue('K' . $i, $product_data['product_type']);
+                //子行+1
+                $i ++;
+            }
+            
+            //如果存在子行，要合并父行            
+            $PHPExcel->getActiveSheet()->mergeCells('A' . $j . ':A' . ($i - 1));
+            $PHPExcel->getActiveSheet()->mergeCells('B' . $j . ':B' . ($i - 1));
+            $PHPExcel->getActiveSheet()->mergeCells('C' . $j . ':C' . ($i - 1));
+            $PHPExcel->getActiveSheet()->mergeCells('D' . $j . ':D' . ($i - 1));
+            $PHPExcel->getActiveSheet()->mergeCells('E' . $j . ':E' . ($i - 1));
+            $PHPExcel->getActiveSheet()->mergeCells('L' . $j . ':L' . ($i - 1));
+         
+            $PHPExcel->getActiveSheet()->getStyle('A' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('B' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('C' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('D' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('E' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+            $PHPExcel->getActiveSheet()->getStyle('L' . $j)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+           
+            
+            
+//            $PHPExcel->getActiveSheet()->getStyle('A' . $j)->applyFromArray(
+//                    array(
+//                        'alignment' => array(
+//                            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+//                            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+//                        )
+//                    )
+//            );
+            // $PHPExcel->getActiveSheet()->getStyle('A'.($i-1))->getAlignment()->setHorizontal()->setVertical();
+        }
+        $PHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+        $PHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+        $PHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $PHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
+        $PHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(10);
+        $PHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(50);
+        //   $PHPSheet->mergeCells('A1:B1');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //告诉浏览器输出07Excel文件
+        //header('Content-Type:application/vnd.ms-excel');//告诉浏览器将要输出Excel03版本文件
+        header('Content-Disposition: attachment;filename="StorageQuery-' . date("YmdHis") . '.xlsx"'); //告诉浏览器输出浏览器名称
+        header('Cache-Control: max-age=0'); //禁止缓存
+        $PHPWriter = PHPExcel_IOFactory::createWriter($PHPExcel, 'Excel2007'); //按照指定格式生成Excel文件，'Excel2007'表示生成2007版本的xlsx，'Excel5'表示生成2003版本Excel文件
+
+        ob_clean();
+        ob_start();
+        $PHPWriter->save("php://output");
+        ob_end_flush();
+        exit();
+        
+        
     }
 
     /**
@@ -183,7 +299,7 @@ class Excel extends Base {
         //   $PHPSheet->mergeCells('A1:B1');
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //告诉浏览器输出07Excel文件
         //header('Content-Type:application/vnd.ms-excel');//告诉浏览器将要输出Excel03版本文件
-        header('Content-Disposition: attachment;filename="WarehouseOut-' . date("YmdHis") . '.xlsx"'); //告诉浏览器输出浏览器名称
+        header('Content-Disposition: attachment;filename="SalesQuery-' . date("YmdHis") . '.xlsx"'); //告诉浏览器输出浏览器名称
         header('Cache-Control: max-age=0'); //禁止缓存
         $PHPWriter = PHPExcel_IOFactory::createWriter($PHPExcel, 'Excel2007'); //按照指定格式生成Excel文件，'Excel2007'表示生成2007版本的xlsx，'Excel5'表示生成2003版本Excel文件
 
