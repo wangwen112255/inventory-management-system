@@ -60,7 +60,7 @@ class Base extends Controller {
         //$this->assign('base', $base);      
        
         
-        //$m_staff_arr = $this->m_system_user->where('status','1')->column('nickname', 'id');       
+        //$m_staff_arr = model('system_user')->where('status','1')->column('nickname', 'id');       
         //$this->assign('m_staff_arr', $m_staff_arr);        
         
         $this->assign('pinyin', array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'));

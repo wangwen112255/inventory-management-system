@@ -17,7 +17,7 @@ class ProductReturnSupplier extends Base {
         $data = 0;
         $post['u_id'] = UID;
         $post['w_id'] = $id;
-        $lists = $this->m_product_storage_order_data->model_where()->group('a.id')->where('a.id', $id)->find();
+        $lists = model('product_storage_order_data')->model_where()->group('a.id')->where('a.id', $id)->find();
         
         $inventory = $this->m_product_inventory
                 ->where('p_id', $lists['id'])
@@ -37,12 +37,12 @@ class ProductReturnSupplier extends Base {
         if (empty($returns) || $returns < $post['quantity'])
             return '仓库库存不足 无法退回';
         if ($this->save($post)) {
-            $this->m_product_storage_order_data->where('id', $id)->setInc('returns', $post['quantity']);
-            $this->m_product_inventory->reduce($lists['id'], $lists['wid'], (int) $post['quantity']);
-            $this->m_operate->success('退回产品');
+            model('product_storage_order_data')->where('id', $id)->setInc('returns', $post['quantity']);
+            model('product_inventory')->reduce($lists['id'], $lists['wid'], (int) $post['quantity']);
+            model('operate')->success('退回产品');
             return 0;
         } else {
-            $this->m_operate->failure('退回产品');
+            model('operate')->failure('退回产品');
             return '删除失败';
         }
   

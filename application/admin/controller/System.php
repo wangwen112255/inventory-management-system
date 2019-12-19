@@ -185,7 +185,7 @@ class System extends Admin {
      * @return Response
      */
     public function user() {
-        $lists = $this->m_system_user->paginate(10, false, ['query' => request()->get()]);
+        $lists = model('system_user')->paginate(10, false, ['query' => request()->get()]);
         foreach ($lists as $key => $value) {
             $lists[$key]['group_name'] = db('auth_group_access')
                     ->alias('a')
@@ -220,7 +220,7 @@ class System extends Admin {
             $data['status'] = 1;
             if (!$this->v_system_user->check($post))
                 $this->error($this->v_system_user->getError());
-            $message = $this->m_system_user->user_add($data);
+            $message = model('system_user')->user_add($data);
             if ($message) {
                 $this->error($message);
             } else {
@@ -249,7 +249,7 @@ class System extends Admin {
             $data['nickname'] = request()->post('nickname') ?: '';
             if (!$this->v_system_user->check($post))
                 $this->error($this->v_system_user->getError());
-            $message = $this->m_system_user->user_edit($data, $post['id']);
+            $message = model('system_user')->user_edit($data, $post['id']);
             if ($message) {
                 $this->error($message);
             } else {
@@ -275,7 +275,7 @@ class System extends Admin {
         empty($id) && $this->error('参数不能为空');
         if($id == 1)
             $this->error('超级管理员都想删，不合适吧？');
-        $message = $this->m_system_user->user_delete($id);
+        $message = model('system_user')->user_delete($id);
         if ($message) {
             $this->error($message);
         } else {
@@ -286,7 +286,7 @@ class System extends Admin {
      * @title 菜单列表
      */
     public function menu() {
-        $lists = $this->m_system_menu->lists_tree();
+        $lists = model('system_menu')->lists_tree();
         foreach ($lists as $key => $value) {
             $lists[$key]['name'] = '<i class="fa ' . $value['icon'] . '"></i>' . $value['name'];
             $lists[$key]['status'] = $value['status'] == 0 ? '隐藏' : '';
@@ -326,15 +326,15 @@ class System extends Admin {
             if (empty($post['name'])) {
                 $this->error('标题不能为空');
             }
-            $insert_id = $this->m_system_menu->allowField(true)->save($post);
+            $insert_id = model('system_menu')->allowField(true)->save($post);
             if (false !== $insert_id) {
                 $this->success("", url('menu'));
             } else {
-                $this->error($this->m_system_menu->getError());
+                $this->error(model('system_menu')->getError());
             }
         } else {
             builder('form')
-                    ->addItem('pid', 'select', '上级', $this->m_system_menu->lists_select_tree())
+                    ->addItem('pid', 'select', '上级', model('system_menu')->lists_select_tree())
                     ->addItem('name', 'input', '名称<font color="red">*</font>', '', '')
                     ->addItem('url', 'input', 'URL')
                     ->addItem('icon', 'input', '图标', '', '', '', '<a href="http://www.thinkcmf.com/font/icons#new" target="_blank">参照网址</a>')
@@ -354,18 +354,18 @@ class System extends Admin {
             if (empty($post['name'])) {
                 $this->error('标题不能为空');
             }
-            $affect_rows = $this->m_system_menu->allowField(true)->save($post, ['id' => $post['id']]);
+            $affect_rows = model('system_menu')->allowField(true)->save($post, ['id' => $post['id']]);
             if (0 == $affect_rows) {
                 $this->error('你没有做任何更改');
             } elseif (false !== $affect_rows) {
                 $this->success("", url('menu'));
             } else {
-                $this->error($this->m_system_menu->getError());
+                $this->error(model('system_menu')->getError());
             }
         } else {
             $one = db('system_menu')->where('id', $id)->find();
             builder('form')
-                    ->addItem('pid', 'select', '上级', $this->m_system_menu->lists_select_tree())
+                    ->addItem('pid', 'select', '上级', model('system_menu')->lists_select_tree())
                     ->addItem('name', 'input', '名称<font color="red">*</font>', '', '')
                     ->addItem('url', 'input', 'URL')
                     ->addItem('icon', 'input', '图标', '', '', '', '<a href="http://www.thinkcmf.com/font/icons#new" target="_blank">参照网址</a>')

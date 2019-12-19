@@ -41,10 +41,10 @@ class Everyone extends Base {
                     } else {
                         $this->_save_session_cookie_($user_arr);
                     }
-                    $this->m_operate->success('成功登录系统', $user_arr['id']);
+                    model('operate')->success('成功登录系统', $user_arr['id']);
                     $this->success('', 'admin/index/index');
                 } else {
-                    $this->m_operate->failure('用户密码错误', $user_arr['id']);
+                    model('operate')->failure('用户密码错误', $user_arr['id']);
                     $this->error('用户密码错误');
                 }
             } else {

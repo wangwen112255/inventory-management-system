@@ -48,7 +48,7 @@ class Admin extends Base {
 
 
         //加载菜单的所有URL
-        $menu_url_arr = $this->m_system_menu->where('url', '<>', '')->column('url');
+        $menu_url_arr = model('system_menu')->where('url', '<>', '')->column('url');
         $menu_url_arr = array_unique($menu_url_arr);
 
         //print_r($menu_url_arr);exit;

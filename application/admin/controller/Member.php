@@ -34,9 +34,9 @@ class Member extends Admin {
             }
             $this->success('保存成功', url('group_price'));
         } else {
-            $p_list = $this->m_product->order('id asc')->select();
-            $m_group = $this->m_member_group->order('pid asc')->select();
-            $price = $this->m_member_price->select();
+            $p_list = model('product')->order('id asc')->select();
+            $m_group = model('member_group')->order('pid asc')->select();
+            $price = model('member_price')->select();
             $price_2 = [];
             foreach ($price as $key => $value) {
                 $price_2[$value['p_id']][$value['g_id']] = $value['price'];
@@ -53,8 +53,8 @@ class Member extends Admin {
      */
     public function index() {
 
-        $this->assign('count', $count = $this->m_member->model_where()->count('distinct a.id'));
-        $this->assign('lists', $lists = $this->m_member->model_where()->paginate(10, $count, ['query' => request()->get()]));
+        $this->assign('count', $count = model('member')->model_where()->count('distinct a.id'));
+        $this->assign('lists', $lists = model('member')->model_where()->paginate(10, $count, ['query' => request()->get()]));
         $this->assign('pages', $lists->render());
 
         builder('list')
@@ -84,10 +84,10 @@ class Member extends Admin {
 
 
         if (db('member')->where('id', $id)->delete()) {
-            $this->m_operate->success('删除会员信息');
+            model('operate')->success('删除会员信息');
             $this->success('');
         } else {
-            $this->m_operate->failure('删除会员信息');
+            model('operate')->failure('删除会员信息');
             $this->error('删除失败');
         }
     }
@@ -104,10 +104,10 @@ class Member extends Admin {
             $where['type'] = (int) $type;
         }
         $where['member'] = $id;
-        $count = $this->m_member_points->where($where)->count('distinct id');
+        $count = model('member_points')->where($where)->count('distinct id');
         $this->assign('count', $count);
-        $this->assign('look', $this->m_member->model_where()->where('a.id', $id)->find());
-        $this->assign('lists', $lists = $this->m_member_points->alias('a')
+        $this->assign('look', model('member')->model_where()->where('a.id', $id)->find());
+        $this->assign('lists', $lists = model('member_points')->alias('a')
                         ->order('a.id desc')
                         ->field('a.*,s.nickname')
                         ->join('system_user s', 'a.u_id=s.id', 'LEFT')
@@ -129,7 +129,7 @@ class Member extends Admin {
             //谁最后一次更新的资料
             $post['update'] = UID;
             if (db('member')->where('id', $post['id'])->update($post) !== false) {
-                $this->m_operate->success('更新会员');
+                model('operate')->success('更新会员');
                 $this->success('', 'index');
             } else {
                 $this->error('新增失败');
@@ -137,7 +137,7 @@ class Member extends Admin {
         } else {
             $one = db('member')->where('id', $id)->find();
             builder('form')
-                    ->addItem('g_id', 'select', '会员组', $this->m_member_group->lists_select_tree(), '')
+                    ->addItem('g_id', 'select', '会员组', model('member_group')->lists_select_tree(), '')
                     ->addItem('nickname', 'input', '名称<font color="red">*</font>')
                     ->addItem('sex', 'radio', '会员性别', [1 => '男', 2 => '女'])
                     ->addItem('card', 'input', '会员卡号')
@@ -161,18 +161,18 @@ class Member extends Admin {
             $post = request()->post();
             $post['u_id'] = UID;
             $post['create_time'] = time();
-            if (!empty($post['card']) && $this->m_member->where('card', $post['card'])->find())
+            if (!empty($post['card']) && model('member')->where('card', $post['card'])->find())
                 $this->error('会员卡号已存在');
-            if ($this->m_member->allowField(true)->save($post)) {
-                $this->m_operate->success('新增会员');
+            if (model('member')->allowField(true)->save($post)) {
+                model('operate')->success('新增会员');
                 $this->success('', 'index');
             } else {
-                $this->m_operate->failure('新增会员');
+                model('operate')->failure('新增会员');
                 $this->error('新增失败');
             }
         } else {
             builder('form')
-                    ->addItem('g_id', 'select', '会员组', $this->m_member_group->lists_select_tree(), '')
+                    ->addItem('g_id', 'select', '会员组', model('member_group')->lists_select_tree(), '')
                     ->addItem('nickname', 'input', '名称<font color="red">*</font>')
                     ->addItem('sex', 'radio', '会员性别', [1 => '男', 2 => '女'])
                     ->addItem('card', 'input', '会员卡号')
@@ -192,7 +192,7 @@ class Member extends Admin {
      * @title 会员分组
      */
     public function group() {
-        $lists = $this->m_member_group->model_where()->lists_tree(NULL, 'a.sort,a.id desc');
+        $lists = model('member_group')->model_where()->lists_tree(NULL, 'a.sort,a.id desc');
         $this->assign('lists', $lists);
         builder('list')
                 ->addItem('id', '#')
@@ -223,7 +223,7 @@ class Member extends Admin {
             }
         } else {
             builder('form')
-                    ->addItem('pid', 'select', '上级', $this->m_member_group->lists_select_tree(), '')
+                    ->addItem('pid', 'select', '上级', model('member_group')->lists_select_tree(), '')
                     ->addItem('name', 'input', '分组名称<font color="red">*</font>', '', '')
                     ->build();
             return view();
@@ -256,7 +256,7 @@ class Member extends Admin {
             $one = db('member_group')->where('id', $id)->find();
 
             builder('form')
-                    ->addItem('pid', 'select', '上级', $this->m_member_group->lists_select_tree(['id' => ['neq', $id]]), '')
+                    ->addItem('pid', 'select', '上级', model('member_group')->lists_select_tree(['id' => ['neq', $id]]), '')
                     ->addItem('name', 'input', '分组名称<font color="red">*</font>', '', '')
                     ->build($one);
 

@@ -19,13 +19,13 @@ class Production extends Admin {
 
 
         // 从order_data表中把数据依次删除
-        $message = $this->m_product_build_order->product_build_undo($id);
+        $message = model('product_build_order')->product_build_undo($id);
 
         if ($message) {
-            $this->m_operate->failure('生产撤消', UID, $message);
+            model('operate')->failure('生产撤消', UID, $message);
             $this->error($message);
         } else {
-            $this->m_operate->success('生产撤消成功');
+            model('operate')->success('生产撤消成功');
             $this->success('生产撤消成功');
         }
     }
@@ -42,14 +42,14 @@ class Production extends Admin {
             $_GET['timeb'] = date('Y-m-d');
 
 
-        $count = $this->m_product_build_order->model_where()->count('distinct a.id');
-        $lists = $this->m_product_build_order->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+        $count = model('product_build_order')->model_where()->count('distinct a.id');
+        $lists = model('product_build_order')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
 
         //添加子
         foreach ($lists as $key => $val) {
 
-            $lists2 = $this->m_product_build_order_data->model_where()->group('a.id')->where('a.o_id', $val['id'])->select();
+            $lists2 = model('product_build_order_data')->model_where()->group('a.id')->where('a.o_id', $val['id'])->select();
 
 
             if ($lists) {
@@ -86,7 +86,7 @@ class Production extends Admin {
             foreach ($product_ids as $id) {
 
                 if (is_numeric($id) && $var = db('product')->where('id', $id)->find()) {
-                    // $var['warehouse'] = $this->m_product_inventory->model_where()->where('a.id', $value)->where('quantity', '>', 0)->select();
+                    // $var['warehouse'] = model('product_inventory')->model_where()->where('a.id', $value)->where('quantity', '>', 0)->select();
                     $products[$id] = $var;
                 }
             }
@@ -117,19 +117,19 @@ class Production extends Admin {
 
 
 
-                if (!$this->m_product_inventory->check_product_sales($value['id'], $product_warehouse[$key], $final_quantity))
+                if (!model('product_inventory')->check_product_sales($value['id'], $product_warehouse[$key], $final_quantity))
                     $this->error('包材：【' . $value['name'] . '】当前库存不足，不能出库，请更换仓库');
                 //                
             }
 
 
-            $message = $this->m_product_build_order->product_build_submit($post, $products);
+            $message = model('product_build_order')->product_build_submit($post, $products);
 
             if ($message) {
-                $this->m_operate->success($message);
+                model('operate')->success($message);
                 $this->error($message);
             } else {
-                $this->m_operate->success('生产成功');
+                model('operate')->success('生产成功');
                 $this->success('生产成功', 'product_build');
             }
         }
@@ -182,7 +182,7 @@ class Production extends Admin {
 
 
         // 加载仓库
-        $this->assign('product_warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.name', 'a.id'));
+        $this->assign('product_warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->column('a.name', 'a.id'));
 
         $this->assign('products', $products);
 
@@ -263,12 +263,12 @@ class Production extends Admin {
 
             $post = request()->post();
 
-            $message = $this->m_product_relation->product_relation_edit_submit($post, $id);
+            $message = model('product_relation')->product_relation_edit_submit($post, $id);
             if ($message) {
-                $this->m_operate->failure('产品关联提交');
+                model('operate')->failure('产品关联提交');
                 $this->error($message);
             } else {
-                $this->m_operate->success('产品关联提交');
+                model('operate')->success('产品关联提交');
                 $this->success('', url('product_relation'));
             }
         }

@@ -18,7 +18,7 @@ class Inventory extends Admin {
             $post = request()->post();
 
             //仓库列表 
-            $warehouse = $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.name', 'a.id');
+            $warehouse = model('product_warehouse')->model_where()->where('pwu.u_id', UID)->column('a.name', 'a.id');
             $this->assign('warehouse', $warehouse);
 
 
@@ -94,12 +94,12 @@ class Inventory extends Admin {
             $post['quantity'] = $quantity;
             $post['amount'] = $amount;
 
-            $message = $this->m_product_storage_order->storage_submit($post, $products);
+            $message = model('product_storage_order')->storage_submit($post, $products);
             if ($message) {
-                $this->m_operate->success($message);
+                model('operate')->success($message);
                 $this->error($message);
             } else {
-                $this->m_operate->success('入库成功');
+                model('operate')->success('入库成功');
                 $this->success('入库成功', 'storage');
             }
         }
@@ -112,12 +112,12 @@ class Inventory extends Admin {
 
         empty($id) && $this->error('参数不能为空');
 
-        $message = $this->m_product_storage_order->storage_undo($id);
+        $message = model('product_storage_order')->storage_undo($id);
         if ($message) {
-            $this->m_operate->failure('入库撤消', UID, $message);
+            model('operate')->failure('入库撤消', UID, $message);
             $this->error($message);
         } else {
-            $this->m_operate->success('入库撤消');
+            model('operate')->success('入库撤消');
             $this->success('入库撤消成功');
         }
     }
@@ -132,8 +132,8 @@ class Inventory extends Admin {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
 
-        $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
-        $this->assign('category', $this->m_product_category->lists_select_tree());
+        $this->assign('warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
+        $this->assign('category', model('product_category')->lists_select_tree());
 
         $chart = request()->get('chart');
         $this->assign('chart', $chart);
@@ -141,18 +141,18 @@ class Inventory extends Admin {
         //如果export这个参数=1，则直接进行数据导出
         $export = input('get.export', 0);
         if ($export) {
-            $lists = $this->m_product_storage_order->model_where()->group('a.id')->select();
-            $this->m_excel->product_storage_query_export($lists);
+            $lists = model('product_storage_order')->model_where()->group('a.id')->select();
+            model('excel')->product_storage_query_export($lists);
             exit();
         }
 
         if (empty($chart)) {
 
-            $count = $this->m_product_storage_order->model_where()->count('distinct a.id');
-            $lists = $this->m_product_storage_order->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+            $count = model('product_storage_order')->model_where()->count('distinct a.id');
+            $lists = model('product_storage_order')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
             foreach ($lists as $key => $val) {
-                $lists2 = $this->m_product_storage_order_data->model_where()->where('a.o_id', $val['id'])->select();
+                $lists2 = model('product_storage_order_data')->model_where()->where('a.o_id', $val['id'])->select();
                 if ($lists2) {
                     $lists[$key]['child'] = $lists2;
                 }
@@ -163,12 +163,12 @@ class Inventory extends Admin {
             $this->assign('pages', $lists->render());
         } else {
 
-            $count_sum = $this->m_product_storage_order_data->model_where()->sum('a.quantity');
+            $count_sum = model('product_storage_order_data')->model_where()->sum('a.quantity');
             $this->assign('count_sum', $count_sum);
 
 
-            $count = $this->m_product_storage_order_data->model_where()->count();
-            $lists = $this->m_product_storage_order_data->model_where()->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+            $count = model('product_storage_order_data')->model_where()->count();
+            $lists = model('product_storage_order_data')->model_where()->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
             $this->assign('count', $count);
             $this->assign('lists', $lists);
@@ -277,7 +277,7 @@ class Inventory extends Admin {
                 if (!empty($id) && is_numeric($id) && ($var = db('product')->where('id', $id)->find())) {
 
                     //上面的三个参数都检查过了，仓库有没有库存也要检查一下。
-                    if (!$this->m_product_inventory->check_product_sales($var['id'], $product_warehouse[$id], $product_quantity[$id]))
+                    if (!model('product_inventory')->check_product_sales($var['id'], $product_warehouse[$id], $product_quantity[$id]))
                         $this->error('产品：【' . $var['name'] . '】当前库存不足，不能出库，请更换仓库');
 
                     $var['product_quantity'] = $product_quantity[$id];
@@ -298,13 +298,13 @@ class Inventory extends Admin {
 
             $post['amount'] = $amount;
             $post['cost'] = $cost;
-            $message = $this->m_product_sales_order->sales_submit($post, $products);
+            $message = model('product_sales_order')->sales_submit($post, $products);
 
             if ($message) {
-                $this->m_operate->failure('产品销售', UID, $message);
+                model('operate')->failure('产品销售', UID, $message);
                 $this->error($message);
             } else {
-                $this->m_operate->success('销售产品');
+                model('operate')->success('销售产品');
                 $this->success('出库成功');
             }
         }
@@ -320,8 +320,8 @@ class Inventory extends Admin {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
 
-        $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
-        $this->assign('category', $this->m_product_category->lists_select_tree());
+        $this->assign('warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
+        $this->assign('category', model('product_category')->lists_select_tree());
 
 
         $chart = request()->get('chart');
@@ -331,19 +331,19 @@ class Inventory extends Admin {
         //如果export这个参数=1，则直接进行数据导出
         $export = input('get.export', 0);
         if ($export) {
-            $lists = $this->m_product_sales_order->model_where()->group('a.id')->select();
-            $this->m_excel->product_sales_query_export($lists);
+            $lists = model('product_sales_order')->model_where()->group('a.id')->select();
+            model('excel')->product_sales_query_export($lists);
             exit();
         }
 
         if (empty($chart)) {
 
-            $count = $this->m_product_sales_order->model_where()->count('distinct a.id');
-            $lists = $this->m_product_sales_order->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+            $count = model('product_sales_order')->model_where()->count('distinct a.id');
+            $lists = model('product_sales_order')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
 
             foreach ($lists as $key => $val) {
-                $lists[$key]['child'] = $this->m_product_sales_order_data->get_order_data_lists($val['id']);
+                $lists[$key]['child'] = model('product_sales_order_data')->get_order_data_lists($val['id']);
             }
 
             $this->assign('count', $count);
@@ -352,10 +352,10 @@ class Inventory extends Admin {
         } else {
 
 
-            $this->assign('count_sum', $count_sum = $this->m_product_sales_order_data->model_where()->sum('a.quantity'));
+            $this->assign('count_sum', $count_sum = model('product_sales_order_data')->model_where()->sum('a.quantity'));
 
-            $this->assign('count', $count = $this->m_product_sales_order_data->model_where()->count());
-            $this->assign('lists', $lists = $this->m_product_sales_order_data->model_where()->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+            $this->assign('count', $count = model('product_sales_order_data')->model_where()->count());
+            $this->assign('lists', $lists = model('product_sales_order_data')->model_where()->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             $this->assign('pages', $lists->render());
         }
 
@@ -370,13 +370,13 @@ class Inventory extends Admin {
 
         empty($id) && $this->error('参数不能为空');
 
-        $message = $this->m_product_sales_order->sales_undo($id);
+        $message = model('product_sales_order')->sales_undo($id);
 
         if ($message) {
-            $this->m_operate->failure('出库撤消', UID, $message);
+            model('operate')->failure('出库撤消', UID, $message);
             $this->error($message);
         } else {
-            $this->m_operate->success('出库撤消成功');
+            model('operate')->success('出库撤消成功');
             $this->success('出库撤消成功');
         }
     }
@@ -393,8 +393,8 @@ class Inventory extends Admin {
             $_GET['timeb'] = date('Y-m-d');
 
 
-        $count = $this->m_product_sales_return->model_where()->group('a.id')->count();
-        $lists = $this->m_product_sales_return->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+        $count = model('product_sales_return')->model_where()->group('a.id')->count();
+        $lists = model('product_sales_return')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
         $this->assign('count', $count);
         $this->assign('lists', $lists);
@@ -422,7 +422,7 @@ class Inventory extends Admin {
                 $this->error('请确定退货数量');
 
 
-            $one = $this->m_product_sales_order_data->get_order_data($id);
+            $one = model('product_sales_order_data')->get_order_data($id);
 
 
             $quantity = $one['quantity'] - $one['returns'];
@@ -435,14 +435,14 @@ class Inventory extends Admin {
                 $this->error('退货数量不能大与' . $quantity);
 
 
-            $message = $this->m_product_sales_order_data->sales_returns_add($post, $one);
+            $message = model('product_sales_order_data')->sales_returns_add($post, $one);
             $message ? $this->error($message) : $this->success('');
         }
 
 
-        $this->assign('one', $one = $this->m_product_sales_order_data->get_order_data($id));
+        $this->assign('one', $one = model('product_sales_order_data')->get_order_data($id));
 
-        $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->select());
+        $this->assign('warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->select());
 
         return view();
     }
@@ -454,14 +454,14 @@ class Inventory extends Admin {
 
         empty($id) && $this->error('参数不能为空');
 
-        $one = $this->m_product_sales_order->model_where()->where('a.id', $id)->group('a.id')->find();
+        $one = model('product_sales_order')->model_where()->where('a.id', $id)->group('a.id')->find();
         $this->assign('one', $one);
 
         if (empty($one['id']))
-            return $this->m_common->failure('查询到产品出库记录不存在');
+            return model('common')->failure('查询到产品出库记录不存在');
 
 
-        $this->assign('orders', $this->m_product_sales_order_data->get_order_data_lists($id));
+        $this->assign('orders', model('product_sales_order_data')->get_order_data_lists($id));
 
 
         // 快递公司下拉
@@ -479,7 +479,7 @@ class Inventory extends Admin {
 
         $post = request()->post();
 
-        $affect_rows = $this->m_product_sales_order->where('id', $id)->update($post);
+        $affect_rows = model('product_sales_order')->where('id', $id)->update($post);
 
         $affect_rows ? $this->success('更新成功') : $this->error('无更新');
     }
@@ -511,19 +511,19 @@ class Inventory extends Admin {
      */
     public function stock_query() {
 
-        $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
-        $this->assign('category', $this->m_product_category->lists_select_tree());        
+        $this->assign('warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
+        $this->assign('category', model('product_category')->lists_select_tree());        
         
         //如果export这个参数=1，则直接进行数据导出
         $export = input('get.export', 0);
         if ($export) {
-            $lists = $this->m_product_inventory->model_where()->group('a.id')->select();
-            $this->m_excel->product_stock_query_export($lists);
+            $lists = model('product_inventory')->model_where()->group('a.id')->select();
+            model('excel')->product_stock_query_export($lists);
             exit();
         }
 
-        $this->assign('count', $count = $this->m_product_inventory->model_where()->count('distinct a.id'));
-        $this->assign('lists', $lists = $this->m_product_inventory->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+        $this->assign('count', $count = model('product_inventory')->model_where()->count('distinct a.id'));
+        $this->assign('lists', $lists = model('product_inventory')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
         $this->assign('pages', $lists->render());
 
         return view();
@@ -551,25 +551,25 @@ class Inventory extends Admin {
 
 
             // 当前库存表
-            $one = $this->m_product_inventory->where('id', $id)->find();
+            $one = model('product_inventory')->where('id', $id)->find();
             if (empty($one) || $one['quantity'] < $post['number']) {
                 $this->error('没这么多货');
             }
 
 
-            $message = $this->m_product_warehouse_transfer->transfer_add($post, $one);
+            $message = model('product_warehouse_transfer')->transfer_add($post, $one);
             if ($message) {
-                $this->m_operate->failure('库存调拨');
+                model('operate')->failure('库存调拨');
                 $this->error($message);
             } else {
-                $this->m_operate->success('库存调拨');
+                model('operate')->success('库存调拨');
                 $this->success('库存调拨');
             }
         } else {
 
 
-            $this->assign('lists', $this->m_product_inventory->model_where()->where('a.id', $id)->find());
-            $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->select());
+            $this->assign('lists', model('product_inventory')->model_where()->where('a.id', $id)->find());
+            $this->assign('warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->select());
 
 
             return view();
@@ -587,12 +587,12 @@ class Inventory extends Admin {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
 
-        $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
-        $this->assign('category', $this->m_product_category->lists_select_tree());
+        $this->assign('warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
+        $this->assign('category', model('product_category')->lists_select_tree());
 
 
-        $count = $this->m_product_warehouse_transfer->model_where()->count('distinct a.id');
-        $lists = $this->m_product_warehouse_transfer->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+        $count = model('product_warehouse_transfer')->model_where()->count('distinct a.id');
+        $lists = model('product_warehouse_transfer')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
         $this->assign('count', $count);
         $this->assign('lists', $lists);
@@ -616,7 +616,7 @@ class Inventory extends Admin {
             $post = request()->post();
 
 
-            $one = $this->m_product_inventory->where('id', $id)->find();
+            $one = model('product_inventory')->where('id', $id)->find();
 
             if (empty($one))
                 $this->error('产品不存在');
@@ -626,16 +626,16 @@ class Inventory extends Admin {
             }
 
 
-            $message = $this->m_product_scrapped->scrapped_add($post, $one);
+            $message = model('product_scrapped')->scrapped_add($post, $one);
             if ($message) {
-                $this->m_operate->failure('报废产品');
+                model('operate')->failure('报废产品');
                 $this->error($message);
             } else {
-                $this->m_operate->success('报废产品');
+                model('operate')->success('报废产品');
                 $this->success('报废成功', 'stock_query');
             }
         } else {
-            $this->assign('var', $this->m_product_inventory->model_where()->where('a.id', $id)->find());
+            $this->assign('var', model('product_inventory')->model_where()->where('a.id', $id)->find());
             return view();
         }
     }
@@ -651,11 +651,11 @@ class Inventory extends Admin {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
 
-        $this->assign('warehouse', $this->m_product_warehouse->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
-        $this->assign('category', $this->m_product_category->lists_select_tree());
+        $this->assign('warehouse', model('product_warehouse')->model_where()->where('pwu.u_id', UID)->column('a.id,a.name'));
+        $this->assign('category', model('product_category')->lists_select_tree());
 
-        $count = $this->m_product_scrapped->model_where()->count('distinct a.id');
-        $lists = $this->m_product_scrapped->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+        $count = model('product_scrapped')->model_where()->count('distinct a.id');
+        $lists = model('product_scrapped')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
         $this->assign('count', $count);
         $this->assign('lists', $lists);

@@ -15,7 +15,7 @@ class Finance extends Admin {
     public function bank() {
 
 
-        $lists = $this->m_finance_bank->model_where()->select();
+        $lists = model('finance_bank')->model_where()->select();
 
 
         $sum = 0;
@@ -64,10 +64,10 @@ class Finance extends Admin {
                 db('finance_bank')->where('1=1')->update(['default' => 0]);
 
             if (db('finance_bank')->insert($data)) {
-                $this->m_operate->success('新增银行');
+                model('operate')->success('新增银行');
                 $this->success('', url('bank'));
             } else {
-                $this->m_operate->failure('新增银行');
+                model('operate')->failure('新增银行');
                 $this->error('新增失败');
             }
         } else {
@@ -93,10 +93,10 @@ class Finance extends Admin {
 
 
         if (db('finance_bank')->where('id', $id)->delete()) {
-            $this->m_operate->success('删除银行');
+            model('operate')->success('删除银行');
             $this->success('', url('bank'));
         } else {
-            $this->m_operate->failure('删除银行');
+            model('operate')->failure('删除银行');
             $this->error('删除失败', url('bank'));
         }
     }
@@ -128,10 +128,10 @@ class Finance extends Admin {
 
             if (db('finance_bank')->where('id', request()->post('id'))->update($data) !== FALSE) {
 
-                $this->m_operate->success('修改银行');
+                model('operate')->success('修改银行');
                 $this->success('', url('bank'));
             } else {
-                $this->m_operate->failure('修改银行');
+                model('operate')->failure('修改银行');
                 $this->error('没有任何修改');
             }
         } else {
@@ -158,7 +158,7 @@ class Finance extends Admin {
     public function category() {
 
 
-        $lists = $this->m_finance_category->lists_tree();
+        $lists = model('finance_category')->lists_tree();
 
         $this->assign('lists', $lists);
 
@@ -193,10 +193,10 @@ class Finance extends Admin {
 
 
             if (db('finance_category')->insert($data)) {
-                $this->m_operate->success('新增财务分类');
+                model('operate')->success('新增财务分类');
                 $this->success('', url('category'));
             } else {
-                $this->m_operate->failure('新增财务分类');
+                model('operate')->failure('新增财务分类');
                 $this->error('新增失败');
             }
         } else {
@@ -205,7 +205,7 @@ class Finance extends Admin {
             $type = input('get.type', 0);
 
             builder('form')
-                    ->addItem('pid', 'select', '目录', $this->m_finance_category->lists_select_tree('type=' . $type), '')
+                    ->addItem('pid', 'select', '目录', model('finance_category')->lists_select_tree('type=' . $type), '')
                     ->addItem('name', 'input', '分类名称<font color="red">*</font>')
                     ->addItem('type', 'hidden', '类别', $type)
                     ->build();
@@ -223,10 +223,10 @@ class Finance extends Admin {
         empty($id) && $this->error('参数不能为空');
 
         if (db('finance_category')->where('id', $id)->delete()) {
-            $this->m_operate->success('删除账务分类');
+            model('operate')->success('删除账务分类');
             $this->success('', url('category'));
         } else {
-            $this->m_operate->failure('删除账务分类');
+            model('operate')->failure('删除账务分类');
             $this->error('删除失败', url('category'));
         }
     }
@@ -250,10 +250,10 @@ class Finance extends Admin {
 
 
             if (db('finance_category')->where('id', request()->post('id'))->update($data) !== FALSE) {
-                $this->m_operate->success('修改银行分类');
+                model('operate')->success('修改银行分类');
                 $this->success('', url('category'));
             } else {
-                $this->m_operate->failure('修改银行分类');
+                model('operate')->failure('修改银行分类');
                 $this->error('没有任何修改');
             }
         } else {
@@ -262,7 +262,7 @@ class Finance extends Admin {
             $one = db('finance_category')->where('id', $id)->find();
 
             builder('form')
-                    ->addItem('pid', 'select', '目录', $this->m_finance_category->lists_select_tree(), '')
+                    ->addItem('pid', 'select', '目录', model('finance_category')->lists_select_tree(), '')
                     ->addItem('name', 'input', '分类名称<font color="red">*</font>')
                     ->build($one);
 
@@ -292,7 +292,7 @@ class Finance extends Admin {
             $data['create_time'] = time();
 
             if (empty($data['type'])) {
-                $var = $this->m_finance_bank->find($data['bank_id']);
+                $var = model('finance_bank')->find($data['bank_id']);
                 if (!empty($var['id']) && $var['money'] < $data['money'])
                     $this->error('当前银行金额不足:' . $data['money'] . ' 无法支出');
             }
@@ -300,13 +300,13 @@ class Finance extends Admin {
 
             if (db('finance_accounts')->insert($data)) {
 
-                empty($data['type']) ? $this->m_finance_bank->expenditure($data['money'], $data['bank_id']) : $this->m_finance_bank->income($data['money'], $data['bank_id']);
+                empty($data['type']) ? model('finance_bank')->expenditure($data['money'], $data['bank_id']) : model('finance_bank')->income($data['money'], $data['bank_id']);
 
 
-                $this->m_operate->success('新增账务');
+                model('operate')->success('新增账务');
                 $this->success('', url('query'));
             } else {
-                $this->m_operate->failure('新增账务');
+                model('operate')->failure('新增账务');
                 $this->error('新增失败');
             }
         } else {
@@ -316,10 +316,10 @@ class Finance extends Admin {
 
 
             builder('form')
-                    ->addItem('bank_id', 'select', '银行', $this->m_finance_bank->model_where()->lists_select('id,name'))
+                    ->addItem('bank_id', 'select', '银行', model('finance_bank')->model_where()->lists_select('id,name'))
                     ->addItem('money', 'input', '金额')
                     ->addItem('datetime', 'datetime', '日期')
-                    ->addItem('attn_id', 'select', '经办人', $this->m_system_user->model_where()->lists_select('id,nickname'))
+                    ->addItem('attn_id', 'select', '经办人', model('system_user')->model_where()->lists_select('id,nickname'))
                     ->addItem('remark', 'textarea', '备注')
                     ->build();
 
@@ -338,21 +338,21 @@ class Finance extends Admin {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
 
-        $this->assign('revenue', $this->m_finance_accounts->model_where()->where('a.type', 1)->sum('a.money'));
-        $this->assign('expenditure', $this->m_finance_accounts->model_where()->where('a.type', 0)->sum('a.money'));
+        $this->assign('revenue', model('finance_accounts')->model_where()->where('a.type', 1)->sum('a.money'));
+        $this->assign('expenditure', model('finance_accounts')->model_where()->where('a.type', 0)->sum('a.money'));
 
 
         //如果export这个参数=1，则直接进行数据导出
         $export = input('get.export', 0);
         if ($export) {
-            $lists = $this->m_finance_accounts->model_where()->group('a.id')->select();
-            $this->m_excel->finance_export($lists);
+            $lists = model('finance_accounts')->model_where()->group('a.id')->select();
+            model('excel')->finance_export($lists);
             exit();
         }
 
 
-        $this->assign('count', $count = $this->m_finance_accounts->model_where()->count('distinct a.id'));
-        $lists = $this->m_finance_accounts->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()])->each(function($item, $key) {
+        $this->assign('count', $count = model('finance_accounts')->model_where()->count('distinct a.id'));
+        $lists = model('finance_accounts')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()])->each(function($item, $key) {
             $item->datetime = date('Y-m-d H:i', $item['datetime']);
             if ($item['type'])
                 $item->type_inc = '+' . $item['money'];
@@ -386,12 +386,12 @@ class Finance extends Admin {
 
         empty($id) && $this->error('参数不能为空');
 
-        $message = $this->m_finance_accounts->query_delete($id);
+        $message = model('finance_accounts')->query_delete($id);
         if ($message) {
-            $this->m_operate->failure('撤销账单');
+            model('operate')->failure('撤销账单');
             $this->error($message);
         } else {
-            $this->m_operate->success('撤销账单');
+            model('operate')->success('撤销账单');
             $this->success('撤销账单');
         }
     }

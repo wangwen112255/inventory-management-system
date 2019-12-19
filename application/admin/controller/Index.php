@@ -17,7 +17,7 @@ class Index extends Admin {
     public function log_clear() {
 
 
-        if ($affect_rows = $this->m_operate->clear()) {
+        if ($affect_rows = model('operate')->clear()) {
 
             $this->success('清理了' . $affect_rows . '条数据 ', 'log');
         } else {
@@ -58,12 +58,12 @@ class Index extends Admin {
     public function index() {
 
         //菜单列表
-        $menu_list = $this->m_system_menu->get_menu_list();
+        $menu_list = model('system_menu')->get_menu_list();
         $this->assign('menu_list', json_encode($menu_list[1]));
 
 
         //菜单分组
-        $menu_list_group = $this->m_system_menu->where('id', 'in', $menu_list[0])->order('sort asc')->select();
+        $menu_list_group = model('system_menu')->where('id', 'in', $menu_list[0])->order('sort asc')->select();
         $this->assign('menu_list_group', $menu_list_group);
 
 
@@ -110,8 +110,8 @@ class Index extends Admin {
 
 
 
-        $count = $this->m_operate->model_where(UID)->count();
-        $lists = $this->m_operate->model_where(UID)->paginate(20, $count);
+        $count = model('operate')->model_where(UID)->count();
+        $lists = model('operate')->model_where(UID)->paginate(20, $count);
 
         $this->assign('count', $count);
         $this->assign('lists', $lists);

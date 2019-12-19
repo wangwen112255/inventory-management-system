@@ -40,16 +40,16 @@ class Prints extends Base {
         empty($id) && $this->error('参数不能为空');
 
 
-        $this->assign('info', $var = $this->m_product_sales_order->model_where(NULL)->where('a.id', $id)->group('a.id')->find());
+        $this->assign('info', $var = model('product_sales_order')->model_where(NULL)->where('a.id', $id)->group('a.id')->find());
 
         // print_r($var);exit;
 
         if (!empty($var)) {
-            $this->m_product_sales_order->save(['print' => 1], ['id' => $id]);
-            $this->m_operate->success('打印出货单=>' . $var['order_number']);
+            model('product_sales_order')->save(['print' => 1], ['id' => $id]);
+            model('operate')->success('打印出货单=>' . $var['order_number']);
         }
 
-        $this->assign('orders', $this->m_product_sales_order_data->get_order_data_lists($id));
+        $this->assign('orders', model('product_sales_order_data')->get_order_data_lists($id));
         return view();
     }
 
@@ -63,8 +63,8 @@ class Prints extends Base {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
 
-        $this->assign('lists', $this->m_product_sales_order_data->model_where()->group('a.id')->select());
-        $this->m_operate->success('打印出货单');
+        $this->assign('lists', model('product_sales_order_data')->model_where()->group('a.id')->select());
+        model('operate')->success('打印出货单');
         return view();
     }
     
@@ -79,8 +79,8 @@ class Prints extends Base {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
 
-        $this->assign('lists', $this->m_product_storage_order_data->model_where(true)->group('a.id')->select());
-        $this->m_operate->success('打印入库单');
+        $this->assign('lists', model('product_storage_order_data')->model_where(true)->group('a.id')->select());
+        model('operate')->success('打印入库单');
         return view();
     }
 
@@ -98,14 +98,14 @@ class Prints extends Base {
             $_GET['timeb'] = date('Y-m-d');
 
 
-        $var = $this->m_product_storage_order->model_where()->group('a.id')->where('a.id', $id)->find();
+        $var = model('product_storage_order')->model_where()->group('a.id')->where('a.id', $id)->find();
 
-        $sub_list = $this->m_product_storage_order_data->model_where()->group('a.id')->where('a.o_id', $var['id'])->select();
+        $sub_list = model('product_storage_order_data')->model_where()->group('a.id')->where('a.o_id', $var['id'])->select();
         $this->assign('sub_list', $sub_list);
 
         $this->assign('var', $var);
 
-        $this->m_operate->success('打印入库单');
+        model('operate')->success('打印入库单');
 
         return view();
     }
@@ -120,8 +120,8 @@ class Prints extends Base {
         if (!isset($_GET['timeb']))
             $_GET['timeb'] = date('Y-m-d');
         
-        $this->assign('lists', $this->m_finance_accounts->model_where()->group('a.id')->select());
-        $this->m_operate->success('打印账务单');
+        $this->assign('lists', model('finance_accounts')->model_where()->group('a.id')->select());
+        model('operate')->success('打印账务单');
         return view();
     }
 

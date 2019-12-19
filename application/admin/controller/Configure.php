@@ -26,21 +26,21 @@ class Configure extends Admin {
                 if ($w_id) {
                     $where1['a.w_id'] = $w_id;
                 }
-                $this->assign('inventory', $this->m_product_inventory->model_where()->where($where1)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('inventory', model('product_inventory')->model_where()->where($where1)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '2') {
 
                 $where2['a.p_id'] = $id;
                 if ($w_id) {
                     $where2['a.w_id'] = $w_id;
                 }
-                $this->assign('warehouse', $this->m_product_storage_order_data->model_where()->where($where2)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('warehouse', model('product_storage_order_data')->model_where()->where($where2)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '3') {
 
                 $where3['a.p_id'] = $id;
                 if ($w_id) {
                     $where3['a.out_id|a.jin_id'] = $w_id;
                 }
-                $this->assign('warehouse_allocate', $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('warehouse_allocate', model('product_warehouse_transfer')->model_where()->where($where3)->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             } elseif (request()->post('looktype') === '4') {
 
 
@@ -48,7 +48,7 @@ class Configure extends Admin {
                 if ($w_id) {
                     $where4['a.w_id'] = $w_id;
                 }
-                $this->assign('lists', $lists = $this->m_product_sales_order_data->model_where()->where($where4)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
+                $this->assign('lists', $lists = model('product_sales_order_data')->model_where()->where($where4)->paginate(config('base.page_size'), $count, ['query' => request()->get()]));
             }
             
             $this->assign('looktype', request()->post('looktype'));
@@ -56,7 +56,7 @@ class Configure extends Admin {
         } else {
 
 
-            $this->assign('var', $var = $this->m_product->model_where()->group('a.id')->where('a.id', $id)->find());
+            $this->assign('var', $var = model('product')->model_where()->group('a.id')->where('a.id', $id)->find());
 
 
             // 库存记录 1
@@ -64,9 +64,9 @@ class Configure extends Admin {
             if ($w_id) {
                 $where1['a.w_id'] = $w_id;
             }
-            $count1 = $this->m_product_inventory->model_where()->where($where1)->count();
+            $count1 = model('product_inventory')->model_where()->where($where1)->count();
             $this->assign('count1', $count1);
-            $quantity_sum1 = $this->m_product_inventory->model_where()->where($where1)->sum('a.quantity');
+            $quantity_sum1 = model('product_inventory')->model_where()->where($where1)->sum('a.quantity');
             $this->assign('quantity_sum1', $quantity_sum1);
 
             // 入库记录 2
@@ -74,9 +74,9 @@ class Configure extends Admin {
             if ($w_id) {
                 $where2['a.w_id'] = $w_id;
             }
-            $count2 = $this->m_product_storage_order_data->model_where()->where($where2)->count();
+            $count2 = model('product_storage_order_data')->model_where()->where($where2)->count();
             $this->assign('count2', $count2);
-            $quantity_sum2 = $this->m_product_storage_order_data->model_where()->where($where2)->sum('a.quantity');
+            $quantity_sum2 = model('product_storage_order_data')->model_where()->where($where2)->sum('a.quantity');
             $this->assign('quantity_sum2', $quantity_sum2);
 
             // 调拨记录
@@ -84,9 +84,9 @@ class Configure extends Admin {
             if ($w_id) {
                 $where3['a.out_id|a.jin_id'] = $w_id;
             }
-            $count3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->group('a.id')->count();
+            $count3 = model('product_warehouse_transfer')->model_where()->where($where3)->group('a.id')->count();
             $this->assign('count3', $count3);
-            $quantity_sum3 = $this->m_product_warehouse_transfer->model_where()->where($where3)->sum('a.number');
+            $quantity_sum3 = model('product_warehouse_transfer')->model_where()->where($where3)->sum('a.number');
             $this->assign('quantity_sum3', $quantity_sum3);
 
             //出库记录          
@@ -94,12 +94,12 @@ class Configure extends Admin {
             if ($w_id) {
                 $where4['a.w_id'] = $w_id;
             }
-            $count4 = $this->m_product_sales_order_data->model_where()->where($where4)->count();
+            $count4 = model('product_sales_order_data')->model_where()->where($where4)->count();
             $this->assign('count4', $count4);
             
-            $quantity_sum4 = $this->m_product_sales_order_data->model_where()->where($where4)->sum('a.quantity');
+            $quantity_sum4 = model('product_sales_order_data')->model_where()->where($where4)->sum('a.quantity');
             $this->assign('quantity_sum4', $quantity_sum4);
-            $quantity_sum42 = $this->m_product_sales_order_data->model_where()->where($where4)->sum('a.returns');
+            $quantity_sum42 = model('product_sales_order_data')->model_where()->where($where4)->sum('a.returns');
             $this->assign('quantity_sum42', $quantity_sum42);
 
             return view();
@@ -113,8 +113,8 @@ class Configure extends Admin {
 
 
 
-        $count = $this->m_product->model_where()->count('distinct a.id');
-        $lists = $this->m_product->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
+        $count = model('product')->model_where()->count('distinct a.id');
+        $lists = model('product')->model_where()->group('a.id')->paginate(config('base.page_size'), $count, ['query' => request()->get()]);
 
 
         $this->assign('count', $count);
@@ -158,15 +158,15 @@ class Configure extends Admin {
             $post['update_time'] = time();
 
             if (db('product')->strict(true)->insertGetId($post) !== FALSE) {
-                $this->m_operate->success('新增产品');
+                model('operate')->success('新增产品');
                 $this->success('', 'product');
             } else {
-                $this->m_operate->failure('新增产品');
+                model('operate')->failure('新增产品');
                 $this->error('新增失败');
             }
         } else {
             builder('form')
-                    ->addItem('c_id', 'select', '产品分类', $this->m_product_category->lists_select_tree())
+                    ->addItem('c_id', 'select', '产品分类', model('product_category')->lists_select_tree())
                     ->addItem('image', 'image', '产品图片','','data-src="holder.js/140x140?text=选择图片" ')
                     ->addItem('name', 'input', '产品名称<font color="red">*</font>')
                     ->addItem('code', 'input', '产品货号<font color="red">*</font>')
@@ -199,10 +199,10 @@ class Configure extends Admin {
             $post['update_uid'] = UID;
             $post['update_time'] = time();
             if (db('product')->strict(true)->where('id', $post['id'])->update($post) !== FALSE) {
-                $this->m_operate->success('更新产品');
+                model('operate')->success('更新产品');
                 $this->success('', 'product');
             } else {
-                $this->m_operate->failure('更新产品');
+                model('operate')->failure('更新产品');
                 $this->error('新增失败');
             }
         } else {
@@ -210,7 +210,7 @@ class Configure extends Admin {
             $one = db('product')->where('id', $id)->find();
 
             builder('form')
-                    ->addItem('c_id', 'select', '产品分类<font color="red">*</font>', $this->m_product_category->lists_select_tree())
+                    ->addItem('c_id', 'select', '产品分类<font color="red">*</font>', model('product_category')->lists_select_tree())
                     ->addItem('image', 'image', '产品图片','','data-src="holder.js/140x140?text=选择图片" ')
                     ->addItem('name', 'input', '产品名称<font color="red">*</font>')
                     ->addItem('code', 'input', '产品货号<font color="red">*</font>')
@@ -235,7 +235,7 @@ class Configure extends Admin {
         empty($id) && $this->error('ID不能为空');
 
 
-        $check = $this->m_product_inventory->where('p_id', $id)->count();
+        $check = model('product_inventory')->where('p_id', $id)->count();
         if ($check > 0) {
             $this->error('已产生库存，暂无法删除');
         } elseif (db('product')->where('id', $id)->delete()) {
@@ -397,7 +397,7 @@ class Configure extends Admin {
      * @title 产品分类
      */
     public function product_category() {
-        $this->assign('lists', $this->m_product_category->lists_tree());
+        $this->assign('lists', model('product_category')->lists_tree());
         builder('list')
                 ->addItem('id', '#')
                 ->addItem('name', '名称')
@@ -426,7 +426,7 @@ class Configure extends Admin {
             }
         } else {
             builder('form')
-                    ->addItem('pid', 'select', '产品分类', $this->m_product_category->lists_select_tree(), '')
+                    ->addItem('pid', 'select', '产品分类', model('product_category')->lists_select_tree(), '')
                     ->addItem('name', 'input', '分类名称<font color="red">*</font>')
                     ->build();
             return view();
@@ -441,16 +441,16 @@ class Configure extends Admin {
         empty($id) && $this->error('ID不能为空');
 
         if (db('product')->where('c_id', $id)->find()) {
-            $this->m_operate->failure('删除产品分类');
+            model('operate')->failure('删除产品分类');
             $this->error('请先转移分类下的产品');
         } elseif (db('product_category')->where('pid', $id)->find()) {
-            $this->m_operate->failure('删除产品分类');
+            model('operate')->failure('删除产品分类');
             $this->error('请先删除子分类');
         } elseif (db('product_category')->where('id', $id)->delete()) {
-            $this->m_operate->success('删除产品分类');
+            model('operate')->success('删除产品分类');
             $this->success('');
         } else {
-            $this->m_operate->failure('删除产品分类');
+            model('operate')->failure('删除产品分类');
             $this->error('删除失败');
         }
     }
@@ -475,7 +475,7 @@ class Configure extends Admin {
             $one = db('product_category')->where('id', $id)->find();
 
             builder('form')
-                    ->addItem('pid', 'select', '产品分类', $this->m_product_category->lists_select_tree(['id' => ['neq', $id]]), '')
+                    ->addItem('pid', 'select', '产品分类', model('product_category')->lists_select_tree(['id' => ['neq', $id]]), '')
                     ->addItem('name', 'input', '分类名称<font color="red">*</font>')
                     ->build($one);
             return view();
@@ -487,7 +487,7 @@ class Configure extends Admin {
      */
     public function warehouse() {
 
-        $lists = $this->m_product_warehouse->model_where(true)->select();
+        $lists = model('product_warehouse')->model_where(true)->select();
         $this->assign('lists', $lists);
 
         builder('list')
@@ -516,12 +516,12 @@ class Configure extends Admin {
             if (!$this->v_product_warehouse->check($post))
                 $this->error($this->v_product_warehouse->getError());
 
-            $message = $this->m_product_warehouse->warehouse_add($post);
+            $message = model('product_warehouse')->warehouse_add($post);
             if ($message) {
-                $this->m_operate->failure('新增仓库');
+                model('operate')->failure('新增仓库');
                 $this->error($message);
             } else {
-                $this->m_operate->success('新增仓库');
+                model('operate')->success('新增仓库');
                 $this->success('', 'warehouse');
             }
         } else {
@@ -551,17 +551,17 @@ class Configure extends Admin {
             if (!$this->v_product_warehouse->check($post))
                 $this->error($this->v_product_warehouse->getError());
 
-            $message = $this->m_product_warehouse->warehouse_edit($post);
+            $message = model('product_warehouse')->warehouse_edit($post);
             if ($message) {
-                $this->m_operate->failure('修改仓库');
+                model('operate')->failure('修改仓库');
                 $this->error($message);
             } else {
-                $this->m_operate->success('修改仓库');
+                model('operate')->success('修改仓库');
                 $this->success('', 'warehouse');
             }
         } else {
 
-            $one = $this->m_product_warehouse->model_where(true)->where('a.id', $id)->find();
+            $one = model('product_warehouse')->model_where(true)->where('a.id', $id)->find();
             $this->assign('one', $one);
 
             builder('form')
@@ -583,12 +583,12 @@ class Configure extends Admin {
 
         empty($id) && $this->error('ID参数不能为空');
 
-        $message = $this->m_product_warehouse->warehouse_delete($id);
+        $message = model('product_warehouse')->warehouse_delete($id);
         if ($message) {
-            $this->m_operate->failure('删除仓库');
+            model('operate')->failure('删除仓库');
             $this->error($message);
         } else {
-            $this->m_operate->success('删除仓库');
+            model('operate')->success('删除仓库');
             $this->success('');
         }
     }
@@ -598,7 +598,7 @@ class Configure extends Admin {
      */
     public function supplier() {
 
-        $this->assign('lists', $this->m_product_supplier->model_where()->select());
+        $this->assign('lists', model('product_supplier')->model_where()->select());
 
         builder('list')
                 ->addItem('id', '#')
@@ -632,10 +632,10 @@ class Configure extends Admin {
             $post['update_time'] = time();
 
             if (db('product_supplier')->insertGetId($post)) {
-                $this->m_operate->success('新增供应商');
+                model('operate')->success('新增供应商');
                 $this->success('', 'supplier');
             } else {
-                $this->m_operate->failure('新增供应商');
+                model('operate')->failure('新增供应商');
                 $this->error('数据库更新出错');
             }
         } else {
@@ -671,15 +671,15 @@ class Configure extends Admin {
             $post['update_time'] = time();
 
             if (db('product_supplier')->where('id', $id)->update($post) !== FALSE) {
-                $this->m_operate->success('修改供应商');
+                model('operate')->success('修改供应商');
                 $this->success('', 'supplier');
             } else {
-                $this->m_operate->failure('修改供应商');
+                model('operate')->failure('修改供应商');
                 $this->error('数据库更新出错');
             }
         } else {
 
-            $one = $this->m_product_supplier->model_where()->find($id);
+            $one = model('product_supplier')->model_where()->find($id);
             builder('form')
                     ->addItem('company', 'input', '供应商名称<font color="red">*</font>', '', '')
                     ->addItem('name', 'input', '联系人')
@@ -700,7 +700,7 @@ class Configure extends Admin {
      */
     public function supplier_look($id) {
         empty($id) && $this->error('ID参数不能为空');
-        $this->assign('var', $this->m_product_supplier->model_where()->where('a.id', $id)->find());
+        $this->assign('var', model('product_supplier')->model_where()->where('a.id', $id)->find());
         return view();
     }
 
@@ -712,10 +712,10 @@ class Configure extends Admin {
         empty($id) && $this->error('ID参数不能为空');
 
         if (db('product_supplier')->where('id', $id)->delete()) {
-            $this->m_operate->success('删除供应商名称');
+            model('operate')->success('删除供应商名称');
             $this->success('');
         } else {
-            $this->m_operate->failure('删除供应商名称');
+            model('operate')->failure('删除供应商名称');
             $this->error('删除失败');
         }
     }
