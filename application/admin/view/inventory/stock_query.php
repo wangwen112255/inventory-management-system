@@ -1,11 +1,4 @@
 {extend name="base:base" /} {block name="body"} 
-<style>
-    .nav>li>a{
-        padding-top: 2px;
-        padding-bottom:2px;
-    }
-    .nav{ margin-bottom: 0px;}
-</style>
 <div class="table-common">
     <form class="form-inline" action="{:url('stock_query')}" method="get">
         <div class="search-box">
