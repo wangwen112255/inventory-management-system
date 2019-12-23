@@ -28,19 +28,19 @@
             <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
             <button class="btn btn-success export" title="导出"><i class="fa fa-file-excel-o"></i> 导出</button>
         </div>
-        <div class="search-box">
-            <ul class="nav nav-pills">
-                <?php
-                foreach ($warehouse as $key => $value) {
-                    ?>
-                    <li role="presentation" <?php
-                    if (request()->get('warehouse') == $key) {
-                        echo 'class="active"';
-                    }
-                    ?> ><a href="<?php echo url('stock_query', ['warehouse' => $key]) ?>"><?php echo $value ?></a></li>
+
+        <div class="btn-group search-box" data-toggle="buttons-radio">
+            <?php
+            foreach ($warehouse as $key => $value) {
+                ?>
+                <button type="button" onclick="location.href = '<?php echo url('stock_query', ['warehouse' => $key]) ?>'" class="btn  btn-default <?php
+                if (request()->get('warehouse') == $key) {
+                    echo ' active ';
+                }
+                ?>"><i class="fa fa-list-alt"></i> <?php echo $value ?></button>
                     <?php } ?>
-            </ul>
         </div>
+
     </form>
 </div>
 <p>
