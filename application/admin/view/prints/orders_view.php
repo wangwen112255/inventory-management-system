@@ -10,7 +10,7 @@
             <table width="90%" border="0" cellpadding="0" cellspacing="5" align="center" >
                 <tr>
                     <td height="21" align="center"><h2> {:config('base.company')}</h2>
-                        <h3>产品销售出库单</h3></td>
+                        <h3>产品出库单</h3></td>
                 </tr>
                 <tr>
                     <td height="21" align="left"> 客户: <span style="text-decoration:underline;"> {$info.nickname? $info.nickname : '无' } </span> &nbsp;&nbsp;物流：<span style="text-decoration:underline;"> {$info.express_name} </span> &nbsp;&nbsp;单号：<span style="text-decoration:underline;"> {$info.express_num} </span></td>

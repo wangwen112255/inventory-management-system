@@ -23,7 +23,7 @@ class ProductBuildOrder extends Base {
             $order['build_time'] = strtotime($post['build_time']);
             $order['create_time'] = time();
             $order['remark'] = $post['remark'];
-            // $order['warehouse_id'] = $post['warehouse_id'];
+            $order['storage_order_id'] = 0;
             $insert_id = db('product_build_order')->insertGetId($order);
             if ($insert_id) {
                 foreach ($products as $key => $value) {

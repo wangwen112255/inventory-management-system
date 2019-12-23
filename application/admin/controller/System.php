@@ -1,15 +1,19 @@
 <?php
+
 namespace app\admin\controller;
+
 use app\admin\controller\Admin;
 use org\util\ClassReader;
 use org\util\Document;
 use think\Cache;
 use think\Db;
 use think\Response;
+
 /**
  * @title 系统
  */
 class System extends Admin {
+
     /**
      * @title 信息列表
      *
@@ -23,11 +27,12 @@ class System extends Admin {
                 ->addItem('id', '#')
                 ->addItem('title', '名称')
                 ->addItem('description', '描述')
-                ->addAction('编辑', 'auth_group_edit', '<i class="fa fa-edit"></i>')
-                ->addAction('删除', 'auth_group_delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
+                ->addAction('编辑', 'auth_group_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'auth_group_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
+
     /**
      * @title 添加角色
      */
@@ -54,6 +59,7 @@ class System extends Admin {
             return view();
         }
     }
+
     /**
      * @title 编辑角色
      */
@@ -82,13 +88,14 @@ class System extends Admin {
             return view();
         }
     }
+
     /**
      * @title 删除资源
      *
      * @param  int  $id
      * @return Response
      */
-    public function auth_group_delete($id) {        
+    public function auth_group_delete($id) {
         empty($id) && $this->error('参数不能为空');
         $affect_rows = db('auth_group')->where('id', $id)->delete();
         if ($affect_rows > 0) {
@@ -97,6 +104,7 @@ class System extends Admin {
             $this->error('删除失败！');
         }
     }
+
     /**
      * @title 显示资源列表
      */
@@ -105,6 +113,7 @@ class System extends Admin {
         $this->assign('auth_rule_list', $result);
         return view();
     }
+
     /**
      * @title 节点解析
      */
@@ -124,6 +133,7 @@ class System extends Admin {
         //$this->assign('folder', $folder);
         return view();
     }
+
     /**
      * @title 刷新节点
      */
@@ -153,6 +163,7 @@ class System extends Admin {
             $this->success("导入成功", null);
         }
     }
+
     /**
      * @title 获取各个类的各个方法的注释字段，返回二维+数组
      */
@@ -179,6 +190,7 @@ class System extends Admin {
         }
         return $module_list;
     }
+
     /**
      * @title 列表
      *
@@ -202,11 +214,12 @@ class System extends Admin {
                 ->addItem('username', '账号')
                 ->addItem('nickname', '姓名')
                 ->addItem('create_time', '创建日期')
-                ->addAction('编辑', 'user_edit', '<i class="fa fa-edit"></i>')
-                ->addAction('删除', 'user_delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
+                ->addAction('编辑', 'user_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'user_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
+
     /**
      * @title 添加用户
      */
@@ -236,12 +249,13 @@ class System extends Admin {
             return view();
         }
     }
+
     /**
      * @title 编辑用户
      */
     function user_edit($id) {
         empty($id) && $this->error('参数不能为空');
-        if($id == 1)
+        if ($id == 1)
             $this->error('超级管理员暂不支持修改');
         if (request()->isPost()) {
             $post = request()->post();
@@ -268,12 +282,13 @@ class System extends Admin {
             return view();
         }
     }
+
     /**
      * @title 用户删除
      */
     public function user_delete($id) {
         empty($id) && $this->error('参数不能为空');
-        if($id == 1)
+        if ($id == 1)
             $this->error('超级管理员都想删，不合适吧？');
         $message = model('system_user')->user_delete($id);
         if ($message) {
@@ -282,6 +297,7 @@ class System extends Admin {
             $this->success('', 'user');
         }
     }
+
     /**
      * @title 菜单列表
      */
@@ -298,11 +314,12 @@ class System extends Admin {
                 ->addItem('url', 'URL')
                 ->addSortItem('sort', '排序', 'system_menu')
                 ->addItem('status', '状态')
-                ->addAction('编辑', 'menu_edit', '<i class="fa fa-edit"></i>')
-                ->addAction('删除', 'menu_delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
+                ->addAction('编辑', 'menu_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'menu_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
+
     /**
      * @title 获取菜单深度
      * @param $id
@@ -317,6 +334,7 @@ class System extends Admin {
             return $this->_get_level($array[$id]['pid'], $array, $i);
         }
     }
+
     /**
      * @title 添加
      */
@@ -344,6 +362,7 @@ class System extends Admin {
             return view();
         }
     }
+
     /**
      * @title 编辑菜单
      */
@@ -375,6 +394,7 @@ class System extends Admin {
             return view();
         }
     }
+
     /**
      * @title 删除菜单
      */
@@ -390,22 +410,48 @@ class System extends Admin {
             $this->error("删除失败！");
         }
     }
+
     /**
      * @title 配置列表
      */
     public function config() {
+
         $base_dir = APP_DIR . '/../application/extra/';
+
         if (request()->isPost()) {
-            $cfg_name = input('post.cfg_name');
-            $cfg_name_root = $base_dir . $cfg_name;
-            if (is_file($cfg_name_root)) {
-                $cfg_cnt = input('post.cfg_cnt');
-                $cfg_cnt = htmlspecialchars_decode($cfg_cnt);
+
+
+            $category = input('post.category');
+            $category_root = $base_dir . $category;
+            if (is_file($category_root)) {
+
+                $post = input('post.');
+                $configs = $post['configs'];
+
+                $title = $post['title'];
+
+                if (empty($title)) {
+                    $this->error('配置名称不能为空');
+                }
+
+                $array_str = '<?php ' . chr(10) . chr(10) . '/**' . chr(10) . ' * @title ' . $title . '' . chr(10) . ' */' . chr(10) . 'return [' . chr(10);
+
+                foreach ($configs as $key => $value) {
+
+                    $remark = $value['remark'] ?? '';
+
+                    $key = is_numeric($value['key']) ? $value['key'] : "'" . $value['key'] . "'";
+                    $value = is_numeric($value['value']) ? $value['value'] : "'" . $value['value'] . "'";
+
+                    $array_str .= chr(9) . $key . " => " . $value . ", //" . $remark . "" . chr(10);
+                }
+
+                $array_str = $array_str . '];';
+
                 /*  【直接保存到文件】  */
-                $check = file_put_contents($cfg_name_root, $cfg_cnt);
+                $check = file_put_contents($category_root, $array_str);
                 if ($check > 0) {
-                    Cache::rm('CACHE_CONFIG_DATA');
-                    $this->success("保存成功，共写入字节数：" . $check);
+                    $this->success("保存成功", url('config', ['category' => $category]));
                 } else {
                     $this->error("内容为空");
                 }
@@ -413,6 +459,22 @@ class System extends Admin {
                 $this->error("请选择一个有效模板文件");
             }
         } else {
+
+            /*  【当前的配置文件名称】  */
+            $category = input('get.category', 'base.php');
+            $this->assign('category', $category);
+            /*  【通过当前name获取配置文件的内容】  */
+            $config_content = file_get_contents($base_dir . $category);
+
+            // 解析配置
+            preg_match_all("/\s*[\'\"]?(.*?)[\'\"]?\s*=>\s*[\'\"]?(.*?)[\'\"]?,(\s*\/\/)?([^\r\n]*)/", $config_content, $matches);
+            // dd($matches);
+            $this->assign('lists', $matches);
+
+            preg_match('/\@title\s*([^\r\n]*)?/i', $config_content, $matches2);
+            $title = isset($matches2[1]) ? $matches2[1] : $category;
+            $this->assign('title', $title);
+
             $file_list = my_scan_dir($base_dir . "*.php");
             $navs = [];
             /*  【通过文件名，依次解析title】  */
@@ -422,17 +484,13 @@ class System extends Admin {
                 if ($array) {
                     $navs[$value] = $array;
                 } else {
-                    $navs[$value] = str_replace('.php', '', $value);
+                    //$navs[$value] = str_replace('.php', '', $value);
                 }
             }
             $this->assign('navs', $navs);
-            /*  【当前的配置文件名称】  */
-            $cfg_name = input('get.cfg_name', 'base.php');
-            $this->assign('cfg_name', $cfg_name);
-            /*  【通过当前name获取配置文件的内容】  */
-            $file_cnt = file_get_contents($base_dir . $cfg_name);
-            $this->assign('file_cnt', $file_cnt);
+
             return view();
         }
     }
+
 }

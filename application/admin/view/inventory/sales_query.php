@@ -47,7 +47,7 @@
 
             <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 查询</button>
             {if $chart==='1'}
-            <button type="button" class="btn btn-default" title="打印销售订单" 
+            <button type="button" class="btn btn-default" title="打印出库订单" 
                     id="print"
                     val="<?php echo url('prints/orders_list') ?>" 
                     ><i class="fa fa-print"></i> 打印</button>
@@ -60,7 +60,7 @@
     </form>
 </div>
 <p>
-    <small> 查询到了<strong>{$count}</strong>个销售记录</small>
+    <small> 查询到了<strong>{$count}</strong>个出库记录</small>
     <?php if (isset($count_sum)) { ?>
         <small> 总数量<strong>{$count_sum}</strong></small>
     <?php } ?>
@@ -115,15 +115,15 @@
                         <td>{$var.count_data}</td>
                         <td style="text-align:center">
                             <a href="javascript:;" 
-                               class="print"
+                               class="print btn btn-default btn-sm"
                                title="打印订单{$var.id}"
                                num="{$var.order_number}"
-                               val="<?php echo url('prints/orders_view', ['id' => $var['id']]) ?>" >
-                                <i class="fa fa-print"></i> 打印</a>
+                               val="<?php echo url('prints/orders_view', ['id' => $var['id']]) ?>" ><i class="fa fa-print"></i> 打印</a>
                         </td>
-                        <td style="text-align:center"><a href="{:url('sales_look',['id'=>$var.id])}" title="查看记录"><i class="fa fa-search"></i> 查看</a></td>
+                        <td style="text-align:center">
+                            <a class="btn btn-primary btn-sm" href="{:url('sales_look',['id'=>$var.id])}" title="查看记录"><i class="fa fa-search"></i> 查看</a></td>
                         <td style="text-align:center">               
-                            <a href="{:url('sales_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>            
+                            <a class="btn btn-danger btn-sm" href="{:url('sales_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>            
                         </td>
                     </tr>
                     <tr id="product_data{$var.id}" class="product_data" style="display:none">
@@ -167,7 +167,7 @@
                                                 <td class="success">{$var2.product_data.product_type}</td>
                                                 <td>
                                                     {if $var2.status>-2}
-                                                    <a data-toggle="modal" data-target="#modal" href="{:url('sales_returns_add',['id'=>$var2.id])}" data-title="产品退货" title="退货"><i class="fa fa-reply"></i> 退货</a>
+                                                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal" href="{:url('sales_returns_add',['id'=>$var2.id])}" data-title="产品退货" title="退货"><i class="fa fa-reply"></i> 退货</a>
                                                     {/if}
                                                 </td>
                                             </tr>

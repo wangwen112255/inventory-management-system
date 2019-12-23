@@ -91,7 +91,7 @@
         <tr>
             <th>ID</th>
             <th>仓库</th>
-            <th>销售数量</th>
+            <th>出库数量</th>
             <th>退货数量</th>
             <th>会员</th>
             <th>创建时间</th>

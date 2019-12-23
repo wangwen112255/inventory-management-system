@@ -2,6 +2,14 @@
 <form class="form-inline" action="{:url('sales')}"  method="post" autocapitalize="off" autocomplete="off" autocorrect="off">
     <table class="table table-hover">
         <tr>
+            <th style="width:120px;line-height:30px;text-align:right"></th>
+            <td>
+                <div id="legend" class="text-ceter">
+                    <h3>出库单</h3> 
+                </div>
+            </td>
+        </tr>
+        <tr>
             <th style="width:120px;line-height:30px;text-align:right">选择会员</th>
             <td><input type="text" class="form-control"  value="" id="automember" placeholder="会员名称搜索">
                 <input type="hidden" name="member_id" value="{$Think.post.member_id}" id="member_id" />
@@ -51,7 +59,7 @@
                                     <th style="width:120px;line-height:30px;text-align:right">产品</th>
                                     <td style="width:120px;line-height:30px;"><input type="hidden" name="product_ids[{$key}]" value="{$var.id}" /> {$var.name}
                                     </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">销售价</th>
+                                    <th style="width:120px;line-height:30px;text-align:right">出库价</th>
                                     <td style="width:120px;line-height:30px;">
                                         {$var.sales}
                                     </td>
@@ -169,7 +177,7 @@
             </td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">销售备注</th>
+            <th style="line-height:30px;text-align:right">出库备注</th>
             <td><textarea style="width: 20%" name="remark" type="" class="form-control" style="height:60px">{$Think.get.remark}</textarea></td>
         </tr>
         <tr>
@@ -204,7 +212,7 @@
         'matchHandler': function (keyword, data) {
             return true
         },
-        'afterSelectedHandler': function (data) {            
+        'afterSelectedHandler': function (data) {
             $('#member_id').val(data.id);
             $('form').submit();
         },
@@ -212,7 +220,7 @@
             alert(msg);
         }
     });
-    
+
     $('#autoproduct').AutoComplete({
         'data': "<?php echo url('json/product') ?>",
         'ajaxDataType': 'json',
@@ -224,7 +232,7 @@
         'matchHandler': function (keyword, data) {
             return true
         },
-        'afterSelectedHandler': function (data) {            
+        'afterSelectedHandler': function (data) {
             $('#product_id').val(data.id);
             $('form').submit();
         },

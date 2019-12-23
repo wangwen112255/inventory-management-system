@@ -72,7 +72,7 @@ class ProductStorageOrder extends Base {
             $data['type'] = $post['type'];
             $data['remark'] = $post['remark'];
             $data['create_time'] = time();
-            $insert_id = db('product_storage_order')->strict(true)->insertGetId($data);
+            $insert_id = db('product_storage_order')->insertGetId($data);
             //让入库 来反向更新 生产表，用于生产关联storage_order_id
             if (isset($post['product_build_id'])) {
                 db('product_build_order')->where('id', $post['product_build_id'])->setField('storage_order_id', $insert_id);

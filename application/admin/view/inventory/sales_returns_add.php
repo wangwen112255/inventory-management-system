@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">销售退货</div>
+    <div class="panel-heading">出库退货</div>
     <div class="panel-body">
         <form class="form-inline sales_returns_add" action="{:url('sales_returns_add',['id'=>$one.id])}" method="post">
             <input type="hidden" name="url" value="" />

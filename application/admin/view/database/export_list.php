@@ -33,8 +33,8 @@
                     <td><?php echo $table['create_time']; ?></td>
                     <td class="info">未备份</td>
                     <td class="action">
-                        <a class="ajax-get no-refresh" href="<?php echo url('optimize?tables=' . $table['name']); ?>">优化表</a>&nbsp;
-                        <a class="ajax-get no-refresh" href="<?php echo url('repair?tables=' . $table['name']); ?>">修复表</a>
+                        <a class="btn btn-primary btn-sm ajax-get no-refresh" href="<?php echo url('optimize?tables=' . $table['name']); ?>"><i class="fa fa-recycle"></i> 优化表</a>&nbsp;
+                        <a class="btn btn-primary btn-sm ajax-get no-refresh" href="<?php echo url('repair?tables=' . $table['name']); ?>"><i class="fa fa-wrench"></i> 修复表</a>
                     </td>
                 </tr>
             <?php } ?>

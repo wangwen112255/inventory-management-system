@@ -35,8 +35,8 @@ class Finance extends Admin {
                 ->addItem('remark', '备注')
                 ->addItem('default', '默认')
                 ->addSortItem('sort', '排序', 'finance_bank')
-                ->addAction('编辑', 'bank_edit', '<i class="fa fa-edit"></i>')
-                ->addAction('删除', 'bank_delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
+                ->addAction('编辑', 'bank_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'bank_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
 
 
@@ -167,8 +167,8 @@ class Finance extends Admin {
                 ->addItem('name', '名称')
                 ->addItem('type_name', '类型')
                 ->addSortItem('sort', '排序', 'finance_category')
-                ->addAction('编辑', 'category_edit', '<i class="fa fa-edit"></i>')
-                ->addAction('删除', 'category_delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
+                ->addAction('编辑', 'category_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'category_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
 
         return view();
@@ -373,7 +373,7 @@ class Finance extends Admin {
                 ->addItem('nickname', '创建人')
                 ->addItem('create_time', '创建日期')
                 ->addItem('remark', '备注')
-                ->addAction('撤消', 'finance/query_delete', '<i class="fa fa-reply-all"></i>', 'ajax-get confirm')
+                ->addAction('撤消', 'finance/query_delete', '<i class="fa fa-reply-all"></i>', 'btn btn-warning btn-sm ajax-get confirm')
                 ->build();
 
         return view();

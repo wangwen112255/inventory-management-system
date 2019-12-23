@@ -3,7 +3,7 @@
     <div class="left">
         <a href="{:url('add')}" title="新增会员" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增会员</a>
     </div>
-    <div class="right">
+    <div class="left">
         <form class="form-inline" action="{:url('index', ['pinyin'=>$pinyin])}" method="get">
             <select name="g_id" class="form-control">
                 <option value="">会员分组</option>

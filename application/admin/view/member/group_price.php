@@ -15,7 +15,7 @@
             <tr>
                 <th>识别码</th>
                 <th>产品名称</th>
-                <th>销售价</th>
+                <th>出库价</th>
                 <?php foreach ($m_group as $key2 => $val2) {
                     ?>
                     <th><?php echo $val2['name'] ?></th>

@@ -90,13 +90,12 @@
                         <td title="{$var.remark}">{$var.remark}</td>
                         <td style="text-align:center">
                             <a href="javascript:;" 
-                               class="print"
+                               class="print btn btn-default btn-sm"
                                val="<?php echo url('prints/storage_view', ['id' => $var['id']]) ?>"
                                num="<?php echo $var['order_number']; ?>"                       
-                               title="打印{$var.id}">
-                                <i class="fa fa-print"></i> 打印</a></td>
+                               title="打印{$var.id}"><i class="fa fa-print"></i> 打印</a></td>
                         <td style="text-align:center">
-                            <a href="{:url('storage_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>
+                            <a class="btn btn-warning btn-sm" href="{:url('storage_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>
                         </td>
                     </tr>
                     <tr id="product_data{$var.id}" class="product_data" style="display:none">

@@ -3,7 +3,7 @@
     <div class="left">
         <a href="{:url('supplier_add')}" title="新增供应商" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增供应商</a>
     </div>
-    <div class="right">
+    <div class="left">
         <form class="form-inline" action="{:url('supplier')}" method="get">
             <input type="text" placeholder="供应商名称/联系人姓名" name="keyword" value="{$Think.get.keyword}" class="form-control">
             <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>

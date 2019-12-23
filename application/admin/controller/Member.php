@@ -69,8 +69,8 @@ class Member extends Admin {
                 ->addItem('points', '会员积分')
                 ->addItem('s_nickname', '创建人')
                 ->addItem('create_time', '创建日期')
-                ->addAction('编辑', 'edit', '<i class="fa fa-edit"></i>', '', '')
-                ->addAction('删除', 'delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
+                ->addAction('编辑', 'edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', '')
+                ->addAction('删除', 'delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
@@ -199,8 +199,8 @@ class Member extends Admin {
                 ->addSortItem('sort', '排序', 'member_group')
                 ->addItem('name', '分类名称')
                 ->addItem('member_count', '会员数')
-                ->addAction('编辑', 'group_edit', '<i class="fa fa-edit"></i>', '', 'data-toggle="modal" data-target="#modal"')
-                ->addAction('删除', 'group_delete', '<i class="fa fa-remove"></i>', 'ajax-get confirm')
+                ->addAction('编辑', 'group_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('删除', 'group_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }

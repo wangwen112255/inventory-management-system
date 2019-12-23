@@ -39,7 +39,7 @@
                     <td onclick="product_data('{$var.id}')">{$var.build_time}</td>
                     <td onclick="product_data('{$var.id}')" title="{$var.remark}">{$var.remark}</td>
                     <td style="text-align:center">
-                        <a href="{:url('product_build_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>
+                        <a href="{:url('product_build_undo',['id'=>$var.id])}" class="btn btn-warning btn-sm ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>
                     </td>
                 </tr>
                 <tr id="product_data{$var.id}" class="product_data" style="display:none">

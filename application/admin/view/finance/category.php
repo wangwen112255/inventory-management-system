@@ -4,7 +4,7 @@
         <a class="btn btn-default" href="<?php echo url('category_add', ['type' => 0]); ?>"><i class="fa fa-plus-circle"></i> 添加支出</a>
         <a class="btn btn-default" href="<?php echo url('category_add', ['type' => 1]); ?>"><i class="fa fa-plus-circle"></i> 添加收入</a>
     </div>
-    <div class="right">
+    <div class="left">
         <form class="form-inline" action="{:url('category')}" method="get">            
             <select name="type" class="form-control">
                 <option value="">全部</option>

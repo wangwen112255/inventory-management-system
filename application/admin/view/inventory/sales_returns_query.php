@@ -57,7 +57,7 @@
                     <td>{$var.product_data.name}</td>
                     <td>{$var.product_data.category}</td>
                     <td title="{$var.remark}">{$var.remark}</td>
-                    <td style="text-align:center"><a href="{:url('sales_look',['id'=>$var.order_id])}" title="查看产品"><i class="fa fa-search"></i> 查看</a></td>
+                    <td style="text-align:center"><a class="btn btn-primary btn-sm" href="{:url('sales_look',['id'=>$var.order_id])}" title="查看产品"><i class="fa fa-search"></i> 查看</a></td>
                 </tr>
                 <?php
             }

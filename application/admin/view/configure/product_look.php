@@ -3,6 +3,9 @@
     <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="fa fa-angle-left"></i> 返回</a>
 </div>
 <hr>
+
+<div class="container">
+
 <div id="legend" class="text-center">
     <h2>产品信息</h2> 
 </div>
@@ -20,7 +23,7 @@
     <tr>
         <th style="text-align:right">产品单位</th>
         <td>{$var.unit}</td>
-        <th style="text-align:right">销售价</th>
+        <th style="text-align:right">出库价</th>
         <td>{$var.sales}</td>
         <th style="text-align:right">进货价</th>
         <td>{$var.purchase}</td>
@@ -55,6 +58,8 @@
         <td colspan="7">{$var.remark}</td>
     </tr>
 </table>
+
+
 {if !empty($count1)}
 <div id="legend" class="text-center">
     <h2>库存信息</h2>  
@@ -68,6 +73,8 @@
     </ul>
 </div>
 {/if}
+
+
 {if !empty($count2)}
 <div id="legend" class="text-center">
     <h2>入库记录</h2>  
@@ -78,6 +85,21 @@
 </div>
 <div class=" text-center">
     <ul class="pagination" id='pagination2'>
+    </ul>
+</div>
+{/if}
+
+
+{if !empty($count4)}
+<div id="legend" class="text-center">
+    <h2>出库记录</h2>  
+</div>
+<hr>
+<p class="bg-warning">   查询到了<strong>{$count4}</strong>个出库记录，出库合计：<?php echo $quantity_sum4; ?>，退货合计：<?php echo $quantity_sum42; ?> </p>
+<div id="tablelist4">
+</div>
+<div class=" text-center">
+    <ul class="pagination" id='pagination4'>
     </ul>
 </div>
 {/if}
@@ -96,20 +118,8 @@
 </div>
 {/if}
 
-{if !empty($count4)}
-<div id="legend" class="text-center">
-    <h2>销售记录</h2>  
-</div>
-<hr>
-<p class="bg-warning">   查询到了<strong>{$count4}</strong>个销售记录，销售合计：<?php echo $quantity_sum4; ?>，退货合计：<?php echo $quantity_sum42; ?> </p>
-<div id="tablelist4">
-</div>
-<div class=" text-center">
-    <ul class="pagination" id='pagination4'>
-    </ul>
-</div>
-{/if}
 
+</div>
 {/block}
 {block name="foot_js"} 
 <script type="text/javascript" src="__PUBLIC__/libs/jqPaginator/1.1.0/dist/jqPaginator.min.js"></script>

@@ -20,8 +20,8 @@
                 <td><?php echo format_bytes($data['size']); ?></td>
                 <td>-</td>
                 <td class="action">
-                    <a class="db-import" href="<?php echo url('import?time=' . $data['time']); ?>"> <i class="fa fa-mail-forward"></i> 还原</a>&nbsp;
-                    <a class="ajax-get confirm" href="<?php echo url('del?time=' . $data['time']); ?>"> <i class="fa fa-remove"></i> 删除</a>
+                    <a class="btn btn-primary btn-sm db-import" href="<?php echo url('import?time=' . $data['time']); ?>"> <i class="fa fa-mail-forward"></i> 还原</a>&nbsp;
+                    <a class="btn btn-danger btn-sm ajax-get confirm" href="<?php echo url('del?time=' . $data['time']); ?>"> <i class="fa fa-remove"></i> 删除</a>
                 </td>
             </tr>
         <?php } ?>

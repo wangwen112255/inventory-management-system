@@ -11,7 +11,7 @@
                 <tr> 
                     <td colspan="2" height="21" align="center">
                         <h2> {:config('base.company')}</h2>
-                        <h3>产品销售出库单</h3>
+                        <h3>产品出库单</h3>
                     </td>
                 </tr>
                 <tr> 

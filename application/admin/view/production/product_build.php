@@ -3,6 +3,14 @@
 <form class="form-inline" action="" method="POST">
     <table class="table table-hover">
         <tr>
+            <th style="width:120px;line-height:30px;text-align:right"></th>
+            <td>
+                <div id="legend" class="text-ceter">
+                    <h3>加工单</h3> 
+                </div>
+            </td>
+        </tr>
+        <tr>
             <th style="width:120px;line-height:30px;text-align:right">加工产品</th>
             <td>
                 <input type="text" name="code" placeholder="产品识别码或搜索" class="form-control" id="autoproduct">

@@ -4,7 +4,7 @@
     <div class="left">
         <a href="{:url('product_add')}" title="新增产品" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增产品</a>
     </div>
-    <div class="right">
+    <div class="left">
         <form class="form-inline" action="{:url('product')}" method="get">
             <input type="text" placeholder="识别码/产品名称" name="keyword" value="{$Think.get.keyword}" class="form-control">
             <select name="c_id" class="form-control">

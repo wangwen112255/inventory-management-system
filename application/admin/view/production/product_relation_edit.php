@@ -19,7 +19,7 @@
                 <input type="text" name="code" placeholder="包材搜索" class="form-control" id="autoproduct">
                 <input type="hidden" name="product_ids[]" id="product_id" value="" />
             </div>
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th>识别码</th>
@@ -48,7 +48,7 @@
                                        placeholder="倍数" class="form-control text-center"  >
                             </td>
                             <td>
-                                <button type="button" class="btn btn-default btn-sm" onclick="$('#tabletbody{$key}').empty()"><i class="fa fa-remove"></i> 删除</button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="$('#tabletbody{$key}').empty()"><i class="fa fa-remove"></i> 删除</button>
                             </td>
                         </tr>
                     <?php } ?>

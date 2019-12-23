@@ -87,7 +87,7 @@ class BuilderForm extends Builder {
 
         foreach ($this->formItems as $key => $field) {
 
-            if (isset($default_values[$key]) && !empty($default_values[$key])) {
+            if (isset($default_values[$key]) && $default_values[$key] !== 0) {
                 $field['result'] = $default_values[$key];
             } else {
                 $field['result'] = '';

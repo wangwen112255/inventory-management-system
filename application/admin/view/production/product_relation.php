@@ -27,7 +27,7 @@
             <td><?php echo $value['name'] ?></td>
             <td><?php echo $value['bc_count'] > 0 ? $value['bc_count'] : '' ?></td>
             <td>
-                <a href="<?php echo url('product_relation_edit', ['id' => $value['id']]) ?>"><i class="fa fa-cog"></i> 配置 </a>
+                <a class="btn btn-success btn-sm" href="<?php echo url('product_relation_edit', ['id' => $value['id']]) ?>"><i class="fa fa-cog"></i> 配置 </a>
             </td>
         </tr>
     <?php } ?>

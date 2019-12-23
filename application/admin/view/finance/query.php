@@ -39,8 +39,6 @@
 
 
 </div>
-
-
 <p>
     <small><i class="fa fa-info-circle"></i> 查询到了<strong>{$count}</strong>个账务记录
         {if !empty($revenue)}收入(+)：<strong>{$revenue}</strong>{/if} 
