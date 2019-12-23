@@ -10,7 +10,7 @@
 </style>
 <form class="form-horizontal" action="{:url('group_price')}" method="post">
 
-    <table class="table table-hover table-bordered" data-toggle="table" id="table">
+    <table class="table table-hover table-striped" data-toggle="table" id="table">
         <thead>
             <tr>
                 <th>识别码</th>

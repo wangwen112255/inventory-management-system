@@ -183,7 +183,7 @@ class Member extends Admin {
                     ->addItem('id_card', 'input', '身份证号')
                     ->addItem('birthday', 'datetime', '会员生日')
                     ->addItem('remark', 'input', '备注')
-                    ->build();
+                    ->build(['sex' => 1]);
             return view();
         }
     }

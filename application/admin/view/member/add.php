@@ -5,7 +5,7 @@
         <button type="submit" class="btn btn-primary ajax-post" target-form="form-horizontal"><i class="fa fa-save"></i> 保存</button>
     </div>
 </div>
-<form class="form-horizontal" action="{:url('add')}" method="post">
+<form class="form-horizontal container" action="{:url('add')}" method="post">
     {$tpl_form}
 </form>
 {/block}

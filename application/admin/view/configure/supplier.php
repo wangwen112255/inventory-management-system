@@ -1,7 +1,7 @@
 {extend name="base:base" /} {block name="body"} 
 <div class="table-common">
     <div class="left">
-        <a href="{:url('supplier_add')}" title="新增供应商" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增供应商</a>
+        <a data-toggle="modal" data-target="#modal" data-title="新增供应商" href="{:url('supplier_add')}" title="新增供应商" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增供应商</a>
     </div>
     <div class="left">
         <form class="form-inline" action="{:url('supplier')}" method="get">

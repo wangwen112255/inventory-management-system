@@ -497,7 +497,7 @@ class Configure extends Admin {
                 ->addItem('nickname', '负责人')
                 ->addItem('number', '库存')
                 ->addItem('default', '默认')
-                ->addAction('编辑', 'warehouse_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', '')
+                ->addAction('编辑', 'warehouse_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
                 ->addAction('删除', 'warehouse_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
@@ -602,14 +602,14 @@ class Configure extends Admin {
 
         builder('list')
                 ->addItem('id', '#')
-                ->addItem('company', '供应商名称')
+                ->addItem('company', '名称')
                 ->addItem('name', '联系人')
                 ->addItem('tel', '电话')
                 ->addItem('address', '地址')
                 ->addItem('update_time', '更新日期')
                 ->addItem('nickname_replace', '更新人')
-                ->addAction('查看', 'supplier_look', '<i class="fa fa-search"></i>', 'btn btn-primary btn-sm', '')
-                ->addAction('编辑', 'supplier_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', '')
+                ->addAction('查看', 'supplier_look', '<i class="fa fa-search"></i>', 'btn btn-primary btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('编辑', 'supplier_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
                 ->addAction('删除', 'supplier_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
@@ -640,7 +640,7 @@ class Configure extends Admin {
             }
         } else {
             builder('form')
-                    ->addItem('company', 'input', '供应商名称<font color="red">*</font>', '', '')
+                    ->addItem('company', 'input', '名称<font color="red">*</font>', '', '')
                     ->addItem('name', 'input', '联系人')
                     ->addItem('tel', 'input', '电话')
                     ->addItem('fax', 'input', '传真')
@@ -681,7 +681,7 @@ class Configure extends Admin {
 
             $one = model('product_supplier')->model_where()->find($id);
             builder('form')
-                    ->addItem('company', 'input', '供应商名称<font color="red">*</font>', '', '')
+                    ->addItem('company', 'input', '名称<font color="red">*</font>', '', '')
                     ->addItem('name', 'input', '联系人')
                     ->addItem('tel', 'input', '电话')
                     ->addItem('fax', 'input', '传真')

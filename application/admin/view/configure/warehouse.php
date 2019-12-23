@@ -1,7 +1,7 @@
 {extend name="base:base" /}{block name="body"}  
 <div class="table-common">
     <div class="left">
-        <a href="{:url('warehouse_add')}" title="新增仓库" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增仓库</a>
+        <a data-toggle="modal" data-target="#modal" data-title="新增仓库" href="{:url('warehouse_add')}" title="新增仓库" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增仓库</a>
     </div>
 </div>
 <p>
