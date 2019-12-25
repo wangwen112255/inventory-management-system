@@ -31,14 +31,14 @@
                                 
                                 <?php foreach ($products as $key => $val) { ?>
                                 <tr id="tabletbody{$key}">
-                                    <td style="">识别码
+                                    <td>识别码
                                         <?php echo $val['code']; ?>
                                     </td>
-                                    <td style="width:300px;line-height:30px;">产品
+                                    <td>产品
                                         <input type="hidden" name="product_ids[{$key}]" value="<?php echo $val['id']; ?>" />
                                         <?php echo $val['name']; ?>
                                     </td>
-                                    <td style="">倍数
+                                    <td>倍数
                                         <?php echo $val['multiple']; ?>
                                     </td>
                                     <td>出货仓库
@@ -65,15 +65,15 @@
             
         <?php } ?>
         <tr>
-            <th style="line-height:30px;text-align:right">加工日期</th>
+            <th style="text-align:right">加工日期</th>
             <td><input type="text" class="form-control" id="build_time" name="build_time" value="{$Think.post.build_time?:date('Y-m-d H:i')}" placeholder="生产日期"></td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">加工数量</th>
+            <th style="text-align:right">加工数量</th>
             <td><input name="quantity" type="number" class="form-control"  value="{$Think.post.quantity}" /></td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">加入仓库</th>
+            <th style="text-align:right">加入仓库</th>
             <td>
                 <select name="warehouse_id" class="form-control">
                     <?php echo html_select($product_warehouse, input('post.warehouse_id')); ?>
@@ -81,11 +81,11 @@
             </td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">备注</th>
+            <th style="text-align:right">备注</th>
             <td><textarea name="remark"  class="form-control" style="height:80px;width:400px;">{$Think.post.remark}</textarea></td>
         </tr>
         <tr>
-            <td style="line-height:30px;text-align:right"></td>
+            <td style="text-align:right"></td>
             <td>
                 <button type="submit" class="btn btn-primary ajax-post" target-form="form-inline" onclick="$('form').attr('action', '<?php echo url('product_build_submit'); ?>');"><i class="fa fa-save"></i> 生产</button> 
             </td>

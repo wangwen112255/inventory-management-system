@@ -30,14 +30,14 @@
                                 
                                 <?php  foreach ($products as $key => $val) { ?>
                                 <tr id="tabletbody{$key}">
-                                    <td style="width:10%">识别码
+                                    <td>识别码
                                         <?php echo $val['code']; ?>
                                     </td>
-                                    <td style="width:10%">产品
+                                    <td>产品
                                         <input type="hidden" name="product_ids[{$key}]" value="<?php echo $val['id']; ?>" />
                                         <?php echo $val['name']; ?>
                                     </td>
-                                    <td style="width:15%">数量
+                                    <td>数量
                                         <div class="form-group">
                                             <div class="input-group">                                                
                                                 <div class="input-group-addon lost" style="cursor:pointer" val="{$key}"><i class="fa fa-minus"></i></div>
@@ -49,7 +49,7 @@
                                             </div>
                                         </div>       
                                     </td>
-                                    <td style="width:18%">进货价
+                                    <td>进货价
                                         <input type="text" 
                                                id="group_price{$key}"
                                                style="width:80px;" 
@@ -61,7 +61,7 @@
                                                class="form-control group_price"
                                                onkeyup="calculate_money({$key})"  >
                                     </td>
-                                    <td style="width:15%">小计
+                                    <td>小计
                                         <input type="text" id="money{$key}" 
                                                key='{$key}'
                                                value="<?php echo $val['purchase']; ?>" 
