@@ -46,20 +46,24 @@
         $key = 0;
         if (!empty($products)) {
             // dd($products);
-            foreach ($products as $key => $var) {
-                // $key2 = $key + 1;
-                //把会员的分组价格给显示出来
-                $final_price = isset($var['group_price']) ? $var['group_price'] : $var['sales'];
-                ?>
-                <tr id="tabletbody{$key}">
-                    <td colspan="2">
-                        <table class="table table-hover table-striped" style="margin-bottom:0px">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 10%; ">识别码{$var.code}</td>
-                                    <td style="width: 10%">产品<input type="hidden" name="product_ids[{$key}]" value="{$var.id}" /> {$var.name}</td>
-                                    <td style="width: 10%">出库价{$var.sales}</td>                                    
-                                    <td style="width: 15%">数量
+            ?>
+            <tr>
+                <td colspan="2">
+                    <table class="table table-hover table-striped" style="margin-bottom:0px">
+                        <tbody>
+
+                            <?php
+                            foreach ($products as $key => $var) {
+                                // $key2 = $key + 1;
+                                //把会员的分组价格给显示出来
+                                $final_price = isset($var['group_price']) ? $var['group_price'] : $var['sales'];
+                                ?>
+
+                                <tr id="tabletbody{$key}"> 
+                                    <td style="">识别码{$var.code}</td>
+                                    <td style="">产品<input type="hidden" name="product_ids[{$key}]" value="{$var.id}" /> {$var.name}</td>
+                                    <td style="">出库价{$var.sales}</td>                                    
+                                    <td style="">数量
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon lost" 
@@ -79,7 +83,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td style="width: 12%">实销价
+                                    <td style="">实销价
                                         <input type="text" 
                                                id="group_price{$key}"
                                                style="width:80px;" 
@@ -91,7 +95,7 @@
                                                class="form-control group_price"
                                                onkeyup="calculate_money({$key})"  >
                                     </td>
-                                    <td style="width: 18%">
+                                    <td style="">
                                         小计<input type="text" id="money{$key}" key='{$key}' value="<?php echo $final_price; ?>" style="width: 100px" class="form-control money" disabled>
                                     </td>
                                     <td style="">
@@ -110,16 +114,18 @@
                                             ?>
                                         </select>                                      
                                         <button type="button" class="btn btn-default remove" onclick="$('#tabletbody{$key}').empty();sum();"><i class="fa fa-remove"></i></button>
-                                                                                  
+
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
+                            <?php } ?>
 
-                    </td>
-                </tr>
-                <?php
-            }
+
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+            <?php
         }
         ?>
         <tr>

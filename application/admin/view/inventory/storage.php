@@ -21,13 +21,15 @@
         </tr>
         <?php
         if (!empty($products)) {
-            foreach ($products as $key => $val) {
+           
                 ?>
-                <tr id="tabletbody{$key}">
+                <tr>
                     <td colspan="2">
                         <table class="table table-hover table-striped" style="margin-bottom:0px">
                             <tbody>
-                                <tr>
+                                
+                                <?php  foreach ($products as $key => $val) { ?>
+                                <tr id="tabletbody{$key}">
                                     <td style="width:10%">识别码
                                         <?php echo $val['code']; ?>
                                     </td>
@@ -78,11 +80,13 @@
                                         </select><button type="button" class="btn btn-default" onclick="$('#tabletbody{$key}').empty()"><i class="fa fa-remove"></i></button>
                                     </td>
                                 </tr>
+                                <?php } ?>   
+                                
                             </tbody>
                         </table>
                     </td>
                 </tr>
-            <?php } ?>   
+            
         <?php } ?>
         <tr>
             <th style="text-align:right">总金额</th>
