@@ -1,8 +1,12 @@
 {extend name="base:base" /} {block name="body"}
+<style>
+    .table>tbody>tr>td,.table>tbody>tr>th{line-height: 30px;}
+</style>
 <form class="form-inline" action="{:url('sales')}"  method="post" autocapitalize="off" autocomplete="off" autocorrect="off">
+
     <table class="table table-hover">
         <tr>
-            <th style="width:120px;line-height:30px;text-align:right"></th>
+            <th style="text-align:right"></th>
             <td>
                 <div id="legend" class="text-ceter">
                     <h3>出库单</h3> 
@@ -10,7 +14,7 @@
             </td>
         </tr>
         <tr>
-            <th style="width:120px;line-height:30px;text-align:right">选择会员</th>
+            <th style="width:150px;text-align:right">选择会员</th>
             <td><input type="text" class="form-control"  value="" id="automember" placeholder="会员名称搜索">
                 <input type="hidden" name="member_id" value="{$Think.post.member_id}" id="member_id" />
             </td>
@@ -32,8 +36,8 @@
         </tr>
         {/if}
         <tr>
-            <th style="line-height:30px;text-align:right">选择产品</th>
-            <td style="line-height:30px;">
+            <th style="text-align:right">选择产品</th>
+            <td style="">
                 <input type="text"  placeholder="产品识别码或名称搜索" class="form-control" id="autoproduct">
                 <input type="hidden" name="product_id" id="product_id" value="" />
             </td>
@@ -52,19 +56,46 @@
                         <table class="table table-hover table-striped" style="margin-bottom:0px">
                             <tbody>
                                 <tr>
-                                    <th style="width:120px;line-height:30px;text-align:right">识别码</th>
-                                    <td style="width:120px;line-height:30px;">
-                                        {$var.code}
+                                    <td style="width: 10%; ">识别码{$var.code}</td>
+                                    <td style="width: 10%">产品<input type="hidden" name="product_ids[{$key}]" value="{$var.id}" /> {$var.name}</td>
+                                    <td style="width: 10%">出库价{$var.sales}</td>                                    
+                                    <td style="width: 15%">数量
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon lost" 
+                                                     style="cursor:pointer" val="<?php echo $key; ?>" ><i class="fa fa-minus"></i></div>
+                                                <input type="text"
+                                                       style="width:80px;"
+                                                       id="quantity{$key}" class="quantity form-control text-center" sales="{$var.sales}" 
+                                                       name="product_quantity[{$key}]" 
+                                                       value="<?php
+                                                       //echo ($key == 0) ? 1 : $_POST['product_quantity'][$key];
+                                                       echo isset($_POST['product_quantity'][$key]) ? $_POST['product_quantity'][$key] : 1;
+                                                       // echo isset($_POST['product_quantity'][$key2]) ? $_POST['product_quantity'][$key2] : 1; 
+                                                       ?>" 
+                                                       onkeyup="calculate_money({$key})" 
+                                                       placeholder="数量">
+                                                <div class="input-group-addon just" style="cursor:pointer" val="<?php echo $key; ?>" ><i class="fa fa-plus"></i></div>
+                                            </div>
+                                        </div>
                                     </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">产品</th>
-                                    <td style="width:120px;line-height:30px;"><input type="hidden" name="product_ids[{$key}]" value="{$var.id}" /> {$var.name}
+                                    <td style="width: 12%">实销价
+                                        <input type="text" 
+                                               id="group_price{$key}"
+                                               style="width:80px;" 
+                                               name="group_price[{$key}]"                                              
+                                               value="<?php
+                                               echo isset($_POST['group_price'][$key]) ? $_POST['group_price'][$key] : $final_price;
+                                               ?>" 
+                                               placeholder="折扣价" 
+                                               class="form-control group_price"
+                                               onkeyup="calculate_money({$key})"  >
                                     </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">出库价</th>
-                                    <td style="width:120px;line-height:30px;">
-                                        {$var.sales}
+                                    <td style="width: 18%">
+                                        小计<input type="text" id="money{$key}" key='{$key}' value="<?php echo $final_price; ?>" style="width: 100px" class="form-control money" disabled>
                                     </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">仓库</th>
-                                    <td style="line-height:30px;">
+                                    <td style="">
+                                        仓库
                                         <select name="product_warehouse[{$key}]" class="form-control" required="">
                                             <option value="">选择</option>
                                             <?php
@@ -79,55 +110,12 @@
                                             ?>
                                         </select>                                      
                                         <button type="button" class="btn btn-default remove" onclick="$('#tabletbody{$key}').empty();sum();"><i class="fa fa-remove"></i></button>
+                                                                                  
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th style="width:120px;line-height:30px;text-align:right">数量</th>
-                                    <td style="width:120px;line-height:30px;">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon lost" 
-                                                     style="cursor:pointer" val="<?php echo $key; ?>" ><i class="fa fa-minus"></i></div>
-                                                <input type="text"
-                                                       style="width:120px;"
-                                                       id="quantity{$key}" class="quantity form-control text-center" sales="{$var.sales}" 
-                                                       name="product_quantity[{$key}]" 
-                                                       value="<?php
-                                                       //echo ($key == 0) ? 1 : $_POST['product_quantity'][$key];
-                                                       echo isset($_POST['product_quantity'][$key]) ? $_POST['product_quantity'][$key] : 1;
-                                                       // echo isset($_POST['product_quantity'][$key2]) ? $_POST['product_quantity'][$key2] : 1; 
-                                                       ?>" 
-                                                       onkeyup="calculate_money({$key})" 
-                                                       placeholder="数量">
-                                                <div class="input-group-addon just" style="cursor:pointer" val="<?php echo $key; ?>" ><i class="fa fa-plus"></i></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">实销价</th>
-                                    <td style="width:120px;line-height:30px;">
-                                        <input type="text" 
-                                               id="group_price{$key}"
-                                               style="width:120px;" 
-                                               name="group_price[{$key}]"                                              
-                                               value="<?php
-                                               echo isset($_POST['group_price'][$key]) ? $_POST['group_price'][$key] : $final_price;
-                                               ?>" 
-                                               placeholder="折扣价" 
-                                               class="form-control group_price"
-                                               onkeyup="calculate_money({$key})"  >
-                                    </td>
-                                    <th style="width:120px;line-height:30px;text-align:right">小计</th>
-                                    <td style="width:120px;line-height:30px;">                                       
-                                        <input type="text" id="money{$key}" 
-                                               key='{$key}'
-                                               value="<?php echo $final_price; ?>" 
-                                               style="width: 120px" class="form-control money" disabled>                                          
-                                    </td>
-                                    <th style="width:120px;line-height:30px;text-align:right"></th>
-                                    <td style="line-height:30px;"></td>
                                 </tr>
                             </tbody>
                         </table>
+
                     </td>
                 </tr>
                 <?php
@@ -135,15 +123,15 @@
         }
         ?>
         <tr>
-            <th style="line-height:30px;text-align:right">总金额</th>
-            <td style="line-height:30px;"><span id="productsummoney"></span></td>
+            <th style="text-align:right">总金额</th>
+            <td style=""><span id="productsummoney"></span></td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">发货日期</th>
+            <th style="text-align:right">发货日期</th>
             <td><input type="text" class="form-control" id="ship_time" name="ship_time" value="{$Think.post.ship_time?:date('Y-m-d H:i')}" placeholder="创建开始日期"></td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">快递公司</th>
+            <th style="text-align:right">快递公司</th>
             <td>
                 <select name="express_id" class="form-control">
                     <option value="">选择</option>
@@ -156,7 +144,7 @@
             </td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">收货地址</th>
+            <th style="text-align:right">收货地址</th>
             <td>
                 <input style="width: 50%" type="text" class="form-control" id="express_addr" name="express_addr" value="<?php
                 $express_addr = input('post.express_addr', '');
@@ -169,7 +157,7 @@
             </td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">出库类型</th>
+            <th style="text-align:right">出库类型</th>
             <td>
                 <select name="sales_type" class="form-control">
                     <?php echo html_select(config('_dict_sales'), input('get.storage_type')); ?>
@@ -177,11 +165,11 @@
             </td>
         </tr>
         <tr>
-            <th style="line-height:30px;text-align:right">出库备注</th>
+            <th style="text-align:right">出库备注</th>
             <td><textarea style="width: 20%" name="remark" type="" class="form-control" style="height:60px">{$Think.get.remark}</textarea></td>
         </tr>
         <tr>
-            <td style="line-height:30px;text-align:right"></td>
+            <td style="text-align:right"></td>
             <td colspan="5">
                 <button type="submit" class="btn btn-primary ajax-post" target-form="form-inline" onclick="$('form').attr('action', '<?php echo url('sales_submit'); ?>');"><i class="fa fa-save"></i> 保存</button>
             </td>
