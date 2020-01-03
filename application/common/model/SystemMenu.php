@@ -19,8 +19,9 @@ class SystemMenu extends Base {
         }
         $gen_tree_result = gen_tree($menu_result, 'id', 'pid');
         foreach ($gen_tree_result as $key => $val) {
-            $menu[$key]['id'] = md5($val['id']);
-            $menu[$key]['homePage'] = str_replace('/', '', $val['url']);
+            $id_arr = explode('/', $val['url']);
+            $menu[$key]['id'] = $id_arr[1];
+            $menu[$key]['homePage'] = substr(strrchr($val['url'], '/'), 1);
             if (isset($val['son'])) {
                 foreach ($val['son'] as $key2 => $val2) {
                     $menu[$key]['menu'][$key2]['text'] = $val2['name'];
@@ -28,24 +29,24 @@ class SystemMenu extends Base {
                         foreach ($val2['son'] as $key3 => $val3) {
                             //如果是超级管理员，显示所有
                             if (IS_SUPER_ADMIN) {
-                                $menu[$key]['menu'][$key2]['items'][$key3] = array(
-                                    'id' => str_replace('/', '', $val3['url']),
+                                $menu[$key]['menu'][$key2]['items'][$key3] = [
+                                    'id' =>  substr(strrchr($val3['url'], '/'), 1),
                                     'text' => $val3['name'],
                                     'href' => url($val3['url']),
                                     'closeable' => true,
-                                );
+                                ];
                             } else {
                                 $Auth = new Auth();
                                 $authList = $Auth->getAuthList(UID, 1);
                                 //将没有权限的菜单隐藏
                                 foreach ($authList as $key4 => $val4) {
                                     if ($val3['url'] === $val4) {
-                                        $menu[$key]['menu'][$key2]['items'][$key3] = array(
-                                            'id' => str_replace('/', '', $val3['url']),
+                                        $menu[$key]['menu'][$key2]['items'][$key3] = [
+                                            'id' => substr(strrchr($val3['url'], '/'), 1),
                                             'text' => $val3['name'],
                                             'href' => url($val3['url']),
                                             'closeable' => true,
-                                        );
+                                        ];
                                     }
                                 }//end foreach
                             }
