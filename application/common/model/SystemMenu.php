@@ -20,7 +20,7 @@ class SystemMenu extends Base {
         $gen_tree_result = gen_tree($menu_result, 'id', 'pid');
         foreach ($gen_tree_result as $key => $val) {
             $id_arr = explode('/', $val['url']);
-            $menu[$key]['id'] = $id_arr[1];
+            $menu[$key]['id'] = $id_arr[1] ?? md5($val['id']);
             $menu[$key]['homePage'] = substr(strrchr($val['url'], '/'), 1);
             if (isset($val['son'])) {
                 foreach ($val['son'] as $key2 => $val2) {
@@ -30,7 +30,7 @@ class SystemMenu extends Base {
                             //如果是超级管理员，显示所有
                             if (IS_SUPER_ADMIN) {
                                 $menu[$key]['menu'][$key2]['items'][$key3] = [
-                                    'id' =>  substr(strrchr($val3['url'], '/'), 1),
+                                    'id' => substr(strrchr($val3['url'], '/'), 1),
                                     'text' => $val3['name'],
                                     'href' => url($val3['url']),
                                     'closeable' => true,
