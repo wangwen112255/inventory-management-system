@@ -18,8 +18,8 @@
                 <option value="">类型</option>
                 <?php echo html_select(config('_dict_product_type'), input('get.type')) ?>                
             </select>
-            <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
-            <button class="btn btn-success export" title="导出"><i class="fa fa-file-excel-o"></i> 导出</button>
+            <button type="submit" class="btn btn-primary" title="查询"><i class="iconfont icon-sousuo"></i> 搜索</button>
+            <button class="btn btn-success export" title="导出"><i class="iconfont icon-excel"></i> 导出</button>
         </div>
 
         <div class="btn-group search-box" data-toggle="buttons-radio">
@@ -37,7 +37,7 @@
     </form>
 </div>
 <p>
-    <small> 查询到了<strong>{$count}</strong>个库存记录</small>
+    <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个库存记录</small>
 </p>
 <?php if (isset($lists) && count($lists) > 0) { ?>
     <table class="table table-hover table-striped">
@@ -79,13 +79,13 @@
                 <td>{$var.type}</td>
                 <td style="text-align:center">
                     <?php if ($var['quantity'] == 0) { ?>
-                        <a href="{:url('stock_delete',['id'=>$var.inventory_id])}" class="ajax-get confirm" title="删除"><i class="fa fa-remove"></i> 删除</a>
+                        <a href="{:url('stock_delete',['id'=>$var.inventory_id])}" class="ajax-get confirm" title="删除"><i class="iconfont icon-shanchu"></i> 删除</a>
                     <?php } ?>
                 </td>
                 <td style="text-align:center">
-                    <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal" href="{:url('transfer_add',['id'=>$var.inventory_id])}" data-title="产品调出"  title="调出"><i class="fa fa-share"></i> 调出</a>
-                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal" href="{:url('scrapped_add',['id'=>$var.inventory_id])}" data-title="产品报废" title="报废"><i class="fa fa-trash"></i> 报废</a>
-                    <a class="btn btn-primary btn-sm" href="{:url('admin/configure/product_look',['id'=>$var.p_id, 'w_id'=>$var.w_id])}" data-title="产品查看" title="查看"><i class="fa fa-search"></i> 查看</a>
+                    <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal" href="{:url('transfer_add',['id'=>$var.inventory_id])}" data-title="产品调出"  title="调出"><i class="iconfont icon-tiaobochuku"></i> 调出</a>
+                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal" href="{:url('scrapped_add',['id'=>$var.inventory_id])}" data-title="产品报废" title="报废"><i class="iconfont icon-baofeishebei"></i> 报废</a>
+                    <a class="btn btn-primary btn-sm" href="{:url('admin/configure/product_look',['id'=>$var.p_id, 'w_id'=>$var.w_id])}" data-title="产品查看" title="查看"><i class="iconfont icon-sousuo"></i> 查看</a>
                 </td>
             </tr>
             {/volist}
@@ -94,7 +94,7 @@
     {$pages}
 <?php } else { ?>
     <p class="bg-warning center-block">   
-        <i class="fa fa-exclamation-circle"></i> 暂时没有相关数据
+        <i class="iconfont icon-wushuju"></i> 暂时没有相关数据
     </p>
 <?php } ?>
 {/block}

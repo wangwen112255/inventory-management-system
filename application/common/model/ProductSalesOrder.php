@@ -117,8 +117,6 @@ class ProductSalesOrder extends Base {
             if ($create_time >= $datea && $create_time <= $dateb) {
                 $vars += $var['amount'];
             }
-            //print_r($var['amount']);
-            //print_r($var['create_time']);
         }
         return $vars;
     }
@@ -161,19 +159,19 @@ class ProductSalesOrder extends Base {
             $this->where('m.nickname', 'like', '%' . request()->get('nickname') . '%');
         if (request()->get('tel'))
             $this->where('m.tel', 'like', '%' . request()->get('tel') . '%');
-        
-        if(request()->get('sales_type'))
+
+        if (request()->get('sales_type'))
             $this->where('a.type', request()->get('sales_type'));
-        
+
         if (request()->get('warehouse'))
             $this->where('d.w_id', request()->get('warehouse'));
         if (request()->get('c_id'))
             $this->where('p.c_id', request()->get('c_id'));
         if (request()->get('type'))
-            $this->where('p.type', request()->get('type'));      
+            $this->where('p.type', request()->get('type'));
         if (request()->get('status'))
             $this->where('d.status', request()->get('status'));
- 
+
 
         $this->join('member m', 'm.id=a.m_id', 'LEFT');
         $this->join('system_user s', 'a.u_id=s.id', 'LEFT');
@@ -191,6 +189,34 @@ class ProductSalesOrder extends Base {
         $this->order('a.id desc');
         $this->alias('a');
         return $this;
+    }
+
+    public function chart($day) {
+
+        $list = $this->field('d.*,a.create_time')->group('d.id')->select();
+
+        //销售 sales 
+        //实际 actual
+        //利润 profit
+
+        $result = [];
+        for ($index = 0; $index < $day; $index++) {
+            
+            $date = date('Y-m-d', strtotime($_REQUEST['timea']) + ($index * 86400));
+            $datea = strtotime($date . ' 00:00:00');
+            $dateb = strtotime($date . ' 23:59:59');
+            
+            $result['sales'][$index + 1] = $this->get_sales($list, $datea, $dateb);
+            $result['actual'][$index + 1] = $this->get_actual($list, $datea, $dateb);
+            $result['profit'][$index + 1] = $this->get_profit($list, $datea, $dateb);
+            $result['quantity'][$index + 1] = $this->get_count($list, $datea, $dateb);
+
+            $date_short = date('d', strtotime($date));
+
+            $result['date'][$index + 1] = "'{$date_short}'";
+        }
+
+        return $result;
     }
 
 }

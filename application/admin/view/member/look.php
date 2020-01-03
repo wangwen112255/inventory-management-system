@@ -1,6 +1,6 @@
 {extend name="base:base" /} {block name="body"} 
         <form class="form-horizontal" method="post">
-                查看会员 <a href="" class="btn btn-default" title="查看"><i class="fa fa-angle-left"></i> 返回</a>
+                查看会员 <a href="" class="btn btn-default" title="查看"><i class="iconfont icon-flow"></i> 返回</a>
            <hr />
             <table class="table table-hover">
                 <tr>
@@ -50,10 +50,10 @@
             </table>
         </form>
         <div id="legend" class="">
-            积分日志 <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="fa fa-angle-left"></i> 返回</a>
+            积分日志 <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="iconfont icon-flow"></i> 返回</a>
         </div>
         <p>
-            <small><i class="fa fa-info-sign"></i> 查询到了<strong>{$count}</strong>个积分记录</small>
+            <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个积分记录</small>
         </p>
 <table class="table table-hover table-striped">
     <thead>
@@ -83,7 +83,7 @@
             </td>
             <td>{$var.nickname}</td>
             <td style="text-align:center"><a href="<?php echo url('inventory/sales_look', ['id'=>$var['m_id']]);?>" title="查看记录">
-                    <i class="fa fa-search"></i> 查看</a></td>
+                    <i class="iconfont icon-sousuo"></i> 查看</a></td>
         </tr>
         {/volist}
     </tbody>

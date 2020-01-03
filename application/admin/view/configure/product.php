@@ -2,7 +2,7 @@
 {block name="body"} 
 <div class="table-common">
     <div class="left">
-        <a href="{:url('product_add')}" title="新增产品" class="btn btn-default"><i class="fa fa-plus-circle"></i> 新增产品</a>
+        <a href="{:url('product_add')}" title="新增产品" class="btn btn-default"><i class="iconfont icon-tianjia"></i> 新增产品</a>
     </div>
     <div class="left">
         <form class="form-inline" action="{:url('product')}" method="get">
@@ -16,12 +16,12 @@
                 <?php echo html_select(config('_dict_product_type'), input('get.type')) ?>
             </select>
             
-            <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
+            <button type="submit" class="btn btn-primary" title="查询"><i class="iconfont icon-sousuo"></i> 搜索</button>
         </form>
     </div>
 </div>
 <p>
-    <small> 查询到了<strong>{$count}</strong>个产品记录</small>
+    <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个产品记录</small>
 </p>
 {$tpl_list}
 {$pages}

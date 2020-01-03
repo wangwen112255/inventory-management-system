@@ -11,16 +11,16 @@
             <input type="text" placeholder="识别码/产品名称" name="keyword" value="{$Think.get.keyword}" class="form-control">
             
             
-            <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
+            <button type="submit" class="btn btn-primary" title="查询"><i class="iconfont icon-sousuo"></i> 搜索</button>
         </form>
     </div>
 </div>
 <p>
-    <small> 查询到了<strong>{$count}</strong>个退货记录</small>
+    <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个退货记录</small>
 </p>
 <?php if (count($lists) == 0) { ?>
     <p class="bg-warning center-block">   
-        <i class="fa fa-exclamation-circle"></i> 暂时没有相关数据
+        <i class="iconfont icon-wushuju"></i> 暂时没有相关数据
     </p>
 <?php } else { ?>
     <table class="table table-hover table-striped">
@@ -57,7 +57,7 @@
                     <td>{$var.product_data.name}</td>
                     <td>{$var.product_data.category}</td>
                     <td title="{$var.remark}">{$var.remark}</td>
-                    <td style="text-align:center"><a class="btn btn-primary btn-sm" href="{:url('sales_look',['id'=>$var.order_id])}" title="查看产品"><i class="fa fa-search"></i> 查看</a></td>
+                    <td style="text-align:center"><a class="btn btn-primary btn-sm" href="{:url('sales_look',['id'=>$var.order_id])}" title="查看产品"><i class="iconfont icon-sousuo"></i> 查看</a></td>
                 </tr>
                 <?php
             }

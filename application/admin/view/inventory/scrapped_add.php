@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th style="width:130px;line-height:30px;text-align:right"></th>
-                    <td><button type="submit" class="btn btn-primary ajax-post" target-form='scrapped_add'><i class="fa fa-save"></i> 保存</button> </td>
+                    <td><button type="submit" class="btn btn-primary ajax-post" target-form='scrapped_add'><i class="iconfont icon-tubiao_tijiao"></i> 保存</button> </td>
                 </tr>
             </table>
         </form>

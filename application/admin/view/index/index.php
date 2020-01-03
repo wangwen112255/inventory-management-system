@@ -9,10 +9,7 @@
         <link href="__PUBLIC__/libs/bui/css/bs3/dpl-min.css" rel="stylesheet" type="text/css" />
         <link href="__PUBLIC__/libs/bui/css/bs3/bui-min.css" rel="stylesheet" type="text/css" />
         <link href="__PUBLIC__/libs/bui/css/main.css" rel="stylesheet" type="text/css" />
-        <link href="__PUBLIC__/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <!--[if IE 7]>
-        <link rel="stylesheet" href="__PUBLIC__/libs/fontawesome/4.2.0/css/font-awesome-ie7.min.css">
-        <![endif]-->
+        <link rel="stylesheet" href="__STATIC__/admin/font/iconfont.css" />        
     </head>
     <body>
         <div class="header">
@@ -39,7 +36,7 @@
                             echo 'dl-selected';
                         }
                         ?>">
-                            <div class="nav-item-inner"><i class="fa <?php echo $value['icon']; ?> fa-lg"></i> <?php echo $value['name']; ?></div>
+                            <div class="nav-item-inner"><i class="iconfont <?php echo $value['icon']; ?>"></i> <?php echo $value['name']; ?></div>
                         </li>
                     <?php } ?>
                 </ul>
@@ -52,7 +49,7 @@
         <script type="text/javascript" src="__PUBLIC__/libs/bui/js/jquery-1.8.1.min.js"></script> 
         <script type="text/javascript" src="__PUBLIC__/libs/bui/js/bui-min.js"></script> 
         <!-- 如果不使用页面内部跳转，则下面 script 标签不需要,同时不需要引入 common/page -->
-        <!--<script type="text/javascript" src="__PUBLIC__/bui/js/config.js"></script> -->
+        <script type="text/javascript" src="__PUBLIC__/libs/bui/js/config.js"></script> 
 
     </body>
 </html>
@@ -65,12 +62,11 @@ BUI.use('common/main', function () {
 });
 $(function () {
     $('#user_info_update').click(function () {
-        var url = "<?php echo url('admin/index/password'); ?>";
         top.topManager.openPage({
             id: 'test1',
-            href: url,
+            href: '<?php echo url('admin/index/password'); ?>',
             title: '用户资料'
         });
-    });
+    });                            
 });
 </script>

@@ -7,12 +7,12 @@
             <i class="fa fa-arrows-h"></i>
             <input size="16" type="text" class="datetime_search form-control" name="timeb" value="{$Think.get.timeb}" placeholder="创建结束日期">
             <input type="text" placeholder="识别码/产品名称" name="keyword" value="{$Think.get.keyword}" class="form-control" />
-            <button type="submit" class="btn btn-primary " title="搜索"><i class="fa fa-search"></i> 搜索</button>
+            <button type="submit" class="btn btn-primary " title="搜索"><i class="iconfont icon-sousuo"></i> 搜索</button>
         </form>
     </div>
 </div>
 <p>
-    <small> 查询到了<strong>{$count}</strong>个入库记录</small>
+    <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个入库记录</small>
 </p>
 <?php if (isset($lists) && count($lists) > 0) { ?>
     <table class="table table-hover table-striped">
@@ -39,7 +39,7 @@
                     <td onclick="product_data('{$var.id}')">{$var.build_time}</td>
                     <td onclick="product_data('{$var.id}')" title="{$var.remark}">{$var.remark}</td>
                     <td style="text-align:center">
-                        <a href="{:url('product_build_undo',['id'=>$var.id])}" class="btn btn-warning btn-sm ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>
+                        <a href="{:url('product_build_undo',['id'=>$var.id])}" class="btn btn-warning btn-sm ajax-get confirm" title="撤销" ><i class="iconfont icon-chexiao"></i> 撤销</a>
                     </td>
                 </tr>
                 <tr id="product_data{$var.id}" class="product_data" style="display:none">
@@ -77,7 +77,7 @@
     </table>
 <?php } else { ?>
     <p class="bg-warning center-block">   
-        <i class="fa fa-exclamation-circle"></i> 暂时没有相关数据
+        <i class="iconfont icon-wushuju"></i> 暂时没有相关数据
     </p>
 <?php } ?>
 {$pages}

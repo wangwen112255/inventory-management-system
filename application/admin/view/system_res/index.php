@@ -34,15 +34,15 @@
         <form class="form-inline" method="get" action="">
             <div class="input-group">
                 <input type="text" name="search" placeholder="请输入关键字" autocomplete="off" value="{$Think.get.filter_name}" class="form-control">
-                <div class="input-group-addon"><i class="fa fa-search" id="button-search"></i></div>
+                <div class="input-group-addon"><i class="iconfont icon-sousuo" id="button-search"></i></div>
             </div>            
         </form>
     </div>
     <div class="left">
-        <a href="<?php echo $data['parent']; ?>" id="button-parent" class="btn btn-primary"><i class="fa fa-chevron-left"></i> 上级</a>         
-        <button id="button-refresh" class="btn btn-primary"><i class="fa fa-refresh"></i> 刷新</button>
-        <button type="button" id="button-folder" class="btn btn-primary"><i class="fa fa-plus"></i> 目录</button>
-        <button type="button" id="button-upload" class="btn btn-success"><i class="fa fa-upload"></i> 上传</button>
+        <a href="<?php echo $data['parent']; ?>" id="button-parent" class="btn btn-primary"><i class="iconfont icon-fanhuishangji"></i> 上级</a>         
+        <button id="button-refresh" class="btn btn-primary"><i class="iconfont icon-shuaxin"></i> 刷新</button>
+        <button type="button" id="button-folder" class="btn btn-primary"><i class="iconfont icon-wulumuqishigongandashujuguanlipingtai-ico-"></i> 目录</button>
+        <button type="button" id="button-upload" class="btn btn-success"><i class="iconfont icon-Group- "></i> 上传</button>
         <input type="checkbox" name="autoname" value="1" checked="on" /> 自动命名
         <span class="text-success">
             <strong>目录：</strong>
@@ -81,7 +81,7 @@
                         <?php if ($image['category'] == 'directory') { ?>
                             <div class="text-center">
                                 <a href="<?php echo $image['href']; ?>" class="directory">
-                                    <i class="fa fa-folder-o"></i>   
+                                    <i class="iconfont icon-wulumuqishigongandashujuguanlipingtai-ico-"></i>   
                                 </a>
                             </div>
                             <label>
@@ -124,7 +124,7 @@
                     <?php if ($image['category'] == 'directory') { ?>
                         <tr>
                             <td><input class="ids" type="checkbox"   name="path[]" value="<?php echo $image['path']; ?>" />
-                                <a style="vertical-align: middle;" href="<?php echo $image['href']; ?>"  ><i class="fa fa-folder-o" style="color: #F1CE6B;font-weight: bold;"></i> <?php echo $image['name']; ?></a></td>
+                                <a style="vertical-align: middle;" href="<?php echo $image['href']; ?>"  ><i class="iconfont icon-wulumuqishigongandashujuguanlipingtai-ico-" style="color: #F1CE6B;font-weight: bold;"></i> <?php echo $image['name']; ?></a></td>
                             <td><?php echo $image['time']; ?></td>
                             <td>文件夹</td>
                         </tr>
@@ -150,8 +150,8 @@
 <div class="table-common fix-bottom fixed">
     <div class="left">        
         <input class="all-file" type="checkbox"/> 全选  
-        <button id="button-delete" class="btn btn-danger"><i class="fa fa-remove"></i> 删除</button>
-        <button class="btn btn-primary ajax-get" href="<?php echo url('admin/system_res/clear') ?>"><i class="fa fa-trash"></i> 清缓存</button>
+        <button id="button-delete" class="btn btn-danger"><i class="iconfont icon-shanchu"></i> 删除</button>
+        <button class="btn btn-primary ajax-get" href="<?php echo url('admin/system_res/clear') ?>"><i class="iconfont icon-baofeishebei"></i> 清缓存</button>
         <span class="text-danger">
             <strong> 限制格式：</strong><?php
             if (isset($ext_arr[$category])) {

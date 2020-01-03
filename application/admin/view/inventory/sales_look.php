@@ -1,12 +1,12 @@
 {extend name="base:base" /} {block name="body"} 
 <div class="text-left">
-    <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="fa fa-angle-left"></i> 返回</a>
+    <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="iconfont icon-flow"></i> 返回</a>
     <a href="javascript:;" 
        class="print btn btn-default"
        title="打印订单{$one.id}"
        num="{$one.order_number}"
        val="<?php echo url('prints/orders_view', ['id' => $one['id']]) ?>"        >
-        <i class="fa fa-print"></i> 打印</a>
+        <i class="iconfont icon-dayin"></i> 打印</a>
 </div>
 <hr>
 
@@ -119,7 +119,7 @@
 {block name="foot_js"} 
 <script type="text/javascript" src="__PUBLIC__/libs/qrcode/jquery.qrcode.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(function () {
         $("#code").qrcode({
             width: 80,
             height: 80,

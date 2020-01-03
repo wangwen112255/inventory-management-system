@@ -113,7 +113,7 @@
                                             }
                                             ?>
                                         </select>                                      
-                                        <button type="button" class="btn btn-default remove" onclick="$('#tabletbody{$key}').empty();sum();"><i class="fa fa-remove"></i></button>
+                                        <button type="button" class="btn btn-default remove" onclick="$('#tabletbody{$key}').empty();sum();"><i class="iconfont icon-shanchu"></i></button>
 
                                     </td>
                                 </tr>
@@ -177,7 +177,7 @@
         <tr>
             <td style="text-align:right"></td>
             <td colspan="5">
-                <button type="submit" class="btn btn-primary ajax-post" target-form="form-inline" onclick="$('form').attr('action', '<?php echo url('sales_submit'); ?>');"><i class="fa fa-save"></i> 保存</button>
+                <button type="submit" class="btn btn-primary ajax-post" target-form="form-inline" onclick="$('form').attr('action', '<?php echo url('sales_submit'); ?>');"><i class="iconfont icon-tubiao_tijiao"></i> 保存</button>
             </td>
         </tr>
     </table>

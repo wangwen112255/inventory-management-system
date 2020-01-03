@@ -29,7 +29,7 @@
                         <div class="input-prepend input-append">
                             <button type="button" class="btn btn-default" onclick="$('#quantityquantity').val((Number($('#quantityquantity').val()) - 1) < 1 ? 1 : (Number($('#quantityquantity').val()) - 1))"><i class="fa fa-minus"></i></button>
                             <input type="text" id="quantityquantity"  name="quantity" value="1" placeholder="数量" class="form-control">
-                            <button type="button" class="btn btn-default" onclick="$('#quantityquantity').val((Number($('#quantityquantity').val()) + 1) > {$one.quantity - $one.returns} ? $('#quantityquantity').val() : (Number($('#quantityquantity').val()) + 1))"><i class="fa fa-plus-circle"></i></button>
+                            <button type="button" class="btn btn-default" onclick="$('#quantityquantity').val((Number($('#quantityquantity').val()) + 1) > {$one.quantity - $one.returns} ? $('#quantityquantity').val() : (Number($('#quantityquantity').val()) + 1))"><i class="iconfont icon-tianjia"></i></button>
                         </div>
                         <p class="help-block">可退货数量为:{$one.quantity-$one.returns}</p>
                     </td>
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <th style="width:130px;line-height:30px;text-align:right"></th>
-                    <td><button type="submit" class="btn btn-primary ajax-post" target-form="sales_returns_add"><i class="fa fa-save"></i> 保存</button> </td>
+                    <td><button type="submit" class="btn btn-primary ajax-post" target-form="sales_returns_add"><i class="iconfont icon-tubiao_tijiao"></i> 保存</button> </td>
                 </tr>
             </table>
         </form>

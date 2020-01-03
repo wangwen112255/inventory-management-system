@@ -23,24 +23,24 @@
 
 
             <span id="finance_category"> 
-                <select class="form-control finance_type" name="selecttype" data-value="{$Think.get.selecttype}" data-first-title="类型" data-first-value="" onchange="$('#typeinput').val($(this).val())"></select>
-                <select class="form-control finance_c_id input-medium" name="selectc_id" data-value="{$Think.get.selectc_id}" data-first-title="分类" data-first-value="" onchange="$('#c_idinput').val($(this).val())"></select>
+                <select class="form-control finance_type" name="selecttype" data-value="{$Think.get.selecttype}" data-first-title="类型" data-first-value=""></select>
+                <select class="form-control finance_c_id input-medium" name="selectc_id" data-value="{$Think.get.selectc_id}" data-first-title="分类" data-first-value="" ></select>
             </span>
-            <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
-            <button class="btn btn-success export" title="导出"><i class="fa fa-share-square"></i> 导出</button>    
+            <button type="submit" class="btn btn-primary" title="查询"><i class="iconfont icon-sousuo"></i> 搜索</button>
+            <button class="btn btn-success export" title="导出"><i class="iconfont icon-excel"></i> 导出</button>    
             <button type="button" class="btn btn-default" 
                     id="print"
                     title="打印入库单" 
                     val="<?php echo url('prints/finance_list'); ?>" 
                     >
-                <i class="fa fa-print"></i> 打印</button>
+                <i class="iconfont icon-dayin"></i> 打印</button>
         </div>
     </form>
 
 
 </div>
 <p>
-    <small><i class="fa fa-info-circle"></i> 查询到了<strong>{$count}</strong>个账务记录
+    <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个账务记录
         {if !empty($revenue)}收入(+)：<strong>{$revenue}</strong>{/if} 
         {if !empty($expenditure)}支出(-)：<strong>{$expenditure}</strong>{/if}
     </small>
@@ -50,7 +50,7 @@
 {/block}
 {block name="foot_js"}
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(function () {
         $('#finance_category').cxSelect({
             selects: ['finance_type', 'finance_c_id'],
             url: "{:url('json/finance_category')}",

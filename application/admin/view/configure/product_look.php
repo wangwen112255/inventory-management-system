@@ -1,6 +1,6 @@
 {extend name="base:base" /} {block name="body"} 
 <div class="text-left">
-    <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="fa fa-angle-left"></i> 返回</a>
+    <a href="javascript:history.back(-1);" title="返回" class="btn btn-default"><i class="iconfont icon-flow"></i> 返回</a>
 </div>
 <hr>
 
@@ -65,7 +65,7 @@
     <h2>库存信息</h2>  
 </div>
 <hr>
-<p class="bg-warning">   查询到了<strong>{$count1}</strong>个库存记录，库存合计：<?php echo $quantity_sum1; ?> </p>
+<p class="bg-warning"> <i class="iconfont icon-tishi"></i>  查询到了<strong>{$count1}</strong>个库存记录，库存合计：<?php echo $quantity_sum1; ?> </p>
 <div id="tablelist1">
 </div>
 <div class=" text-center">
@@ -80,7 +80,7 @@
     <h2>入库记录</h2>  
 </div>
 <hr>
-<p class="bg-warning">   查询到了<strong>{$count2}</strong>个入库记录，入库合计：<?php echo $quantity_sum2; ?> </p>
+<p class="bg-warning"> <i class="iconfont icon-tishi"></i>  查询到了<strong>{$count2}</strong>个入库记录，入库合计：<?php echo $quantity_sum2; ?> </p>
 <div id="tablelist2">
 </div>
 <div class=" text-center">
@@ -95,7 +95,7 @@
     <h2>出库记录</h2>  
 </div>
 <hr>
-<p class="bg-warning">   查询到了<strong>{$count4}</strong>个出库记录，出库合计：<?php echo $quantity_sum4; ?>，退货合计：<?php echo $quantity_sum42; ?> </p>
+<p class="bg-warning"> <i class="iconfont icon-tishi"></i>  查询到了<strong>{$count4}</strong>个出库记录，出库合计：<?php echo $quantity_sum4; ?>，退货合计：<?php echo $quantity_sum42; ?> </p>
 <div id="tablelist4">
 </div>
 <div class=" text-center">
@@ -109,7 +109,7 @@
     <h2>调拨记录</h2>   
 </div>
 <hr />
-<p class="bg-warning">   查询到了<strong>{$count3}</strong>个调拨记录</p>
+<p class="bg-warning"> <i class="iconfont icon-tishi"></i>  查询到了<strong>{$count3}</strong>个调拨记录</p>
 <div id="tablelist3">
 </div>
 <div class=" text-center">

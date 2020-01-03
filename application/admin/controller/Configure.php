@@ -133,9 +133,9 @@ class Configure extends Admin {
                 ->addItem('warehouse', '仓库分布')
                 ->addItem('type', '类型')
                 ->addItem('update_time', '更新')
-                ->addAction('编辑', 'product_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
-                ->addAction('删除', 'product_del', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
-                ->addAction('查看', 'product_look', '<i class="fa fa-search"></i>', 'btn btn-primary btn-sm')
+                ->addAction('编辑', 'product_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'product_del', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('查看', 'product_look', '<i class="iconfont icon-sousuo"></i>', 'btn btn-primary btn-sm')
                 ->build();
         return view();
     }
@@ -251,8 +251,8 @@ class Configure extends Admin {
         builder('list')
                 ->addItem('id', '#')
                 ->addItem('name', '名称')
-                ->addAction('编辑', 'express_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
-                ->addAction('删除', 'express_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('编辑', 'express_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('删除', 'express_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
@@ -327,8 +327,8 @@ class Configure extends Admin {
         builder('list')
                 ->addItem('id', '#')
                 ->addItem('name', '名称')
-                ->addAction('编辑', 'unit_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
-                ->addAction('删除', 'unit_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('编辑', 'unit_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('删除', 'unit_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
@@ -402,8 +402,8 @@ class Configure extends Admin {
                 ->addItem('id', '#')
                 ->addItem('name', '名称')
                 ->addSortItem('sort', '排序', 'product_category')
-                ->addAction('编辑', 'product_category_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
-                ->addAction('删除', 'product_category_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('编辑', 'product_category_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('删除', 'product_category_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
@@ -497,8 +497,8 @@ class Configure extends Admin {
                 ->addItem('nickname', '负责人')
                 ->addItem('number', '库存')
                 ->addItem('default', '默认')
-                ->addAction('编辑', 'warehouse_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
-                ->addAction('删除', 'warehouse_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('编辑', 'warehouse_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('删除', 'warehouse_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
@@ -608,9 +608,9 @@ class Configure extends Admin {
                 ->addItem('address', '地址')
                 ->addItem('update_time', '更新日期')
                 ->addItem('nickname_replace', '更新人')
-                ->addAction('查看', 'supplier_look', '<i class="fa fa-search"></i>', 'btn btn-primary btn-sm', 'data-toggle="modal" data-target="#modal"')
-                ->addAction('编辑', 'supplier_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
-                ->addAction('删除', 'supplier_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('查看', 'supplier_look', '<i class="iconfont icon-sousuo"></i>', 'btn btn-primary btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('编辑', 'supplier_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm', 'data-toggle="modal" data-target="#modal"')
+                ->addAction('删除', 'supplier_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }

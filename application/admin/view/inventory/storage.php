@@ -77,7 +77,7 @@
                                                 echo html_select($warehouse);
                                             }
                                             ?>
-                                        </select><button type="button" class="btn btn-default" onclick="$('#tabletbody{$key}').empty()"><i class="fa fa-remove"></i></button>
+                                        </select><button type="button" class="btn btn-default" onclick="$('#tabletbody{$key}').empty()"><i class="iconfont icon-shanchu"></i></button>
                                     </td>
                                 </tr>
                                 <?php } ?>   
@@ -118,7 +118,7 @@
         <tr>
             <td style="text-align:right"></td>
             <td>
-                <button type="submit" class="btn btn-primary ajax-post" target-form="form-inline" onclick="$('form').attr('action', '<?php echo url('storage_submit'); ?>');"><i class="fa fa-save"></i> 保存</button> 
+                <button type="submit" class="btn btn-primary ajax-post" target-form="form-inline" onclick="$('form').attr('action', '<?php echo url('storage_submit'); ?>');"><i class="iconfont icon-tubiao_tijiao"></i> 保存</button> 
             </td>
         </tr>
     </table>

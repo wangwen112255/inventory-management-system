@@ -1,7 +1,7 @@
 {extend name="base:base" /} {block name="body"} 
 <div class="table-common">  
     <div class="left">
-        <a id="export" class="btn btn-primary" href="javascript:;" autocomplete="off"><i class="fa fa-save"></i> 立即备份</a>
+        <a id="export" class="btn btn-primary" href="javascript:;" autocomplete="off"><i class="iconfont icon-tubiao_tijiao"></i> 立即备份</a>
         <a id="optimize" class="btn btn-primary ajax-get" href="<?php echo url('optimize') ?>" autocomplete="off"><i class="fa fa-recycle"></i> 优化表</a>
         <a id="repair" class="btn btn-primary  ajax-get" href="<?php echo url('repair') ?>" autocomplete="off"><i class="fa fa-wrench"></i> 修复表</a>
     </div>

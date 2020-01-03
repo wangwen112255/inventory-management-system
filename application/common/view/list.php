@@ -4,7 +4,7 @@
 
 <?php if (count($lists) == 0) { ?>
     <p class="bg-warning center-block">   
-        <i class="fa fa-exclamation-circle"></i> 暂时没有相关数据
+        <i class="iconfont icon-wushuju"></i> 暂时没有相关数据
     </p>
 <?php } else { ?>
 

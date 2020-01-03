@@ -1,8 +1,8 @@
 {extend name="base:base" /}{block name="body"}  
 <div class="table-common">
     <div class="left">
-        <a class="btn btn-default" href="javascript:history.back();"><i class="fa fa-angle-left"></i> 返回</a>
-        <button type="submit" class="btn btn-primary ajax-post" target-form="form-horizontal"><i class="fa fa-save"></i> 保存</button>
+        <a class="btn btn-default" href="javascript:history.back();"><i class="iconfont icon-flow"></i> 返回</a>
+        <button type="submit" class="btn btn-primary ajax-post" target-form="form-horizontal"><i class="iconfont icon-tubiao_tijiao"></i> 保存</button>
     </div>
 </div>
 <form method="post" class="form-horizontal" action="{:url('user_add')}">

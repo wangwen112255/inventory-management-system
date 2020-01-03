@@ -34,16 +34,16 @@
                 <button type="button" onclick="$('#chartinput').val(1); $('form').submit()" class="btn-default btn {$chart==='1'?' active':''}"><i class="fa fa-table"></i> 产品列表</button>
             </div>
 
-            <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
+            <button type="submit" class="btn btn-primary" title="查询"><i class="iconfont icon-sousuo"></i> 搜索</button>
             {if $chart==='1'}
             <button type="button" class="btn btn-default" 
                     id="print"
                     title="打印入库单" 
                     val="<?php echo url('prints/storage_list'); ?>" 
                     >
-                <i class="fa fa-print"></i> 打印</button>
+                <i class="iconfont icon-dayin"></i> 打印</button>
             {else/}
-            <button class="btn btn-success export" title="导出"><i class="fa fa-file-excel-o"></i> 导出</button>
+            <button class="btn btn-success export" title="导出"><i class="iconfont icon-excel"></i> 导出</button>
             {/if}
         </div>
 
@@ -51,7 +51,7 @@
     </form>
 </div>
 <p>
-    <small> 查询到了<strong>{$count}</strong>个入库记录</small>
+    <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个入库记录</small>
     <?php if (isset($count_sum)) { ?>
         <small> 总数量<strong>{$count_sum}</strong></small>
     <?php } ?>
@@ -93,9 +93,9 @@
                                class="print btn btn-default btn-sm"
                                val="<?php echo url('prints/storage_view', ['id' => $var['id']]) ?>"
                                num="<?php echo $var['order_number']; ?>"                       
-                               title="打印{$var.id}"><i class="fa fa-print"></i> 打印</a></td>
+                               title="打印{$var.id}"><i class="iconfont icon-dayin"></i> 打印</a></td>
                         <td style="text-align:center">
-                            <a class="btn btn-warning btn-sm" href="{:url('storage_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="fa fa-reply-all"></i> 撤销</a>
+                            <a class="btn btn-warning btn-sm" href="{:url('storage_undo',['id'=>$var.id])}" class="ajax-get confirm" title="撤销" ><i class="iconfont icon-chexiao"></i> 撤销</a>
                         </td>
                     </tr>
                     <tr id="product_data{$var.id}" class="product_data" style="display:none">
@@ -192,7 +192,7 @@
     {$pages}
 <?php } else { ?>
     <p class="bg-warning center-block">   
-        <i class="fa fa-exclamation-circle"></i> 暂时没有相关数据
+        <i class="iconfont icon-wushuju"></i> 暂时没有相关数据
     </p>
 <?php } ?>
 {/block}

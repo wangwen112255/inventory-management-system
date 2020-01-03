@@ -17,19 +17,14 @@
         <script src="__PUBLIC__/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="__PUBLIC__/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <link href="__PUBLIC__/libs/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">     
+        <link rel="stylesheet" href="__STATIC__/admin/font/iconfont.css" /> 
         <link rel="stylesheet" href="__STATIC__/admin/css/style.css" />
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="__PUBLIC__/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="container-fluid body">
-            <div class="row">    
-                <div class="col-sm-12">
-                    {block name="body"} 
-                    {/block}
-                </div>
-            </div>
+            {block name="body"} {/block}
         </div>
         <div class="modal fade" tabindex="-1" role="dialog" id="modal">
             <div class="modal-dialog" role="document">

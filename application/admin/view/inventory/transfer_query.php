@@ -31,16 +31,16 @@
                 <option value="">类型</option>
                 <?php echo html_select(config('_dict_product_type'), input('get.type')) ?>                
             </select>
-            <button type="submit" class="btn btn-primary" title="查询"><i class="fa fa-search"></i> 搜索</button>
+            <button type="submit" class="btn btn-primary" title="查询"><i class="iconfont icon-sousuo"></i> 搜索</button>
         </form>
     </div>
 </div>
 <p>
-    <small> 查询到了<strong>{$count}</strong>个库存记录</small>
+    <small><i class="iconfont icon-tishi"></i> 查询到了<strong>{$count}</strong>个库存记录</small>
 </p>
 <?php if (count($lists) == 0) { ?>
     <p class="bg-warning center-block">   
-        <i class="fa fa-exclamation-circle"></i> 暂时没有相关数据
+        <i class="iconfont icon-wushuju"></i> 暂时没有相关数据
     </p>
 <?php } else { ?>
     <table class="table table-hover table-striped">

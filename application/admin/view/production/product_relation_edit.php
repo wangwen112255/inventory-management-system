@@ -5,9 +5,9 @@
 <div class="table-common">
 
     <div class="left">
-        <a class="btn btn-default" href="<?php echo url('product_relation') ?>"><i class="fa fa-angle-left"></i>返回</a>
+        <a class="btn btn-default" href="<?php echo url('product_relation') ?>"><i class="iconfont icon-flow"></i>返回</a>
         <button type="submit" class="btn btn-primary ajax-post" target-form="form-inline" 
-                onclick="$('form').attr('action', '<?php echo url('product_relation_edit_submit', ['id' => input('get.id')]); ?>');"><i class="fa fa-save"></i> 保存</button>
+                onclick="$('form').attr('action', '<?php echo url('product_relation_edit_submit', ['id' => input('get.id')]); ?>');"><i class="iconfont icon-tubiao_tijiao"></i> 保存</button>
     </div>
 </div>
 <div class="row">    
@@ -48,7 +48,7 @@
                                        placeholder="倍数" class="form-control text-center"  >
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="$('#tabletbody{$key}').empty()"><i class="fa fa-remove"></i> 删除</button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="$('#tabletbody{$key}').empty()"><i class="iconfont icon-shanchu"></i> 删除</button>
                             </td>
                         </tr>
                     <?php } ?>

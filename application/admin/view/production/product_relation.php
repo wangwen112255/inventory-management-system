@@ -4,7 +4,7 @@
     <div class="search-box">
         <form class="form-inline" action="{:url('product_relation')}" method="get">
             <input type="text" placeholder="识别码/产品名称" name="keyword" value="{$Think.get.keyword}" class="form-control" />
-            <button type="submit" class="btn btn-primary " title="搜索"><i class="fa fa-search"></i> 搜索</button>
+            <button type="submit" class="btn btn-primary " title="搜索"><i class="iconfont icon-sousuo"></i> 搜索</button>
         </form>
     </div>
 </div>

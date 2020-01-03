@@ -49,7 +49,7 @@
         <tr>
             <th style="text-align:right"></th>
             <td>
-                <button type="submit" class="btn btn-primary ajax-post" target-form='transfer_add'><i class="fa fa-save"></i> 调拨</button>
+                <button type="submit" class="btn btn-primary ajax-post" target-form='transfer_add'><i class="iconfont icon-tubiao_tijiao"></i> 调拨</button>
             </td>
         </tr>
     </table>

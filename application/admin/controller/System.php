@@ -27,8 +27,8 @@ class System extends Admin {
                 ->addItem('id', '#')
                 ->addItem('title', '名称')
                 ->addItem('description', '描述')
-                ->addAction('编辑', 'auth_group_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
-                ->addAction('删除', 'auth_group_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('编辑', 'auth_group_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'auth_group_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
@@ -214,8 +214,8 @@ class System extends Admin {
                 ->addItem('username', '账号')
                 ->addItem('nickname', '姓名')
                 ->addItem('create_time', '创建日期')
-                ->addAction('编辑', 'user_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
-                ->addAction('删除', 'user_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('编辑', 'user_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'user_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
@@ -304,7 +304,7 @@ class System extends Admin {
     public function menu() {
         $lists = model('system_menu')->lists_tree();
         foreach ($lists as $key => $value) {
-            $lists[$key]['name'] = '<i class="fa ' . $value['icon'] . '"></i>' . $value['name'];
+            $lists[$key]['name'] = '<i class="iconfont ' . $value['icon'] . '"></i>' . $value['name'];
             $lists[$key]['status'] = $value['status'] == 0 ? '隐藏' : '';
         }
         $this->assign('lists', $lists);
@@ -314,8 +314,8 @@ class System extends Admin {
                 ->addItem('url', 'URL')
                 ->addSortItem('sort', '排序', 'system_menu')
                 ->addItem('status', '状态')
-                ->addAction('编辑', 'menu_edit', '<i class="fa fa-edit"></i>', 'btn btn-success btn-sm')
-                ->addAction('删除', 'menu_delete', '<i class="fa fa-remove"></i>', 'btn btn-danger btn-sm ajax-get confirm')
+                ->addAction('编辑', 'menu_edit', '<i class="iconfont icon-bianji"></i>', 'btn btn-success btn-sm')
+                ->addAction('删除', 'menu_delete', '<i class="iconfont icon-shanchu"></i>', 'btn btn-danger btn-sm ajax-get confirm')
                 ->build();
         return view();
     }
